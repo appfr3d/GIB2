@@ -5,8 +5,8 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 export default function App() {
   return (
     <View style={styles.container}>
-      <MapView 
-        style={styles.mapStyle} 
+      <MapView
+        style={styles.mapStyle}
         initialRegion={{
           latitude: 37.78825,
           longitude: -122.4324,
@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
   },
   mapStyle: {
     ...StyleSheet.absoluteFill,
-    // height: 400,
+    height: 400,
     borderColor: 'red',
-    borderWidth: 2
+    borderWidth: 2,
   },
 });

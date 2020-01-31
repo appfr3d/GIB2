@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "geoMATikk-app",
-    "slug": "geoMATikk-app",
+    "name": "geoMATikk",
+    "slug": "geoMATikk",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -24,6 +24,7 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.gib.geomatikk",
       "supportsTablet": true
     },
     "android": {
