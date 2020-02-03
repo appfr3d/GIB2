@@ -3,14 +3,15 @@ import { StyleSheet, Text, View, Dimensions, TextInput, StatusBar } from 'react-
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Ionicons } from '@expo/vector-icons';
+import Constants from 'expo-constants';
 
 const marker = {
   latlng: {
     latitude: 63.430646,
     longitude: 10.397,
   },
-  title: 'Test',
-  description: 'Description',
+  title: 'McDonalds',
+  description: 'Burger<3',
 };
 
 export default function App() {
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   },
   topMenu: {
     position: 'absolute',
-    top: StatusBar.currentHeight + 10,
+    top: Constants.statusBarHeight + 10,
     left: 10,
     borderWidth: 1,
     borderColor: 'red',
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     // position: 'absolute',
     // top: StatusBar.currentHeight + 10,
     // left: 10,
-    width: '50%',
+    width: '85%',
     height: 40,
     backgroundColor: 'white',
     borderRadius: 20,
