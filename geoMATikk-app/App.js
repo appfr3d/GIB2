@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: Constants.statusBarHeight + 10,
     left: 10,
-    borderWidth: 1,
-    borderColor: 'red',
+    borderWidth: 0,
+
   },
   searchView: {
     // position: 'absolute',
