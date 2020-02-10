@@ -2,19 +2,15 @@ import React, { useState} from 'react';
 import { 
   StyleSheet, 
   Text, 
-  View, 
-  Dimensions, 
+  View,
   TextInput, 
-  StatusBar, 
   TouchableOpacity, 
-  Button, 
   Alert, 
   Modal, 
   TouchableHighlight,
   Slider
 } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Ionicons } from '@expo/vector-icons';
 import Constants from 'expo-constants';
 
@@ -32,6 +28,8 @@ export default function App() {
   const [logInModelVisible, setlogInModelVisible] = useState(false);
   const [filterModelVisible, setFilterModelVisible] = useState(false);
   const [distanceValue, setDistanceValue] = useState(10);
+  const [registerUserVisible, setRegisterUserVisible] = useState(false);
+  const [restInfoVisible, setRestInfoVisible] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -45,7 +43,14 @@ export default function App() {
         }}
         // provider={PROVIDER_GOOGLE}
       >
-      <Marker coordinate={marker.latlng} title={marker.title} description={marker.description} />
+      <Marker 
+        coordinate={marker.latlng} 
+        //title={marker.title} 
+        //description={marker.description}
+        onPress={() =>
+        setRestInfoVisible(!restInfoVisible)} 
+        hitSlop={{top: 20, bottom: 20, left: 20, right: 20}} 
+        />
       </MapView>
 
       <View style={styles.topMenu}>
@@ -117,33 +122,67 @@ export default function App() {
           Alert.alert('Modal has been closed.');
         }}>
         
-        <View style={{backgroundColor: 'rgba(0,0,0,0.3)', flex: 1}}>
+        <View style={{backgroundColor: 'rgba(0,0,0,0.4)', flex: 1}}>
           <View style={styles.loginbox}>
-            <TouchableOpacity     
-              hitSlop={{top: 15, bottom: 15, left: 15, right: 15}} 
-              style={styles.closelogin} 
-              onPress={() => {
-                setlogInModelVisible(!logInModelVisible);
-              }}>
-                  <Ionicons name="md-close" size={20}/>
-                  
-              </TouchableOpacity>
             <View>
               <TextInput placeholder="Brukernavn" placeholderTextColor= "rgba(0,0,0,0.5)" marginBottom='5%'></TextInput>
               <TextInput placeholder="Passord" placeholderTextColor= "rgba(0,0,0,0.5)" marginBottom='10%'></TextInput>
 
-              <TouchableHighlight
+              <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
+                <TouchableHighlight
                 onPress={() => {
                   setlogInModelVisible(!logInModelVisible);
                 }}>
                 <Text>Logg inn</Text>
-              </TouchableHighlight>
+                </TouchableHighlight>
+                <TouchableOpacity                   
+                  onPress={() => {
+                    setRegisterUserVisible(!registerUserVisible);
+                  }}> 
+                  <Text>Registrer user</Text>
+
+                </TouchableOpacity>
+              </View>
             </View>
+              <TouchableOpacity     
+                hitSlop={{top: 15, bottom: 15, left: 15, right: 15}} 
+                style={styles.closelogin} 
+                onPress={() => {
+                  setlogInModelVisible(!logInModelVisible);
+                  setRegisterUserVisible(false);
+                }}>
+                    <Ionicons name="md-close" size={20}/>
+              </TouchableOpacity>
+            {!registerUserVisible ? null : 
+              <View style={styles.registrerUser}>
+                <Text>Halla</Text>
+              </View>
+              }
 
             
           </View>
         </View>
       </Modal>
+
+      {!restInfoVisible ? null : 
+      <View style={styles.restInfo}>
+        <TouchableOpacity 
+          hitSlop={{top: 15, bottom: 15, left: 15, right: 15}} 
+          style={styles.closelogin} 
+          onPress={() => {
+            setRestInfoVisible(false);
+          }}>
+            <Ionicons name="md-close"></Ionicons>
+        </TouchableOpacity>
+          <View style= {styles.restTitle}>
+            <Text>Restaurantnavn</Text>
+          </View> 
+
+          <View style= {styles.restDesc}>
+            <Text>Info om restaurant</Text>
+          </View> 
+      </View> 
+      }
 
       
     </View>
@@ -158,7 +197,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+
   },
   mapStyle: {
     ...StyleSheet.absoluteFill,
@@ -205,7 +245,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 8,
     display: 'flex', 
-    flexDirection: 'column',
+    flexDirection: 'column-reverse',
     marginTop: 110,
     borderRadius: 10,
     backgroundColor: 'white'
@@ -239,5 +279,20 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent: 'space-between'
   }, 
+  registrerUser: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    height: 100
+  },
+  restInfo: {
+    backgroundColor: 'white',
+    display: 'flex',
+    flexDirection: 'column',
+    margin: 0,
+    height: 200,
+    width: '90%',
+    borderRadius: 25,
+    padding: 20,
+  }
 
 });
