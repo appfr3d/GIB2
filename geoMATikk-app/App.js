@@ -16,7 +16,8 @@ const marker = {
 
 export default function App() {
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const [logInModelVisible, setlogInModelVisible] = useState(false);
+  const [filterModelVisible, setFilterModelVisible] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -46,7 +47,7 @@ export default function App() {
         <TouchableOpacity 
           hitSlop={{top: 10, bottom: 10, left: 10, right: 10}} 
           onPress = { () => 
-          setModalVisible(!modalVisible)} > 
+          setlogInModelVisible(!logInModelVisible)} > 
 
           <Ionicons style= {styles.loginperson}name="md-person" size={40}/>
             
@@ -59,7 +60,7 @@ export default function App() {
 
           animationType="fade"
           transparent= {true}
-          visible={modalVisible}
+          visible={logInModelVisible}
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
@@ -70,7 +71,7 @@ export default function App() {
                 hitSlop={{top: 15, bottom: 15, left: 15, right: 15}} 
                 style={styles.closelogin} 
                 onPress={() => {
-                  setModalVisible(!modalVisible);
+                  setlogInModelVisible(!logInModelVisible);
                 }}>
                     <Ionicons name="md-close" size={20}/>
                     
@@ -81,7 +82,7 @@ export default function App() {
 
                 <TouchableHighlight
                   onPress={() => {
-                    setModalVisible(!modalVisible);
+                    setlogInModelVisible(!logInModelVisible);
                   }}>
                   <Text>Logg inn</Text>
                 </TouchableHighlight>
