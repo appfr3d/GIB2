@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View, Dimensions, TextInput, StatusBar } from 'react-native';
+import React, { useState} from 'react';
+import { StyleSheet, Text, View, Dimensions, TextInput, StatusBar, TouchableOpacity, Button, Alert, Modal, TouchableHighlight } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Ionicons } from '@expo/vector-icons';
@@ -15,6 +15,9 @@ const marker = {
 };
 
 export default function App() {
+
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={styles.container}>
       <MapView
@@ -27,15 +30,68 @@ export default function App() {
         }}
         // provider={PROVIDER_GOOGLE}
       >
-        <Marker coordinate={marker.latlng} title={marker.title} description={marker.description} />
+      <Marker coordinate={marker.latlng} title={marker.title} description={marker.description} />
       </MapView>
+
       <View style={styles.topMenu}>
         <View style={styles.searchView}>
+          <TouchableOpacity style={styles.filterbutton}>
+              <View><Ionicons name="md-funnel" size={32} /></View>
+          </TouchableOpacity>
+        
           <TextInput placeholder="Search" style={styles.searchInput} />
           <Ionicons name="md-search" size={32} />
         </View>
+
+        <TouchableOpacity onPress = { () => 
+          setModalVisible(!modalVisible)} > 
+
+          <Ionicons style= {styles.loginperson}name="md-person" size={40}/>
+            
+        </TouchableOpacity>  
+
+
       </View>
+
+        <Modal style={styles.modalStyle}
+
+          animationType="fade"
+          transparent= {true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+          
+          <View style={{backgroundColor: 'rgba(0,0,0,0.3)', flex: 1}}>
+            <View style={styles.loginbox}>
+              <TouchableOpacity style={styles.closelogin} onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}>
+                    <Ionicons name="md-close" size={20}/>
+                    
+                </TouchableOpacity>
+              <View>
+                <TextInput placeholder="Brukernavn"></TextInput>
+                <TextInput placeholder="Passord"></TextInput>
+
+                <TouchableHighlight
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}>
+                  <Text> {"\n"} Logg inn</Text>
+                </TouchableHighlight>
+              </View>
+
+              
+            </View>
+          </View>
+        </Modal>
+          
+      
     </View>
+
+  
+    
   );
 }
 
@@ -54,13 +110,14 @@ const styles = StyleSheet.create({
     top: Constants.statusBarHeight + 10,
     left: 10,
     borderWidth: 0,
+    flexDirection: "row",
 
   },
   searchView: {
-    // position: 'absolute',
+    //position: 'absolute',
     // top: StatusBar.currentHeight + 10,
     // left: 10,
-    width: '85%',
+    width: '75%',
     height: 40,
     backgroundColor: 'white',
     borderRadius: 20,
@@ -70,7 +127,40 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   searchInput: {
-    width: '80%',
-    marginLeft: 5,
+    width: '60%',
+    marginLeft: 7,
+
   },
+
+  filterbutton: {
+   flexDirection: "column",
+   paddingRight: 10,
+    },
+
+  loginperson: {
+    marginLeft: 50,
+  },
+
+  loginbox: {
+    padding: 30,
+    margin: 0,
+    marginLeft: 20,
+    marginRight: 8,
+    display: 'flex', 
+    flexDirection: 'column',
+    marginTop: 110,
+    borderRadius: 10,
+    backgroundColor: 'white'
+   
+  }, 
+
+  closelogin: {
+    display: 'flex',
+    flexDirection: 'row-reverse'
+  },
+
+  modalStyle: {
+    opacity: 1
+  }
+
 });
