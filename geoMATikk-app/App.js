@@ -92,6 +92,20 @@ export default function App() {
             </View>
           </View>
         </Modal>
+
+        <Modal           
+          animationType="fade"
+          transparent= {true}
+          visible={logInModelVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+            <View>
+              
+            </View>
+
+
+        </Modal>
           
       
     </View>
