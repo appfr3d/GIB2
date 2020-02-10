@@ -8,7 +8,8 @@ import {
   Alert, 
   Modal, 
   TouchableHighlight,
-  Slider
+  Slider,
+  Console
 } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
@@ -24,6 +25,8 @@ const marker = {
 };
 
 export default function App() {
+
+  const [searchInput, setSearchInput] = useState('Placeholder');
 
   const [logInModelVisible, setlogInModelVisible] = useState(false);
   const [filterModelVisible, setFilterModelVisible] = useState(false);
@@ -63,9 +66,17 @@ export default function App() {
                 
                 <Ionicons name="md-funnel" size={32} />
             </TouchableOpacity>
-          
-            <TextInput placeholder="Search" style={styles.searchInput} />
-            <Ionicons name="md-search" size={32} />
+            <TextInput 
+              placeholder="Search" 
+              style={styles.searchInput}
+              onChangeText={(value) => {
+                setSearchInput({value})
+              }} />
+            <TouchableOpacity>
+              <Ionicons name="md-search" size={32} />
+            </TouchableOpacity>
+            <Text></Text>
+
             
           </View>
           {
@@ -172,7 +183,7 @@ export default function App() {
           onPress={() => {
             setRestInfoVisible(false);
           }}>
-            <Ionicons name="md-close"></Ionicons>
+            <Ionicons name="md-close" size={20}></Ionicons>
         </TouchableOpacity>
           <View style= {styles.restTitle}>
             <Text>Restaurantnavn</Text>
@@ -183,8 +194,6 @@ export default function App() {
           </View> 
       </View> 
       }
-
-      
     </View>
 
   
@@ -198,7 +207,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-end',
-
   },
   mapStyle: {
     ...StyleSheet.absoluteFill,
@@ -209,7 +217,6 @@ const styles = StyleSheet.create({
     left: 10,
     borderWidth: 0,
     flexDirection: "row",
-
   },
   searchContainer: {
     width: '75%',
@@ -230,15 +237,12 @@ const styles = StyleSheet.create({
     width: '60%',
     marginLeft: 7,
   },
-
   filterbutton: {
    paddingRight: 10,
   },
-
   loginperson: {
     marginLeft: 50,
   },
-
   loginbox: {
     padding: 30,
     margin: 0,
@@ -249,18 +253,14 @@ const styles = StyleSheet.create({
     marginTop: 110,
     borderRadius: 10,
     backgroundColor: 'white'
-   
-  }, 
-
+  },
   closelogin: {
     display: 'flex',
     flexDirection: 'row-reverse'
   },
-
   modalStyle: {
     opacity: 1
-  }, 
-
+  },
   filterbox: {
     padding: 5,
     paddingTop: 30,
@@ -270,8 +270,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'white',
    
-  }, 
-
+  },
   filterOption: {
     marginBottom: 25, 
     display: 'flex',
@@ -294,5 +293,4 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     padding: 20,
   }
-
 });
