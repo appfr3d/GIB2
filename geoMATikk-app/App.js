@@ -43,7 +43,9 @@ export default function App() {
           <Ionicons name="md-search" size={32} />
         </View>
 
-        <TouchableOpacity onPress = { () => 
+        <TouchableOpacity 
+          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}} 
+          onPress = { () => 
           setModalVisible(!modalVisible)} > 
 
           <Ionicons style= {styles.loginperson}name="md-person" size={40}/>
@@ -64,21 +66,24 @@ export default function App() {
           
           <View style={{backgroundColor: 'rgba(0,0,0,0.3)', flex: 1}}>
             <View style={styles.loginbox}>
-              <TouchableOpacity style={styles.closelogin} onPress={() => {
-                    setModalVisible(!modalVisible);
-                  }}>
+              <TouchableOpacity     
+                hitSlop={{top: 15, bottom: 15, left: 15, right: 15}} 
+                style={styles.closelogin} 
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}>
                     <Ionicons name="md-close" size={20}/>
                     
                 </TouchableOpacity>
               <View>
-                <TextInput placeholder="Brukernavn"></TextInput>
-                <TextInput placeholder="Passord"></TextInput>
+                <TextInput placeholder="Brukernavn" placeholderTextColor= "rgba(0,0,0,0.5)" marginBottom='5%'></TextInput>
+                <TextInput placeholder="Passord" placeholderTextColor= "rgba(0,0,0,0.5)" marginBottom='10%'></TextInput>
 
                 <TouchableHighlight
                   onPress={() => {
                     setModalVisible(!modalVisible);
                   }}>
-                  <Text> {"\n"} Logg inn</Text>
+                  <Text>Logg inn</Text>
                 </TouchableHighlight>
               </View>
 
