@@ -1,0 +1,370 @@
+2020-02-10 13:38:59.934 CET [2700] LOG:  listening on IPv6 address "::1", port 5432
+2020-02-10 13:38:59.934 CET [2700] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2020-02-10 13:39:00.079 CET [7420] LOG:  database system was shut down at 2020-02-10 13:38:22 CET
+2020-02-10 13:39:00.150 CET [2700] LOG:  database system is ready to accept connections
+2020-02-10 13:42:35.533 CET [14456] FATAL:  role "postgres" does not exist
+2020-02-10 13:43:22.985 CET [12872] FATAL:  role "postgres" does not exist
+2020-02-10 13:43:37.216 CET [11472] FATAL:  role "postgres" does not exist
+2020-02-10 13:45:24.785 CET [2084] ERROR:  could not open extension control file "C:/Program Files/PostgreSQL/10/share/extension/postgis.control": No such file or directory
+2020-02-10 13:45:24.785 CET [2084] STATEMENT:  create extension postgis;
+2020-02-10 13:58:25.148 CET [4492] ERROR:  could not open extension control file "C:/Program Files/PostgreSQL/10/share/extension/postgis.control": No such file or directory
+2020-02-10 13:58:25.148 CET [4492] STATEMENT:  create extension postgis;
+2020-02-10 14:20:56.748 CET [2700] LOG:  received fast shutdown request
+2020-02-10 14:20:56.749 CET [13940] ERROR:  canceling statement due to user request
+2020-02-10 14:20:56.765 CET [2700] LOG:  aborting any active transactions
+2020-02-10 14:20:56.778 CET [4492] FATAL:  terminating connection due to administrator command
+2020-02-10 14:20:56.780 CET [2084] FATAL:  terminating connection due to administrator command
+2020-02-10 14:20:56.798 CET [8628] FATAL:  terminating connection due to administrator command
+2020-02-10 14:20:56.804 CET [2700] LOG:  worker process: logical replication launcher (PID 13940) exited with exit code 1
+2020-02-10 14:20:56.855 CET [13000] LOG:  shutting down
+2020-02-10 14:20:57.021 CET [2700] LOG:  database system is shut down
+2020-02-10 15:08:38.255 CET [5964] LOG:  listening on IPv6 address "::1", port 5432
+2020-02-10 15:08:38.256 CET [5964] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2020-02-10 15:08:38.356 CET [5024] LOG:  database system was shut down at 2020-02-10 14:20:56 CET
+2020-02-10 15:08:38.383 CET [5964] LOG:  database system is ready to accept connections
+2020-02-10 15:16:00.527 CET [12620] ERROR:  cannot drop table spatial_ref_sys because extension postgis requires it
+2020-02-10 15:16:00.527 CET [12620] HINT:  You can drop extension postgis instead.
+2020-02-10 15:16:00.527 CET [12620] STATEMENT:  
+	DROP TABLE spatial_ref_sys
+2020-02-10 15:23:39.185 CET [2312] ERROR:  cannot drop table spatial_ref_sys because extension postgis requires it
+2020-02-10 15:23:39.185 CET [2312] HINT:  You can drop extension postgis instead.
+2020-02-10 15:23:39.185 CET [2312] STATEMENT:  
+	DROP TABLE spatial_ref_sys
+2020-02-10 15:25:38.743 CET [8688] ERROR:  cannot drop table spatial_ref_sys because extension postgis requires it
+2020-02-10 15:25:38.743 CET [8688] HINT:  You can drop extension postgis instead.
+2020-02-10 15:25:38.743 CET [8688] STATEMENT:  
+	DROP TABLE spatial_ref_sys
+2020-02-10 15:29:24.218 CET [15884] ERROR:  cannot drop table spatial_ref_sys because extension postgis requires it
+2020-02-10 15:29:24.218 CET [15884] HINT:  You can drop extension postgis instead.
+2020-02-10 15:29:24.218 CET [15884] STATEMENT:  
+	DROP TABLE spatial_ref_sys
+2020-02-10 15:29:48.164 CET [13732] ERROR:  cannot drop table spatial_ref_sys because extension postgis requires it
+2020-02-10 15:29:48.164 CET [13732] HINT:  You can drop extension postgis instead.
+2020-02-10 15:29:48.164 CET [13732] STATEMENT:  
+	DROP TABLE spatial_ref_sys
+2020-02-10 15:54:28.438 CET [7000] ERROR:  syntax error at or near "*" at character 8
+2020-02-10 15:54:28.438 CET [7000] STATEMENT:  delete * from alembic_version
+	
+2020-02-10 16:20:16.400 CET [5964] LOG:  server process (PID 7000) was terminated by exception 0xC000013A
+2020-02-10 16:20:16.400 CET [5964] DETAIL:  Failed process was running: delete from alembic_version
+	
+2020-02-10 16:20:16.400 CET [5964] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2020-02-10 16:20:16.400 CET [5964] LOG:  terminating any other active server processes
+2020-02-10 16:20:16.422 CET [1872] WARNING:  terminating connection because of crash of another server process
+2020-02-10 16:20:16.422 CET [1872] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2020-02-10 16:20:16.422 CET [1872] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2020-02-10 16:20:16.444 CET [5964] LOG:  all server processes terminated; reinitializing
+2020-02-10 16:20:16.497 CET [19284] LOG:  database system was interrupted; last known up at 2020-02-10 16:11:16 CET
+2020-02-10 16:20:17.207 CET [18728] FATAL:  the database system is in recovery mode
+2020-02-10 16:20:17.286 CET [19284] LOG:  database system was not properly shut down; automatic recovery in progress
+2020-02-10 16:20:17.293 CET [19284] LOG:  redo starts at 0/2030B40
+2020-02-10 16:20:17.293 CET [19284] LOG:  invalid record length at 0/2030C20: wanted 24, got 0
+2020-02-10 16:20:17.293 CET [19284] LOG:  redo done at 0/2030BE8
+2020-02-10 16:20:17.364 CET [5964] LOG:  database system is ready to accept connections
+2020-02-11 12:12:22.662 CET [15020] LOG:  listening on IPv6 address "::1", port 5432
+2020-02-11 12:12:22.663 CET [15020] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2020-02-11 12:12:22.800 CET [4008] LOG:  database system was interrupted; last known up at 2020-02-10 16:20:17 CET
+2020-02-11 12:12:24.278 CET [4008] LOG:  database system was not properly shut down; automatic recovery in progress
+2020-02-11 12:12:24.297 CET [4008] LOG:  invalid record length at 0/2030C90: wanted 24, got 0
+2020-02-11 12:12:24.298 CET [4008] LOG:  redo is not required
+2020-02-11 12:12:24.511 CET [15020] LOG:  database system is ready to accept connections
+2020-02-11 12:14:00.275 CET [17448] ERROR:  relation "restaurants" does not exist at character 15
+2020-02-11 12:14:00.275 CET [17448] STATEMENT:  select * from restaurants
+2020-02-11 12:14:08.300 CET [17448] ERROR:  relation "restaurant" does not exist at character 15
+2020-02-11 12:14:08.300 CET [17448] STATEMENT:  select * from restaurant
+2020-02-11 12:14:32.009 CET [17448] ERROR:  relation "restaurant" does not exist at character 15
+2020-02-11 12:14:32.009 CET [17448] STATEMENT:  select * from restaurant
+2020-02-11 12:14:37.997 CET [17448] ERROR:  relation "restaurant" does not exist at character 15
+2020-02-11 12:14:37.997 CET [17448] STATEMENT:  select * from restaurant;
+2020-02-11 13:06:25.799 CET [15020] LOG:  received fast shutdown request
+2020-02-11 13:06:25.800 CET [6516] ERROR:  canceling statement due to user request
+2020-02-11 13:06:25.819 CET [15020] LOG:  aborting any active transactions
+2020-02-11 13:06:25.822 CET [17448] FATAL:  terminating connection due to administrator command
+2020-02-11 13:06:25.823 CET [15596] FATAL:  terminating connection due to administrator command
+2020-02-11 13:06:25.824 CET [15020] LOG:  worker process: logical replication launcher (PID 6516) exited with exit code 1
+2020-02-11 13:06:25.854 CET [1548] LOG:  shutting down
+2020-02-11 13:06:25.967 CET [15020] LOG:  database system is shut down
+2020-02-11 13:06:41.883 CET [5316] LOG:  listening on IPv6 address "::1", port 5432
+2020-02-11 13:06:41.883 CET [5316] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2020-02-11 13:06:41.957 CET [8612] LOG:  database system was shut down at 2020-02-11 13:06:25 CET
+2020-02-11 13:06:42.002 CET [5316] LOG:  database system is ready to accept connections
+2020-02-11 13:07:14.122 CET [876] ERROR:  cannot drop table spatial_ref_sys because extension postgis requires it
+2020-02-11 13:07:14.122 CET [876] HINT:  You can drop extension postgis instead.
+2020-02-11 13:07:14.122 CET [876] STATEMENT:  
+	DROP TABLE spatial_ref_sys
+2020-02-11 13:13:56.572 CET [11084] ERROR:  relation "restaurant" does not exist at character 15
+2020-02-11 13:13:56.572 CET [11084] STATEMENT:  select * from restaurant
+2020-02-11 13:14:04.260 CET [11084] ERROR:  relation "restaurant" does not exist at character 15
+2020-02-11 13:14:04.260 CET [11084] STATEMENT:  select * from Restaurant
+2020-02-11 13:16:06.781 CET [15488] ERROR:  schema "user" does not exist at character 15
+2020-02-11 13:16:06.781 CET [15488] STATEMENT:  
+	CREATE TABLE "user"."user" (
+		"ID" SERIAL NOT NULL, 
+		name VARCHAR, 
+		PRIMARY KEY ("ID")
+	)
+	
+	
+2020-02-11 13:17:21.448 CET [17684] ERROR:  schema "user" does not exist
+2020-02-11 13:17:21.448 CET [17684] STATEMENT:  CREATE INDEX "ix_user_user_ID" ON "user"."user" ("ID")
+2020-02-11 13:19:06.473 CET [19060] ERROR:  cannot drop table spatial_ref_sys because extension postgis requires it
+2020-02-11 13:19:06.473 CET [19060] HINT:  You can drop extension postgis instead.
+2020-02-11 13:19:06.473 CET [19060] STATEMENT:  
+	DROP TABLE spatial_ref_sys
+2020-02-11 13:24:58.848 CET [16828] ERROR:  cannot drop table spatial_ref_sys because extension postgis requires it
+2020-02-11 13:24:58.848 CET [16828] HINT:  You can drop extension postgis instead.
+2020-02-11 13:24:58.848 CET [16828] STATEMENT:  
+	DROP TABLE spatial_ref_sys
+2020-02-11 13:41:55.294 CET [5316] LOG:  server process (PID 11084) was terminated by exception 0xC000013A
+2020-02-11 13:41:55.294 CET [5316] DETAIL:  Failed process was running: select * from Restaurant
+2020-02-11 13:41:55.294 CET [5316] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2020-02-11 13:41:55.295 CET [5316] LOG:  terminating any other active server processes
+2020-02-11 13:41:55.318 CET [4504] WARNING:  terminating connection because of crash of another server process
+2020-02-11 13:41:55.318 CET [4504] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2020-02-11 13:41:55.318 CET [4504] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2020-02-11 13:41:55.383 CET [5316] LOG:  all server processes terminated; reinitializing
+2020-02-11 13:41:55.545 CET [19192] LOG:  database system was interrupted; last known up at 2020-02-11 13:31:47 CET
+2020-02-11 13:41:56.262 CET [10228] FATAL:  the database system is in recovery mode
+2020-02-11 13:41:56.365 CET [19192] LOG:  database system was not properly shut down; automatic recovery in progress
+2020-02-11 13:41:56.378 CET [19192] LOG:  redo starts at 0/2118C40
+2020-02-11 13:41:56.379 CET [19192] LOG:  invalid record length at 0/2118D20: wanted 24, got 0
+2020-02-11 13:41:56.379 CET [19192] LOG:  redo done at 0/2118CE8
+2020-02-11 13:41:56.472 CET [5316] LOG:  database system is ready to accept connections
+2020-02-11 13:41:57.263 CET [5316] LOG:  worker process: logical replication launcher (PID 12808) was terminated by exception 0xC000013A
+2020-02-11 13:41:57.263 CET [5316] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2020-02-11 13:41:57.263 CET [5316] LOG:  terminating any other active server processes
+2020-02-11 13:41:57.265 CET [13836] WARNING:  terminating connection because of crash of another server process
+2020-02-11 13:41:57.265 CET [13836] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2020-02-11 13:41:57.265 CET [13836] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2020-02-11 13:41:57.278 CET [5316] LOG:  statistics collector process (PID 3912) was terminated by exception 0xC000013A
+2020-02-11 13:41:57.278 CET [5316] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2020-02-11 13:41:57.278 CET [5316] LOG:  all server processes terminated; reinitializing
+2020-02-11 13:41:57.331 CET [10768] LOG:  database system was interrupted; last known up at 2020-02-11 13:41:56 CET
+2020-02-11 13:41:58.412 CET [10768] LOG:  database system was not properly shut down; automatic recovery in progress
+2020-02-11 13:41:58.424 CET [10768] LOG:  invalid record length at 0/2118D90: wanted 24, got 0
+2020-02-11 13:41:58.425 CET [10768] LOG:  redo is not required
+2020-02-11 13:41:58.570 CET [5316] LOG:  database system is ready to accept connections
+2020-02-11 13:41:58.885 CET [5316] LOG:  worker process: logical replication launcher (PID 12128) was terminated by exception 0xC000013A
+2020-02-11 13:41:58.885 CET [5316] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2020-02-11 13:41:58.885 CET [5316] LOG:  terminating any other active server processes
+2020-02-11 13:41:58.887 CET [5092] WARNING:  terminating connection because of crash of another server process
+2020-02-11 13:41:58.887 CET [5092] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2020-02-11 13:41:58.887 CET [5092] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2020-02-11 13:41:58.902 CET [5316] LOG:  statistics collector process (PID 9908) was terminated by exception 0xC000013A
+2020-02-11 13:41:58.902 CET [5316] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2020-02-11 13:41:58.902 CET [5316] LOG:  all server processes terminated; reinitializing
+2020-02-11 13:41:58.959 CET [5152] LOG:  database system was interrupted; last known up at 2020-02-11 13:41:58 CET
+2020-02-11 13:41:59.489 CET [5316] LOG:  startup process (PID 5152) was terminated by exception 0xC000013A
+2020-02-11 13:41:59.489 CET [5316] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2020-02-11 13:41:59.489 CET [5316] LOG:  aborting startup due to startup process failure
+^C2020-02-11 13:49:45.770 CET [8952] LOG:  listening on IPv6 address "::1", port 5432
+2020-02-11 13:49:45.770 CET [8952] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2020-02-11 13:49:45.878 CET [7236] LOG:  database system was interrupted; last known up at 2020-02-11 13:41:58 CET
+2020-02-11 13:49:45.881 CET [18408] FATAL:  the database system is starting up
+2020-02-11 13:49:45.932 CET [11776] FATAL:  the database system is starting up
+2020-02-11 13:49:45.981 CET [1924] FATAL:  the database system is starting up
+2020-02-11 13:49:46.039 CET [16416] FATAL:  the database system is starting up
+2020-02-11 13:49:46.093 CET [4548] FATAL:  the database system is starting up
+2020-02-11 13:49:46.144 CET [17000] FATAL:  the database system is starting up
+2020-02-11 13:49:46.195 CET [15264] FATAL:  the database system is starting up
+2020-02-11 13:49:46.286 CET [17908] FATAL:  the database system is starting up
+2020-02-11 13:49:46.362 CET [7484] FATAL:  the database system is starting up
+2020-02-11 13:49:46.441 CET [18964] FATAL:  the database system is starting up
+2020-02-11 13:49:46.527 CET [15432] FATAL:  the database system is starting up
+2020-02-11 13:49:46.595 CET [15172] FATAL:  the database system is starting up
+2020-02-11 13:49:46.687 CET [8700] FATAL:  the database system is starting up
+2020-02-11 13:49:46.743 CET [19084] FATAL:  the database system is starting up
+2020-02-11 13:49:46.760 CET [7236] LOG:  database system was not properly shut down; automatic recovery in progress
+2020-02-11 13:49:46.773 CET [7236] LOG:  invalid record length at 0/2118E00: wanted 24, got 0
+2020-02-11 13:49:46.773 CET [7236] LOG:  redo is not required
+2020-02-11 13:49:46.791 CET [15580] FATAL:  the database system is starting up
+2020-02-11 13:49:46.850 CET [8952] LOG:  database system is ready to accept connections
+2020-02-11 13:49:46.928 CET [17288] FATAL:  the database system is starting up
+2020-02-11 13:54:20.340 CET [816] ERROR:  relation "users" does not exist at character 15
+2020-02-11 13:54:20.340 CET [816] STATEMENT:  select * from Users
+2020-02-11 13:54:47.577 CET [816] ERROR:  relation "public.users" does not exist at character 15
+2020-02-11 13:54:47.577 CET [816] STATEMENT:  select * from public.Users
+2020-02-11 13:54:49.288 CET [816] ERROR:  relation "public.users" does not exist at character 15
+2020-02-11 13:54:49.288 CET [816] STATEMENT:  select * from public.Users
+2020-02-11 13:55:04.848 CET [816] ERROR:  cross-database references are not implemented: "schemas.public.users" at character 15
+2020-02-11 13:55:04.848 CET [816] STATEMENT:  select * from schemas.public.Users
+2020-02-11 13:56:00.191 CET [12188] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 13:56:17.222 CET [3584] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 13:56:45.168 CET [11084] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:03:43.825 CET [10668] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:04:34.654 CET [816] ERROR:  relation "restaurant" does not exist at character 15
+2020-02-11 14:04:34.654 CET [816] STATEMENT:  select * from Restaurant
+2020-02-11 14:05:02.754 CET [17340] ERROR:  relation "restaurant" does not exist at character 15
+2020-02-11 14:05:02.754 CET [17340] STATEMENT:  select * from restaurant
+2020-02-11 14:05:06.188 CET [17340] ERROR:  relation "restaurant" does not exist at character 15
+2020-02-11 14:05:06.188 CET [17340] STATEMENT:  select * from Restaurant
+2020-02-11 14:19:32.420 CET [7320] ERROR:  relation "restaurant" does not exist at character 15
+2020-02-11 14:19:32.420 CET [7320] STATEMENT:  select * from restaurant
+2020-02-11 14:19:44.221 CET [7320] ERROR:  relation "restaurant" does not exist at character 15
+2020-02-11 14:19:44.221 CET [7320] STATEMENT:  select * from Restaurant
+2020-02-11 14:20:48.620 CET [5968] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:20:48.621 CET [5968] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 14:21:39.837 CET [3184] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:22:27.773 CET [4020] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:23:27.724 CET [4476] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:23:51.955 CET [8968] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:27:09.386 CET [7320] ERROR:  relation "restaurant" does not exist at character 15
+2020-02-11 14:27:09.386 CET [7320] STATEMENT:  select * from Restaurant
+2020-02-11 14:27:13.568 CET [7320] ERROR:  relation "restaurant" does not exist at character 18
+2020-02-11 14:27:13.568 CET [7320] STATEMENT:  select name from Restaurant
+2020-02-11 14:29:22.240 CET [7320] ERROR:  relation "public.restaurant" does not exist at character 18
+2020-02-11 14:29:22.240 CET [7320] STATEMENT:  select name from public.Restaurant
+2020-02-11 14:29:23.075 CET [7320] ERROR:  relation "public.restaurant" does not exist at character 18
+2020-02-11 14:29:23.075 CET [7320] STATEMENT:  select name from public.Restaurant
+2020-02-11 14:29:50.070 CET [3680] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:52:27.809 CET [18640] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:53:01.580 CET [3164] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:53:01.580 CET [3164] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 14:57:37.392 CET [12364] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:57:37.392 CET [12364] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 14:57:57.463 CET [9024] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:57:57.463 CET [9024] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 14:58:21.503 CET [3592] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 14:58:21.503 CET [3592] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 14:58:55.666 CET [7320] ERROR:  relation "public.Restaurant" does not exist at character 18
+2020-02-11 14:58:55.666 CET [7320] STATEMENT:  select name from public."Restaurant"
+2020-02-11 14:59:03.569 CET [7320] ERROR:  relation "public.restaurant" does not exist at character 18
+2020-02-11 14:59:03.569 CET [7320] STATEMENT:  select name from public.restaurant
+2020-02-11 14:59:06.405 CET [7320] ERROR:  relation "public.restaurant" does not exist at character 18
+2020-02-11 14:59:06.405 CET [7320] STATEMENT:  select name from public.restaurant
+2020-02-11 15:00:01.661 CET [15908] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:00:01.661 CET [15908] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:00:01.661 CET [11548] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:00:01.661 CET [18524] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:00:01.661 CET [11548] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:00:01.661 CET [18524] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:01:06.065 CET [18604] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:01:06.065 CET [18604] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:01:51.580 CET [1876] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:01:51.581 CET [1876] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:13:56.035 CET [18508] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:20:05.880 CET [14212] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:26:12.197 CET [13004] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:26:12.198 CET [13004] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:34:01.261 CET [6884] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:34:01.261 CET [6884] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:35:28.282 CET [7736] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:35:28.282 CET [10788] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:35:28.283 CET [7736] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:35:28.283 CET [19376] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:35:28.283 CET [10788] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:35:28.283 CET [19376] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:36:37.319 CET [15568] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:36:37.319 CET [13992] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:36:37.319 CET [13992] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:39:42.142 CET [14188] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:39:42.143 CET [14188] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:40:22.092 CET [6756] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:40:28.484 CET [18744] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:40:28.485 CET [18744] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:40:43.977 CET [8328] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:40:53.174 CET [18656] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:41:14.635 CET [18876] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:41:14.635 CET [18876] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:41:34.456 CET [3216] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:41:34.456 CET [5612] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:41:34.456 CET [3216] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:41:34.456 CET [5612] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:42:08.346 CET [15108] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:44:05.695 CET [18744] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:44:05.695 CET [18744] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:45:19.451 CET [18716] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:47:20.956 CET [16840] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:47:20.956 CET [14716] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:47:20.956 CET [16840] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:47:20.956 CET [14716] LOG:  unexpected EOF on client connection with an open transaction
+2020-02-11 15:48:38.595 CET [10736] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:49:32.150 CET [13924] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:52:14.499 CET [16260] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:53:06.783 CET [14124] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 15:55:35.407 CET [4992] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 16:00:09.326 CET [10740] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 16:10:04.530 CET [17220] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 16:42:31.454 CET [18608] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 16:42:42.862 CET [18384] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 16:49:03.787 CET [12464] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 16:55:35.032 CET [21288] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 16:57:12.565 CET [3560] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 17:07:37.995 CET [15524] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 17:13:51.946 CET [8960] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 20:23:07.896 CET [19584] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 20:29:08.794 CET [244] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 20:44:52.240 CET [18368] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 20:46:49.083 CET [20248] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 20:47:05.873 CET [17060] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 20:47:36.998 CET [14240] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 20:58:29.381 CET [10756] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 21:04:34.779 CET [19636] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 21:17:09.887 CET [4056] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2020-02-11 21:18:59.705 CET [13996] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
