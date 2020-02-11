@@ -9,11 +9,12 @@ import {
   Modal, 
   TouchableHighlight,
   Slider,
-  Console
+  KeyboardAvoidingView,
 } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
 import Constants from 'expo-constants';
+import { Dropdown } from 'react-native-material-dropdown';
 
 const marker = {
   latlng: {
@@ -33,6 +34,15 @@ export default function App() {
   const [distanceValue, setDistanceValue] = useState(10);
   const [registerUserVisible, setRegisterUserVisible] = useState(false);
   const [restInfoVisible, setRestInfoVisible] = useState(false);
+  const [logInBoxVisible, setLoginBoxVisible] = useState(true);
+
+  let data = [{
+    value: 'Banana',
+  }, {
+    value: 'Mango',
+  }, {
+    value: 'Pear',
+  }];
 
   return (
     <View style={styles.container}>
@@ -106,21 +116,26 @@ export default function App() {
             
               <View style= {styles.filterOption}>
                 <Text>Type mat</Text>
+                <Dropdown data={data} label='haha' style={styles.dropDown}>
+                  
+                </Dropdown>
               </View> 
               
             </View> 
           }
         </View>
-
-        <TouchableOpacity 
-          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}} 
-          onPress = { () => 
-          setlogInModelVisible(!logInModelVisible)} > 
-
-          <Ionicons style= {styles.loginperson}name="md-person" size={40}/>
-            
-        </TouchableOpacity>  
-
+        <View>
+          <TouchableOpacity 
+            hitSlop={{top: 10, bottom: 10, left: 10, right: 10}} 
+            onPress = { () => {
+            setlogInModelVisible(!logInModelVisible);
+            }} 
+            style={styles.profileButton}> 
+            <View style={{justifyContent: 'center'}}>
+              <Ionicons style= {styles.loginperson}name="md-person" size={40}/>
+            </View> 
+          </TouchableOpacity>  
+        </View>
 
       </View>
 
@@ -134,44 +149,93 @@ export default function App() {
         }}>
         
         <View style={{backgroundColor: 'rgba(0,0,0,0.4)', flex: 1}}>
-          <View style={styles.loginbox}>
-            <View>
-              <TextInput placeholder="Brukernavn" placeholderTextColor= "rgba(0,0,0,0.5)" marginBottom='5%'></TextInput>
-              <TextInput placeholder="Passord" placeholderTextColor= "rgba(0,0,0,0.5)" marginBottom='10%'></TextInput>
-
-              <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
-                <TouchableHighlight
-                onPress={() => {
-                  setlogInModelVisible(!logInModelVisible);
-                }}>
-                <Text>Logg inn</Text>
-                </TouchableHighlight>
-                <TouchableOpacity                   
+          <KeyboardAvoidingView  behavior='position'>
+          {!logInBoxVisible ? null:
+            <View style={styles.loginbox}>
+              <View style={{justifyContent: 'flex-end', display: 'flex', flexDirection: 'row'}}>
+                <TouchableOpacity     
+                  hitSlop={{top: 15, bottom: 15, left: 15, right: 15}} 
+                  style={styles.closelogin} 
                   onPress={() => {
-                    setRegisterUserVisible(!registerUserVisible);
-                  }}> 
-                  <Text>Registrer user</Text>
-
+                    setlogInModelVisible(!logInModelVisible);
+                    setRegisterUserVisible(!logInBoxVisible);
+                  }}>
+                  <Ionicons name="md-close" size={20}/>
                 </TouchableOpacity>
               </View>
-            </View>
-              <TouchableOpacity     
-                hitSlop={{top: 15, bottom: 15, left: 15, right: 15}} 
-                style={styles.closelogin} 
-                onPress={() => {
-                  setlogInModelVisible(!logInModelVisible);
-                  setRegisterUserVisible(false);
-                }}>
-                    <Ionicons name="md-close" size={20}/>
-              </TouchableOpacity>
-            {!registerUserVisible ? null : 
-              <View style={styles.registrerUser}>
-                <Text>Halla</Text>
-              </View>
-              }
+              <View>
+                <TextInput 
+                  placeholder="Brukernavn" 
+                  placeholderTextColor= "rgba(0,0,0,0.5)" 
+                  marginBottom='5%' 
+                  style={styles.regUser}/>
+                <TextInput 
+                  placeholder="Passord" 
+                  placeholderTextColor= "rgba(0,0,0,0.5)" 
+                  marginBottom='10%' 
+                  secureTextEntry
+                  style={styles.regUser}/>
 
-            
+                <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
+                  <TouchableHighlight
+                  onPress={() => {
+                    setlogInModelVisible(!logInModelVisible);
+                  }}>
+                  <Text>Logg inn</Text>
+                  </TouchableHighlight>
+                  <TouchableOpacity                   
+                    onPress={() => {
+                      setRegisterUserVisible(true);
+                      setLoginBoxVisible(false);
+                    }}> 
+                    <Text>Registrer user</Text>
+                  </TouchableOpacity>
+                </View>
+              </View> 
+            </View>
+            }
+          {!registerUserVisible ? null : 
+          <View style={styles.loginbox}>
+            <View style={{justifyContent: 'flex-end', display: 'flex', flexDirection: 'row'}} >
+              <TouchableOpacity     
+                  hitSlop={{top: 15, bottom: 15, left: 15, right: 15}} 
+                  style={styles.closelogin} 
+                  onPress={() => {
+                    setlogInModelVisible(!logInModelVisible);
+                    setRegisterUserVisible(false);
+                    setLoginBoxVisible(true);
+                  }}>
+                      <Ionicons name="md-close" size={20}/>
+              </TouchableOpacity>
+              </View>
+            <Text style={{fontSize: 20}}>
+              Registrer Bruker
+            </Text>
+            <TextInput 
+              placeholder="Fornavn" 
+              placeholderTextColor='rgba(0,0,0,0.5)'
+              style={styles.regUser}/>
+            <TextInput 
+              placeholder="Etternavn" 
+              placeholderTextColor='rgba(0,0,0,0.5)'
+              style={styles.regUser}/>
+            <TextInput 
+              placeholder="E-post" 
+              placeholderTextColor='rgba(0,0,0,0.5)'
+              style={styles.regUser}/>
+            <TextInput 
+              placeholder="Brukernavn" 
+              placeholderTextColor='rgba(0,0,0,0.5)'
+              style={styles.regUser}/>
+            <TextInput 
+              placeholder="Passord" 
+              placeholderTextColor='rgba(0,0,0,0.5)'
+              secureTextEntry
+              style={styles.regUser}
+              />
           </View>
+          }
+          </KeyboardAvoidingView>
         </View>
       </Modal>
 
@@ -217,9 +281,9 @@ const styles = StyleSheet.create({
     left: 10,
     borderWidth: 0,
     flexDirection: "row",
+    justifyContent: 'space-between'
   },
   searchContainer: {
-    width: '75%',
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 5,
@@ -240,23 +304,23 @@ const styles = StyleSheet.create({
   filterbutton: {
    paddingRight: 10,
   },
-  loginperson: {
-    marginLeft: 50,
-  },
   loginbox: {
     padding: 30,
     margin: 0,
     marginLeft: 20,
     marginRight: 8,
     display: 'flex', 
-    flexDirection: 'column-reverse',
+    flexDirection: 'column',
     marginTop: 110,
     borderRadius: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   closelogin: {
     display: 'flex',
-    flexDirection: 'row-reverse'
+    flexDirection: 'row',
+    width: '8%',
+    justifyContent: 'space-around'
+
   },
   modalStyle: {
     opacity: 1
@@ -278,11 +342,6 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent: 'space-between'
   }, 
-  registrerUser: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    height: 100
-  },
   restInfo: {
     backgroundColor: 'white',
     display: 'flex',
@@ -292,5 +351,16 @@ const styles = StyleSheet.create({
     width: '90%',
     borderRadius: 25,
     padding: 20,
+  },
+  regUser: {
+    color: 'black',
+    marginTop: '10%'
+  },
+  dropDown: {
+    flex: 1,
+    padding: 50 
+  },
+  personButton: {
+    justifyContent: 'center',
   }
 });
