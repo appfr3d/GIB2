@@ -6,4 +6,5 @@ app/__pycache__/
 .idea/
 __pycache__/
 
-migrations/versions
+migrations/versions/*
+logfile
