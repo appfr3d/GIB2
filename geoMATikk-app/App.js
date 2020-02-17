@@ -37,12 +37,19 @@ export default function App() {
   const [logInBoxVisible, setLoginBoxVisible] = useState(true);
 
   let data = [{
-    value: 'Banana',
+    value: 'Asiatisk',
   }, {
-    value: 'Mango',
+    value: 'Kinesisk',
   }, {
-    value: 'Pear',
-  }];
+    value: 'Italiensk',
+  }, {
+    value: 'Fransk',
+  },
+  {
+    value: 'Nordisk',
+  }
+
+];
 
   return (
     <View style={styles.container}>
@@ -114,9 +121,11 @@ export default function App() {
 
               </View> 
             
-              <View style= {styles.filterOption}>
+              <View style= {[styles.filterOption,{justifyContent: 'center'}]}>
                 <Text>Type mat</Text>
-                <Dropdown data={data} label='haha' style={styles.dropDown}>
+                <Dropdown data={data} label='Velg type' style={styles.dropDown}
+                
+                >
                   
                 </Dropdown>
               </View> 
@@ -358,7 +367,7 @@ const styles = StyleSheet.create({
   },
   dropDown: {
     flex: 1,
-    padding: 50 
+    padding: 40, 
   },
   personButton: {
     justifyContent: 'center',
