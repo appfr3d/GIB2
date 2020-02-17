@@ -1,2 +1,2 @@
-export { default as AuthModal } from "./AuthModal.js";
-export { default as TopMenu } from "./TopMenu.js";
+export { default as AuthModal } from './AuthModal';
+export { default as TopMenu } from './TopMenu';

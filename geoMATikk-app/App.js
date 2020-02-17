@@ -16,7 +16,6 @@ const marker = {
 
 export default function App() {
   const [restInfoVisible, setRestInfoVisible] = useState(false);
-
   const [authModalVisible, setAuthModalVisible] = useState(false);
 
   return (
