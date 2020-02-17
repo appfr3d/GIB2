@@ -1,1 +1,0 @@
-pg_ctl -D ^"C^:^\Program^ Files^\PostgreSQL^\10^\data^" -l logfile start
