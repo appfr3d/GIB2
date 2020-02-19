@@ -4,12 +4,16 @@ import { View, TouchableOpacity, TextInput, StyleSheet, Text, Slider } from 'rea
 import Constants from 'expo-constants';
 import { Dropdown } from 'react-native-material-dropdown';
 import { Ionicons } from '@expo/vector-icons';
+import CheckBox from 'react-native-modest-checkbox';
+
 
 function TopMenu(props) {
   const { authModalVisible, setAuthModalVisible } = props;
   const [filterModalVisible, setFilterModalVisible] = useState(false);
   const [searchInput, setSearchInput] = useState('Placeholder');
   const [distanceValue, setDistanceValue] = useState(10);
+  const [priceChecked, setPriceChecked] = useState(false);
+
 
   const data = [
     {
@@ -49,15 +53,25 @@ function TopMenu(props) {
         {!filterModalVisible ? null : (
           <View style={styles.filterbox}>
             <View style={styles.filterOption}>
-              <Text>Rating</Text>
+           
+           <CheckBox
+            label='Pris'
+            checkedComponent={<Text>hei</Text>}
+            onChange ={(priceChecked)=> setPriceChecked(!priceChecked)}
+           />
+            
             </View>
 
             <View style={styles.filterOption}>
-              <Text>Prisklasse</Text>
+              <CheckBox
+                label='I nærheten'
+              />
             </View>
 
             <View style={styles.filterOption}>
-              <Text>Avstand</Text>
+              <CheckBox
+                label='God rating'
+              />
 
               <Slider
                 style={{ width: 120, height: 40 }}
@@ -138,6 +152,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    
   },
   dropDown: {
     flex: 1,
