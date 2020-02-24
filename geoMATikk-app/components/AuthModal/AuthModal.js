@@ -38,7 +38,7 @@ export default function AuthModal(props) {
               hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
               style={styles.closelogin}
               onPress={() => {
-                props.authModalVisible(false);
+                props.setAuthModalVisible(false);
               }}
             >
               <Ionicons name="md-close" size={20} />
