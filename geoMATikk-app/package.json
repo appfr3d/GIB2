@@ -16,6 +16,7 @@
     "react-native-maps": "0.26.1",
     "react-native-material-dropdown": "^0.11.1",
     "react-native-modest-checkbox": "^3.3.0",
+    "react-native-snap-slider": "^0.3.0",
     "react-native-web": "~0.11.7"
   },
   "devDependencies": {
