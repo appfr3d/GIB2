@@ -2,17 +2,29 @@ import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MapView, { Marker } from 'react-native-maps';
+import { useRestaurants } from '../hooks';
+
+// Mock data
+// const restaurants = [
+//   {
+//     description: 'Burger <3',
+//     id: 9,
+//     image_url: '',
+//     location: {
+//       latitude: 63.430646,
+//       longitude: 10.397,
+//     },
+//     name: 'MacDonald',
+//     phone: '12345678',
+//     price_class: 2,
+//     rating: 4,
+//   },
+// ];
 
 function MapComponent() {
+  const [restaurants] = useRestaurants();
   const [restInfoVisible, setRestInfoVisible] = useState(false);
-  const marker = {
-    latlng: {
-      latitude: 63.430646,
-      longitude: 10.397,
-    },
-    title: 'McDonalds',
-    description: 'Burger<3',
-  };
+
   return (
     <>
       <MapView
@@ -24,13 +36,17 @@ function MapComponent() {
           longitudeDelta: 0.0271,
         }}
       >
-        <Marker
-          coordinate={marker.latlng}
-          // title={marker.title}
-          // description={marker.description}
-          onPress={() => setRestInfoVisible(!restInfoVisible)}
-          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-        />
+        {restaurants &&
+          restaurants.map(restaurant => (
+            <Marker
+              key={restaurant.id}
+              coordinate={restaurant.location}
+              title={restaurant.name}
+              description={restaurant.description}
+              onPress={() => setRestInfoVisible(!restInfoVisible)}
+              hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+            />
+          ))}
       </MapView>
       {!restInfoVisible ? null : (
         <View style={styles.restInfo}>
