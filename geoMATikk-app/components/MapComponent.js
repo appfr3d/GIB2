@@ -22,7 +22,7 @@ import { useRestaurants } from '../hooks';
 // ];
 
 function MapComponent() {
-  const [restaurants] = useRestaurants();
+  const [{ restaurants, queryState }, queryDispatch] = useRestaurants();
   const [restInfoVisible, setRestInfoVisible] = useState(false);
 
   return (
