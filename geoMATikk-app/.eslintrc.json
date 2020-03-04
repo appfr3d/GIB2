@@ -14,6 +14,8 @@
         "react-native/no-inline-styles": 2, // disallow styles declared within the component itself
         "import/no-unresolved": "off",
         "react/prop-types": 0,
+        "react/destructuring-assignment": 0,
+        "import/no-extraneous-dependencies": 0,
         "react/jsx-filename-extension": [
             1,
             {
