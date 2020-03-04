@@ -2,15 +2,18 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TopMenu, AuthModal, MapComponent } from './components';
+import { FilterProvider } from './context/FilterContext';
 
 export default function App() {
   const [authModalVisible, setAuthModalVisible] = useState(false);
 
   return (
     <View style={styles.container}>
-      <MapComponent />
-      <TopMenu authModalVisible={authModalVisible} setAuthModalVisible={setAuthModalVisible} />
-      <AuthModal authModalVisible={authModalVisible} setAuthModalVisible={setAuthModalVisible} />
+      <FilterProvider>
+        <MapComponent />
+        <TopMenu authModalVisible={authModalVisible} setAuthModalVisible={setAuthModalVisible} />
+        <AuthModal authModalVisible={authModalVisible} setAuthModalVisible={setAuthModalVisible} />
+      </FilterProvider>
     </View>
   );
 }

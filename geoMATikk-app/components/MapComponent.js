@@ -22,8 +22,8 @@ import { useRestaurants } from '../hooks';
 // ];
 
 function MapComponent() {
-  const [{ restaurants, queryState }, queryDispatch] = useRestaurants();
   const [restInfoVisible, setRestInfoVisible] = useState(false);
+  const [restaurants] = useRestaurants();
 
   return (
     <>
@@ -43,7 +43,7 @@ function MapComponent() {
               coordinate={restaurant.location}
               title={restaurant.name}
               description={restaurant.description}
-              onPress={() => setRestInfoVisible(!restInfoVisible)}
+              onPress={() => {}}
               hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
             />
           ))}

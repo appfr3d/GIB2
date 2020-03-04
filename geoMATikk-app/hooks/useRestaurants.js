@@ -1,37 +1,27 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { FilterStateContext } from '../context/FilterContext';
 
 const domain = 'https://f74d3962.ngrok.io';
 
-function queryReducer(state, action) {
-  switch (action.type) {
-    case 'set_search_string':
-      return { ...state, search: action.payload };
-
-    default:
-      console.warning(action.type);
-      return state;
-  }
-}
-
 export default function useRestaurants() {
   const [restaurants, setRestaurants] = useState();
-  const [queryState, queryDispatch] = useReducer(queryReducer, {});
+  const filterState = useContext(FilterStateContext);
 
   // UseEffect cannot be async in itself, so need to define an async function.
   async function fetchRestaurants() {
     const url = `${domain}/restaurant/filter`;
     try {
-      const response = await axios.get(url, { params: queryState });
+      const response = await axios.get(url, { params: filterState, timeout: 5000 });
       setRestaurants(response.data);
     } catch (error) {
-      console.error(error);
+      console.error('Error:', error);
     }
   }
 
   useEffect(() => {
     fetchRestaurants();
-  }, [queryState]);
+  }, [filterState]);
 
-  return [{ restaurants, queryState }, queryDispatch];
+  return [restaurants];
 }
