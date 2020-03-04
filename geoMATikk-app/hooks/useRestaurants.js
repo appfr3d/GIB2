@@ -1,8 +1,7 @@
 import { useState, useEffect, useReducer } from 'react';
-import { alert } from 'react-native';
 import axios from 'axios';
 
-const domain = 'https://f15f6496.ngrok.io';
+const domain = 'https://f74d3962.ngrok.io';
 
 function queryReducer(state, action) {
   switch (action.type) {
@@ -10,6 +9,7 @@ function queryReducer(state, action) {
       return { ...state, search: action.payload };
 
     default:
+      console.warning(action.type);
       return state;
   }
 }
@@ -22,12 +22,10 @@ export default function useRestaurants() {
   async function fetchRestaurants() {
     const url = `${domain}/restaurant/filter`;
     try {
-      console.log('hey', url);
       const response = await axios.get(url, { params: queryState });
-      console.log(response.data);
       setRestaurants(response.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
