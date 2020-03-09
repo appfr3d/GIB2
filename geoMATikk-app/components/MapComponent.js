@@ -24,7 +24,7 @@ import RestaurantList from './RestaurantList';
 // ];
 
 function MapComponent(props) {
-  const [{ restaurants, queryState }, queryDispatch] = useRestaurants();
+  const [restaurants] = useRestaurants();
   const [restInfoVisible, setRestInfoVisible] = useState(false);
   const [selectedRestaurantID, setSelectedRestaurantID] = useState(null);
   useEffect(() => {
@@ -37,9 +37,6 @@ function MapComponent(props) {
           latitudeDelta: 0.002,
           longitudeDelta: 0.002,
         });
-      } else {
-        console.log('fant ikke restauranten');
-        console.log(selectedRestaurantID);
       }
     }
   });

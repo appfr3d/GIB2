@@ -89,22 +89,23 @@ function RestaurantList({ restaurants, visible, selectedID, setSelectedID }) {
   // const [{ restaurants, queryState }, queryDispatch] = useRestaurants();
   // const [hidden, setHidden] = useState(true);
 
-  function printEvent(event) {
+  function selectRestaurant(event) {
     // console.log(event.nativeEvent);
     const i = Math.floor(event.nativeEvent.contentOffset.x / screenWidth);
     setSelectedID(restaurants[i].id);
   }
 
-  let isInitialized = false;
-
   function scrollToInitialIndex() {
     if (!isInitialized) {
       isInitialized = true;
       const i = restaurants.map(x => x.id).indexOf(selectedID);
-      listRef.scrollToIndex({ animated: true, index: i });
+      if (i !== -1) {
+        listRef.scrollToIndex({ animated: true, index: i });
+      }
     }
   }
 
+  let isInitialized = false;
   let listRef = null;
 
   return (
@@ -125,7 +126,7 @@ function RestaurantList({ restaurants, visible, selectedID, setSelectedID }) {
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          onMomentumScrollEnd={e => printEvent(e)}
+          onMomentumScrollEnd={e => selectRestaurant(e)}
           onLayout={() => scrollToInitialIndex()}
           // onScroll={()}
         />
