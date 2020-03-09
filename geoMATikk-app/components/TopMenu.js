@@ -57,7 +57,7 @@ function TopMenu(props) {
             </View>
 
             {priceChecked && (
-              <>
+              <View>
                 <View style={styles.priceRateBox}>
                   <View style={styles.priceRate}>
                     <Button title="Lav" color="black" />
@@ -76,7 +76,7 @@ function TopMenu(props) {
                   onSlidingComplete={value => setPricePriority(value)}
                   width="200"
                 />
-              </>
+              </View>
             )}
             <View style={styles.filterOption}>
               <CheckBox
@@ -186,11 +186,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  dropDown: {
-    flex: 1,
-    padding: 50,
-  },
-
+  // dropDown: {
+  //   flex: 1,
+  //   padding: 50,
+  // },
   typeKitchen: {
     padding: 5,
     display: 'flex',

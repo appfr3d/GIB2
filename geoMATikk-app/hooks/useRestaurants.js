@@ -1,7 +1,7 @@
 import { useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 
-const domain = 'https://f74d3962.ngrok.io';
+const domain = 'http://a09eabf1.ngrok.io';
 
 function queryReducer(state, action) {
   switch (action.type) {
