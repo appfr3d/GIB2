@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   FlatList,
@@ -51,7 +51,7 @@ function RestaurantItem({ restaurant }) {
           backgroundColor: 'white',
           marginHorizontal: 20,
           padding: 10,
-        }
+        },
       ]}
     >
       <Image
@@ -66,7 +66,7 @@ function RestaurantItem({ restaurant }) {
   );
 }
 
-/*{
+/* {
   transform: [
     {
       scaleX: _panY.interpolate({
@@ -84,37 +84,35 @@ function RestaurantItem({ restaurant }) {
 },
 */
 
-
 function RestaurantList({ restaurants, visible, selectedID, setSelectedID }) {
-  // const [{ restaurants, queryState }, queryDispatch] = useRestaurants();
-  // const [hidden, setHidden] = useState(true);
+  const listRef = useRef(null);
 
-  function selectRestaurant(event) {
-    // console.log(event.nativeEvent);
-    const i = Math.floor(event.nativeEvent.contentOffset.x / screenWidth);
-    setSelectedID(restaurants[i].id);
-  }
+  const viewabilityConfig = useRef({
+    viewAreaCoveragePercentThreshold: 95,
+    minimumViewTime: 100,
+  });
 
-  function scrollToInitialIndex() {
-    if (!isInitialized) {
-      isInitialized = true;
+  const handleViewableItemsChanged = useRef(info => {
+    console.log(info);
+    if (info.viewableItems.length > 0) {
+      setSelectedID(info.viewableItems[0].item.id);
+    }
+  });
+
+  useEffect(() => {
+    if (listRef && restaurants) {
       const i = restaurants.map(x => x.id).indexOf(selectedID);
-      if (i !== -1) {
-        listRef.scrollToIndex({ animated: true, index: i });
+      if (i > -1) {
+        listRef.current.scrollToIndex({ index: i });
       }
     }
-  }
-
-  let isInitialized = false;
-  let listRef = null;
+  }, [selectedID]);
 
   return (
     <SafeAreaView style={styles.listContainer}>
       {visible && (
         <FlatList
-          ref={ref => {
-            listRef = ref;
-          }}
+          ref={listRef}
           data={restaurants}
           renderItem={({ item }) => <RestaurantItem restaurant={item} />}
           getItemLayout={(data, index) => ({
@@ -125,10 +123,11 @@ function RestaurantList({ restaurants, visible, selectedID, setSelectedID }) {
           keyExtractor={item => item.id.toString()}
           horizontal
           pagingEnabled
+          snapToInterval={screenWidth}
           showsHorizontalScrollIndicator={false}
-          onMomentumScrollEnd={e => selectRestaurant(e)}
-          onLayout={() => scrollToInitialIndex()}
-          // onScroll={()}
+          initialScrollIndex={restaurants.map(x => x.id).indexOf(selectedID)}
+          viewabilityConfig={viewabilityConfig.current}
+          onViewableItemsChanged={handleViewableItemsChanged.current}
         />
       )}
     </SafeAreaView>

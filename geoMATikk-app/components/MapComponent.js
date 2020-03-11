@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { useRestaurants } from '../hooks';
 
@@ -23,7 +22,7 @@ import RestaurantList from './RestaurantList';
 //   },
 // ];
 
-function MapComponent(props) {
+function MapComponent() {
   const [restaurants] = useRestaurants();
   const [restInfoVisible, setRestInfoVisible] = useState(false);
   const [selectedRestaurantID, setSelectedRestaurantID] = useState(null);
@@ -42,17 +41,17 @@ function MapComponent(props) {
   });
 
   const selectRestaurant = restaurant => {
-    if (!restInfoVisible) {
-      console.log(restaurant);
-      setSelectedRestaurantID(restaurant.id);
-      setRestInfoVisible(true);
-      mapRef.animateToRegion({
-        latitude: restaurant.location.latitude,
-        longitude: restaurant.location.longitude,
-        latitudeDelta: 0.001,
-        longitudeDelta: 0.001,
-      });
-    }
+    // if (!restInfoVisible) {
+    // console.log(restaurant);
+    setSelectedRestaurantID(restaurant.id);
+    setRestInfoVisible(true);
+    mapRef.animateToRegion({
+      latitude: restaurant.location.latitude,
+      longitude: restaurant.location.longitude,
+      latitudeDelta: 0.001,
+      longitudeDelta: 0.001,
+    });
+    // }
   };
 
   const hideRestInfo = () => {
