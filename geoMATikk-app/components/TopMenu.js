@@ -1,11 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
-import { View, TouchableOpacity, TextInput, StyleSheet, Text, Slider, Button } from 'react-native';
+import { View, TouchableOpacity, TextInput, StyleSheet, Text, Button, Modal, ScrollView, FlatList } from 'react-native';
 import Constants from 'expo-constants';
 import { Dropdown } from 'react-native-material-dropdown';
 import { Ionicons } from '@expo/vector-icons';
 import CheckBox from 'react-native-modest-checkbox'; 
 import SnapSlider from 'react-native-snap-slider';
+
+
 
 
 function TopMenu(props) {
@@ -17,6 +19,35 @@ function TopMenu(props) {
   const [nearbyChecked, setNearbyChecked] = useState(false); 
   const [ratingChecked, setRatingChecked] = useState(false); 
   const [pricePriority, setPricePriority] = useState(1);
+  const [nearbyPriority, setNearbyPriority] = useState(1); 
+  const [ratingPriority, setRatingPriority] = useState(1); 
+  const [kitchenVisible, setKitchenVisible] = useState(false);
+
+  const [kjokken, setKjokken]= useState([
+  
+    {
+      id: '1',
+      title: 'Italiensk',
+    }, 
+  
+    {
+      id:'2',
+      title: 'Asiatisk',
+    }, 
+    {
+      id:'3',
+      title: 'Meksikansk',
+    }, 
+    {
+      id:'4',
+      title: 'Amerikansk',
+    }, 
+    {
+      id:'5',
+      title: 'Nordisk',
+    },
+  
+  ]);
 
   sliderOptions = [
     { value:0, label: 'Uviktig'},
@@ -63,7 +94,10 @@ function TopMenu(props) {
             
             </View>
 
+       
+
         { priceChecked &&
+
           <>
           <View style={styles.priceRateBox}>
             <View style={styles.priceRate}>
@@ -93,13 +127,14 @@ function TopMenu(props) {
             defaultItem='1'
             onSlidingComplete={value => setPricePriority(value)}
             width='200'
-            
 
           />  
 
-          
           </>
+     
         }
+
+   
             <View style={styles.filterOption}>
               <CheckBox
                 label='I nærheten'
@@ -112,12 +147,15 @@ function TopMenu(props) {
             { nearbyChecked &&
             <View>
             
-              <Slider
-              style={{ width: 200, height: 40 }}
-              minimumValue={0}
-              maximumValue={100}
-              value={10}
+              <SnapSlider containerStyle={styles.snapSlider}
+              
+                labelPosisiton="top"
+                items={sliderOptions}
+                defaultItem='1'
+                onSlidingComplete={value => setNearbyPriority(value)}
+                width='200'
               />  
+
             </View>
 
             }
@@ -135,23 +173,87 @@ function TopMenu(props) {
           {ratingChecked &&
             <View>
 
-            <Slider
-              style={{ width: 200, height: 40 }}
-              minimumValue={0}
-              maximumValue={100}
-              value={10}
-            />  
+          <SnapSlider containerStyle={styles.snapSlider}
+            
+            labelPosisiton="top"
+            items={sliderOptions}
+            defaultItem='1'
+            onSlidingComplete={value => setRatingPriority(value)}
+            width='200'
+      
+          />  
+
 
             </View>
 
             }
 
             <View style={styles.typeKitchen}>
+              <TouchableOpacity 
+              style={{display: 'flex', flexDirection: 'row'}}
+              onPress={() => 
+                setKitchenVisible(!kitchenVisible)}
+             
+              >  
+
+                <Text style={{fontSize: 19}}>Velg kjøkken </Text>
+                <Ionicons name ="md-arrow-round-forward" size={20} />
+
+               
+          
+             </TouchableOpacity>
+
+              <Modal 
+              visible={kitchenVisible}
+              animationType='fade'
+              transparent
+
+              > 
+ 
+              <View style={{backgroundColor:'rgba(0,0,0,0.4)', flex: 1}}>
+                <View style={styles.kitchenBox}>
+                  <FlatList 
+                  style={styles.kitchenFLatList}
+                  ItemSeparatorComponent = {() =>
+                    <View style={{height:0.1, backgroundColor:'black', width:"90%"}}>
+
+                    </View>  
+                  }
+                  keyExtractor={(item)=>item.id}
+                  data={kjokken}
+                  renderItem={({item})=>
+                    <View style={{padding:20}}> 
+                     
+                        <CheckBox
+                          label= {item.title}
+                        />
+
+                     
+                    </View>
+                  }
+                
+                  >
+                    
+
+                  </FlatList>
+                </View>
+
+              </View>
+
+             
+              </Modal>
+             
+              
+            </View>
+
+            <View style={styles.searchButton}>
               <Button
-                title="Kjøkken"
+                title="Søk"
                 color="black"
               />
+
             </View>
+
           </View>
         )}
       </View>
@@ -212,6 +314,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'white',
   },
+
   filterOption: {
     marginBottom: 25,
     display: 'flex',
@@ -229,9 +332,11 @@ const styles = StyleSheet.create({
    
     padding: 5,
     display: 'flex', 
-    backgroundColor: 'lightblue', 
-    width: 110, 
-    borderWidth: 1.5, 
+    width: 220, 
+    marginBottom: 10,
+    flexDirection: "row", 
+    padding: 20, 
+
   },
 
   priceRate: {
@@ -248,12 +353,33 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     padding: 10,
-    paddingTop: 5
+    paddingTop: 5,
   },
 
   snapSlider: {
-    marginBottom: 30
-  }
+    marginBottom: 35,
+  }, 
+
+  searchButton:  {
+    padding: 5,
+    display: 'flex', 
+    backgroundColor: 'lightblue', 
+    width: 200, 
+    borderWidth: 1.5, 
+  }, 
+  kitchenFlatList: {
+    backgroundColor: 'blue',
+  },
+  kitchenBox: {
+    backgroundColor: 'white', 
+    width:280,
+    display: 'flex',
+    marginLeft:10, 
+    marginTop: 55, 
+    borderRadius: 10,
+    padding: 10, 
+
+  },
 
 });
 

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
 import { TopMenu, AuthModal } from './components';
@@ -42,22 +42,38 @@ export default function App() {
       <AuthModal authModalVisible={authModalVisible} setAuthModalVisible={setAuthModalVisible} />
 
       {!restInfoVisible ? null : (
-        <View style={styles.restInfo}>
-          <TouchableOpacity
-            hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
-            style={styles.closelogin}
-            onPress={() => {
-              setRestInfoVisible(false);
-            }}
-          >
-            <Ionicons name="md-close" size={20} />
-          </TouchableOpacity>
-          <View style={styles.restTitle}>
-            <Text>Restaurantnavn</Text>
-          </View>
 
-          <View style={styles.restDesc}>
-            <Text>Info om restaurant</Text>
+        <View>
+          <View style={styles.restInfo}>
+            <View style={styles.restBox}>
+              <TouchableOpacity
+                hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
+                style={styles.closelogin}
+                onPress={() => {
+                  setRestInfoVisible(false);
+                }}
+              >
+                <Ionicons name="md-close" size={20} style={{marginRight: 20}} />
+              </TouchableOpacity>
+
+              <View style={styles.restText}>
+                <View style={styles.restTitle}>
+                    <Text style={{fontSize: 20}}>Restaurantnavn</Text>
+                </View>
+
+                <View style={styles.restDesc}>
+                  <Text>Info om restaurant</Text>
+                </View>
+              </View>
+            </View>
+
+            <View style={styles.restImg}>
+              <Image 
+                source={{uri: 'https://www.trondheimcityguide.no/media/djmediatools/cache/270-starbucks/775x500-crop-100-starbucks-trondheim.jpg'}} 
+                style={{width: 260, height: 150, margin: 10}} 
+                
+              />
+            </View>  
           </View>
         </View>
       )}
@@ -78,7 +94,6 @@ const styles = StyleSheet.create({
   closelogin: {
     display: 'flex',
     flexDirection: 'row',
-    width: '8%',
     justifyContent: 'space-around',
   },
   restInfo: {
@@ -86,9 +101,28 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     margin: 0,
-    height: 200,
-    width: '90%',
+    height: 250,
     borderRadius: 25,
-    padding: 20,
+    padding: 20, 
   },
+  restTitle: {
+    display: 'flex',
+    flexDirection: 'column',
+  }, 
+  restDesc: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  restBox:{
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  restText: {
+
+  },
+  restImg: {
+    display:'flex',
+    flexDirection: 'column',
+  },
+
 });
