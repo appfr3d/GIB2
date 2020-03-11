@@ -15,6 +15,7 @@ const initialFilterState = {
     name: 'I nærheten',
     active: false,
     priority: 1,
+    position: null,
   },
   rating: {
     name: 'God rating',

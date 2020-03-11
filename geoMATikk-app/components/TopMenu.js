@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { View, TouchableOpacity, TextInput, StyleSheet, Text, Button } from 'react-native';
 import Constants from 'expo-constants';
 import { Ionicons } from '@expo/vector-icons';
-import FilterItem from './FilterItem';
+import { FilterItem, PrefferedPrice, FilterLocation } from './FilterComponents';
 import { FilterDispatchContext } from '../context/FilterContext';
 
 function TopMenu(props) {
@@ -34,8 +34,12 @@ function TopMenu(props) {
         </View>
         {!filterModalVisible ? null : (
           <View style={styles.filterbox}>
-            <FilterItem item="price" />
-            <FilterItem item="nearby" />
+            <FilterItem item="price">
+              <PrefferedPrice />
+            </FilterItem>
+            <FilterItem item="nearby">
+              <FilterLocation />
+            </FilterItem>
             <FilterItem item="rating" />
             <View style={styles.typeKitchen}>
               <Button title="Kjøkken" color="black" />
