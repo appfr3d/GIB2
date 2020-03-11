@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { FilterStateContext } from '../context/FilterContext';
 
-const domain = 'https://6c7a22f1.ngrok.io';
+const domain = 'https://56e3dc93.ngrok.io';
 
 export default function useRestaurants() {
   const [restaurants, setRestaurants] = useState();
