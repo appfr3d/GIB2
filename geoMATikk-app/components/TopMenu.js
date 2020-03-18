@@ -4,11 +4,8 @@ import { View, TouchableOpacity, TextInput, StyleSheet, Text, Button, Modal, Scr
 import Constants from 'expo-constants';
 import { Dropdown } from 'react-native-material-dropdown';
 import { Ionicons } from '@expo/vector-icons';
-import CheckBox from 'react-native-modest-checkbox'; 
+import CheckBox from 'react-native-modest-checkbox';
 import SnapSlider from 'react-native-snap-slider';
-
-
-
 
 function TopMenu(props) {
   const { authModalVisible, setAuthModalVisible } = props;
@@ -16,8 +13,8 @@ function TopMenu(props) {
   const [searchInput, setSearchInput] = useState('Placeholder');
   const [distanceValue, setDistanceValue] = useState(10);
   const [priceChecked, setPriceChecked] = useState(false);
-  const [nearbyChecked, setNearbyChecked] = useState(false); 
-  const [ratingChecked, setRatingChecked] = useState(false); 
+  const [nearbyChecked, setNearbyChecked] = useState(false);
+  const [ratingChecked, setRatingChecked] = useState(false);
   const [pricePriority, setPricePriority] = useState(1);
   const [nearbyPriority, setNearbyPriority] = useState(1); 
   const [ratingPriority, setRatingPriority] = useState(1); 
@@ -50,12 +47,11 @@ function TopMenu(props) {
   ]);
 
   sliderOptions = [
-    { value:0, label: 'Uviktig'},
-    { value:1, label: 'Passe viktig'}, 
-    { value:2, label: 'Viktig'}
+    { value: 0, label: 'Uviktig' },
+    { value: 1, label: 'Passe viktig' },
+    { value: 2, label: 'Viktig' },
+  ];
 
-  ]; 
-  
   return (
     <View style={styles.topMenu}>
       <View style={styles.searchContainer}>
@@ -82,176 +78,75 @@ function TopMenu(props) {
         {!filterModalVisible ? null : (
           <View style={styles.filterbox}>
             <View style={styles.filterOption}>
-           
-           <CheckBox
-            label='Pris'
-            checked={priceChecked}
-            onChange ={()=> setPriceChecked(!priceChecked)}
-           />
-
-
-           
-            
-            </View>
-
-       
-
-        { priceChecked &&
-
-          <>
-          <View style={styles.priceRateBox}>
-            <View style={styles.priceRate}>
-                
-              <Button 
-                title="Lav"
-                color="black" 
-              />
-              
-            </View>
-
-            <View style={styles.priceRate}>
-
-              <Button
-                title="Høy"
-                color="black"
-              
-              />             
-            </View>
-
-          </View>
-
-          <SnapSlider containerStyle={styles.snapSlider}
-            
-            labelPosisiton="top"
-            items={sliderOptions}
-            defaultItem='1'
-            onSlidingComplete={value => setPricePriority(value)}
-            width='200'
-
-          />  
-
-          </>
-     
-        }
-
-   
-            <View style={styles.filterOption}>
               <CheckBox
-                label='I nærheten'
-                checked={nearbyChecked}
-                onChange ={()=> setNearbyChecked(!nearbyChecked)}
+                label="Pris"
+                checked={priceChecked}
+                onChange={() => setPriceChecked(!priceChecked)}
               />
             </View>
 
+            {priceChecked && (
+              <>
+                <View style={styles.priceRateBox}>
+                  <View style={styles.priceRate}>
+                    <Button title="Lav" color="black" />
+                  </View>
 
-            { nearbyChecked &&
-            <View>
-            
-              <SnapSlider containerStyle={styles.snapSlider}
-              
-                labelPosisiton="top"
-                items={sliderOptions}
-                defaultItem='1'
-                onSlidingComplete={value => setNearbyPriority(value)}
-                width='200'
-              />  
-
-            </View>
-
-            }
-
-            <View style={styles.filterOption}>
-
-              <CheckBox
-                label='God rating'
-                checked={ratingChecked}
-                onChange ={()=> setRatingChecked(!ratingChecked)}
-              />
-
-            </View>
-            
-          {ratingChecked &&
-            <View>
-
-          <SnapSlider containerStyle={styles.snapSlider}
-            
-            labelPosisiton="top"
-            items={sliderOptions}
-            defaultItem='1'
-            onSlidingComplete={value => setRatingPriority(value)}
-            width='200'
-      
-          />  
-
-
-            </View>
-
-            }
-
-            <View style={styles.typeKitchen}>
-              <TouchableOpacity 
-              style={{display: 'flex', flexDirection: 'row'}}
-              onPress={() => 
-                setKitchenVisible(!kitchenVisible)}
-             
-              >  
-
-                <Text style={{fontSize: 19}}>Velg kjøkken </Text>
-                <Ionicons name ="md-arrow-round-forward" size={20} />
-
-               
-          
-             </TouchableOpacity>
-
-              <Modal 
-              visible={kitchenVisible}
-              animationType='fade'
-              transparent
-
-              > 
- 
-              <View style={{backgroundColor:'rgba(0,0,0,0.4)', flex: 1}}>
-                <View style={styles.kitchenBox}>
-                  <FlatList 
-                  style={styles.kitchenFLatList}
-                  ItemSeparatorComponent = {() =>
-                    <View style={{height:0.1, backgroundColor:'black', width:"90%"}}>
-
-                    </View>  
-                  }
-                  keyExtractor={(item)=>item.id}
-                  data={kjokken}
-                  renderItem={({item})=>
-                    <View style={{padding:20}}> 
-                     
-                        <CheckBox
-                          label= {item.title}
-                        />
-
-                     
-                    </View>
-                  }
-                
-                  >
-                    
-
-                  </FlatList>
+                  <View style={styles.priceRate}>
+                    <Button title="Høy" color="black" />
+                  </View>
                 </View>
 
-              </View>
-
-             
-              </Modal>
-             
-              
+                <SnapSlider
+                  containerStyle={styles.snapSlider}
+                  labelPosisiton="top"
+                  items={sliderOptions}
+                  defaultItem="1"
+                  onSlidingComplete={value => setPricePriority(value)}
+                  width="200"
+                />
+              </>
+            )}
+            <View style={styles.filterOption}>
+              <CheckBox
+                label="I nærheten"
+                checked={nearbyChecked}
+                onChange={() => setNearbyChecked(!nearbyChecked)}
+              />
             </View>
 
-            <View style={styles.searchButton}>
-              <Button
-                title="Søk"
-                color="black"
-              />
+            {nearbyChecked && (
+              <View>
+                <Slider
+                  style={{ width: 200, height: 40 }}
+                  minimumValue={0}
+                  maximumValue={100}
+                  value={10}
+                />
+              </View>
+            )}
 
+            <View style={styles.filterOption}>
+              <CheckBox
+                label="God rating"
+                checked={ratingChecked}
+                onChange={() => setRatingChecked(!ratingChecked)}
+              />
+            </View>
+
+            {ratingChecked && (
+              <View>
+                <Slider
+                  style={{ width: 200, height: 40 }}
+                  minimumValue={0}
+                  maximumValue={100}
+                  value={10}
+                />
+              </View>
+            )}
+
+            <View style={styles.typeKitchen}>
+              <Button title="Kjøkken" color="black" />
             </View>
 
           </View>
@@ -321,33 +216,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    
   },
   dropDown: {
     flex: 1,
     padding: 50,
   },
 
-  typeKitchen: { 
-   
+  typeKitchen: {
     padding: 5,
-    display: 'flex', 
-    width: 220, 
-    marginBottom: 10,
-    flexDirection: "row", 
-    padding: 20, 
-
+    display: 'flex',
+    backgroundColor: 'lightblue',
+    width: 110,
+    borderWidth: 1.5,
   },
 
   priceRate: {
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: 'lightblue', 
-    borderWidth: 1.5, 
+    backgroundColor: 'lightblue',
+    borderWidth: 1.5,
     width: 70,
-    margin: 5
-
-  }, 
+    margin: 5,
+  },
 
   priceRateBox: {
     display: 'flex',
@@ -357,30 +247,8 @@ const styles = StyleSheet.create({
   },
 
   snapSlider: {
-    marginBottom: 35,
-  }, 
-
-  searchButton:  {
-    padding: 5,
-    display: 'flex', 
-    backgroundColor: 'lightblue', 
-    width: 200, 
-    borderWidth: 1.5, 
-  }, 
-  kitchenFlatList: {
-    backgroundColor: 'blue',
+    marginBottom: 30,
   },
-  kitchenBox: {
-    backgroundColor: 'white', 
-    width:280,
-    display: 'flex',
-    marginLeft:10, 
-    marginTop: 55, 
-    borderRadius: 10,
-    padding: 10, 
-
-  },
-
 });
 
 export default TopMenu;
