@@ -7,13 +7,15 @@ import {
   SafeAreaView,
   Dimensions,
   Image,
-  Animated,
+  // Animated,
   // TextInput,
   // Slider,
   // Button,
 } from 'react-native';
 import Constants from 'expo-constants';
-import { PanGestureHandler, State } from 'react-native-gesture-handler';
+// import { PanGestureHandler, State } from 'react-native-gesture-handler';
+
+import Rating from './Rating';
 
 // const { Swipeable } = GestureHandler;
 // import { Dropdown } from 'react-native-material-dropdown';
@@ -60,6 +62,7 @@ function RestaurantItem({ restaurant }) {
       />
       <View style={{ paddingTop: 10 }}>
         <Text>{restaurant.name}</Text>
+        <Rating maxRating={5} value={restaurant.rating} size={20} />
         <Text>{restaurant.phone}</Text>
       </View>
     </View>
@@ -85,7 +88,7 @@ function RestaurantItem({ restaurant }) {
 */
 
 function RestaurantList({ restaurants, visible, selectedID, setSelectedID }) {
-  const listRef = useRef(null);
+  let listRef = useRef(null);
 
   const viewabilityConfig = useRef({
     viewAreaCoveragePercentThreshold: 95,
@@ -100,9 +103,11 @@ function RestaurantList({ restaurants, visible, selectedID, setSelectedID }) {
   });
 
   useEffect(() => {
-    if (listRef && restaurants) {
+    // måtte ha null-sjekk for at den ikke skal krasje på iOS
+    if (listRef !== null && restaurants) { 
       const i = restaurants.map(x => x.id).indexOf(selectedID);
       if (i > -1) {
+        console.log(`index: ${i}`);
         listRef.current.scrollToIndex({ index: i });
       }
     }
