@@ -13,7 +13,7 @@ import {
 import Constants from 'expo-constants';
 import CheckBox from 'react-native-modest-checkbox';
 import { Ionicons } from '@expo/vector-icons';
-import { FilterItem, PrefferedPrice, FilterLocation } from './FilterComponents';
+import FilterItem from './FilterItem';
 import { FilterDispatchContext } from '../context/FilterContext';
 
 function TopMenu(props) {
@@ -60,7 +60,7 @@ function TopMenu(props) {
           <TextInput
             placeholder="Search"
             style={styles.searchInput}
-            onChangeText={value => filterDispatch({ type: 'set_search_string', payload: value })}
+            onChangeText={value =>  patch({ type: 'set_search_string', payload: value })}
           />
           <TouchableOpacity>
             <Ionicons name="md-search" size={32} />
@@ -69,12 +69,8 @@ function TopMenu(props) {
         </View>
         {!filterModalVisible ? null : (
           <View style={styles.filterbox}>
-            <FilterItem item="price">
-              <PrefferedPrice />
-            </FilterItem>
-            <FilterItem item="nearby">
-              <FilterLocation />
-            </FilterItem>
+            <FilterItem item="price" />
+            <FilterItem item="nearby" />
             <FilterItem item="rating" />
 
             <View style={styles.typeKitchen}>
