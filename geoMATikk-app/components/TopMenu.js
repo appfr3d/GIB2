@@ -10,6 +10,7 @@ import {
   Modal,
   FlatList,
 } from 'react-native';
+import TypeKitchen from './TypeKitchen';
 import Constants from 'expo-constants';
 import CheckBox from 'react-native-modest-checkbox';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,29 +23,6 @@ function TopMenu(props) {
   const [kitchenVisible, setKitchenVisible] = useState(false);
   const filterDispatch = useContext(FilterDispatchContext);
 
-  const [kjokken, setKjokken] = useState([
-    {
-      id: '1',
-      title: 'Italiensk',
-    },
-
-    {
-      id: '2',
-      title: 'Asiatisk',
-    },
-    {
-      id: '3',
-      title: 'Meksikansk',
-    },
-    {
-      id: '4',
-      title: 'Amerikansk',
-    },
-    {
-      id: '5',
-      title: 'Nordisk',
-    },
-  ]);
 
   return (
     <View style={styles.topMenu}>
@@ -69,9 +47,15 @@ function TopMenu(props) {
         </View>
         {!filterModalVisible ? null : (
           <View style={styles.filterbox}>
+            
             <FilterItem item="price" />
+            <View style={{ height: 0.3, backgroundColor: 'black', width: '100%', opacity: .4, marginBottom: 15}} />
+
             <FilterItem item="nearby" />
+            <View style={{ height: 0.3, backgroundColor: 'black', width: '100%' , opacity: .4, marginBottom: 15}} />
+
             <FilterItem item="rating" />
+            <View style={{ height: 0.3, backgroundColor: 'black', width: '100%' , opacity: .4, marginBottom: 15}} />
 
             <View style={styles.typeKitchen}>
               <TouchableOpacity
@@ -82,26 +66,9 @@ function TopMenu(props) {
                 <Ionicons name="md-arrow-round-forward" size={20} />
               </TouchableOpacity>
 
-              <Modal visible={kitchenVisible} animationType="fade" transparent>
-                <View style={{ backgroundColor: 'rgba(0,0,0,0.4)', flex: 1 }}>
-                  <View style={styles.kitchenBox}>
-                    <FlatList
-                      style={styles.kitchenFLatList}
-                      ItemSeparatorComponent={() => (
-                        <View style={{ height: 0.1, backgroundColor: 'black', width: '90%' }} />
-                      )}
-                      keyExtractor={item => item.id}
-                      data={kjokken}
-                      renderItem={({ item }) => (
-                        <View style={{ padding: 20 }}>
-                          <CheckBox label={item.title} />
-                        </View>
-                      )}
-                    />
-                  </View>
-                </View>
-              </Modal>
             </View>
+
+            <TypeKitchen kitchenVisible={kitchenVisible} setKitchenVisible={setKitchenVisible}/>
 
             <View style={styles.searchButton}>
               <Button title="Søk" color="black" />
@@ -124,6 +91,7 @@ function TopMenu(props) {
 }
 
 const styles = StyleSheet.create({
+
   topMenu: {
     position: 'absolute',
     top: Constants.statusBarHeight + 10,
@@ -151,21 +119,23 @@ const styles = StyleSheet.create({
   filterbutton: {
     paddingRight: 10,
   },
+  
   filterbox: {
     padding: 5,
-    paddingTop: 30,
+    paddingTop: 15,
     margin: 20,
     display: 'flex',
     flexDirection: 'column',
     borderRadius: 10,
     backgroundColor: 'white',
+  
   },
+
   typeKitchen: {
-    padding: 5,
+    padding: 10,
     display: 'flex',
-    backgroundColor: 'lightblue',
-    width: 110,
-    borderWidth: 1.5,
+    width: 200,
+
   },
 
   searchButton: {
@@ -173,7 +143,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     backgroundColor: 'lightblue',
     width: 200,
-    borderWidth: 1.5,
+    marginTop: 15,
   },
   kitchenBox: {
     backgroundColor: 'white',

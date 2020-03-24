@@ -13,7 +13,7 @@ import {
   // Button,
 } from 'react-native';
 import Constants from 'expo-constants';
-import { PanGestureHandler, State } from 'react-native-gesture-handler';
+// import { PanGestureHandler, State } from 'react-native-gesture-handler';
 
 // const { Swipeable } = GestureHandler;
 // import { Dropdown } from 'react-native-material-dropdown';

@@ -6,24 +6,24 @@ import { useRestaurants } from '../hooks';
 import RestaurantList from './RestaurantList';
 
 // Mock data
-// const restaurants = [
-//   {
-//     description: 'Burger <3',
-//     id: 9,
-//     image_url: '',
-//     location: {
-//       latitude: 63.430646,
-//       longitude: 10.397,
-//     },
-//     name: 'MacDonald',
-//     phone: '12345678',
-//     price_class: 2,
-//     rating: 4,
-//   },
-// ];
+const restaurants = [
+  {
+    description: 'Burger <3',
+    id: 9,
+    image_url: '',
+    location: {
+      latitude: 63.430646,
+      longitude: 10.397,
+    },
+    name: 'MacDonald',
+    phone: '12345678',
+    price_class: 2,
+    rating: 4,
+  },
+];
 
 function MapComponent() {
-  const [restaurants] = useRestaurants();
+  //const [restaurants] = useRestaurants();
   const [restInfoVisible, setRestInfoVisible] = useState(false);
   const [selectedRestaurantID, setSelectedRestaurantID] = useState(null);
   useEffect(() => {
