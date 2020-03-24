@@ -18,9 +18,10 @@ const initialFilterState = {
   },
   rating: {
     name: 'God rating',
-    activa: false,
+    active: false,
     priority: 1,
   },
+  kitchens: [],
 };
 
 function filterReducer(state, action) {
@@ -35,7 +36,20 @@ function filterReducer(state, action) {
       };
     case 'set_priority':
       return { ...state, [payload.item]: { ...state[payload.item], priority: payload.value } };
-
+    case 'toggle_kitchen':
+      if (state.kitchens.includes(payload)) {
+        const index = state.kitchens.indexOf(payload);
+        const newArray = state.kitchens;
+        newArray.splice(index, 1);
+        return {
+          ...state,
+          kitchens: newArray,
+        };
+      }
+      return {
+        ...state,
+        kitchens: [...state.kitchens, payload],
+      };
     default:
       console.warning(action.type);
       return state;

@@ -1,18 +1,17 @@
 import React, { useContext, useState } from 'react';
-import { View, StyleSheet, Modal, FlatList, TouchableOpacity, TabBarIOS, Text } from 'react-native';
+import { View, StyleSheet, Modal, FlatList, TouchableOpacity, Text } from 'react-native';
 import CheckBox from 'react-native-modest-checkbox';
 import { Ionicons } from '@expo/vector-icons';
-
-
+import { FilterDispatchContext, FilterStateContext } from '../context/FilterContext';
 
 export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
-
-  const [kjokken, setKjokken] = useState([
+  const filterDispatch = useContext(FilterDispatchContext);
+  const filterState = useContext(FilterStateContext);
+  const [kjokken] = useState([
     {
       id: '1',
       title: 'Italiensk',
     },
-  
     {
       id: '2',
       title: 'Asiatisk',
@@ -49,55 +48,47 @@ export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
       id: '9',
       title: 'Midtøsten',
     },
-  
-
   ]);
 
-  const [checkedKitchen, setCheckedKitchen] = useState(false); 
-
+  console.log(filterState);
   return (
     <Modal visible={kitchenVisible} animationType="fade" transparent>
-        <View style={{ backgroundColor: 'rgba(0,0,0,0.4)', flex: 1 }}>
-            <View style={styles.kitchenBox}>
+      <View style={{ backgroundColor: 'rgba(0,0,0,0.4)', flex: 1 }}>
+        <View style={styles.kitchenBox}>
+          <TouchableOpacity
+            style={{ display: 'flex', flexDirection: 'row', padding: 10 }}
+            onPress={() => setKitchenVisible(!kitchenVisible)}
+          >
+            <Ionicons name="md-arrow-back" size={20} style={{ marginRight: 10 }} />
+            <Text style={{ fontSize: 19 }}> Tilbake </Text>
+          </TouchableOpacity>
 
-            <TouchableOpacity 
-                style={{ display: 'flex', flexDirection: 'row' , padding:10}}
-                onPress={() => setKitchenVisible(!kitchenVisible)}
-              >
-                <Ionicons name="md-arrow-back" size={20} style={{marginRight:10,}} />
-                <Text style={{ fontSize: 19 }}> Tilbake </Text>
-                
-            </TouchableOpacity>
-            
-            <FlatList
-                style={styles.kitchenFLatList}
-                ItemSeparatorComponent={() => (
-                <View style={{ height: 0.4, backgroundColor: 'black', width: '100%', opacity: .4, }} />
-                )}
-                keyExtractor={item => item.id}
-                data={kjokken}
-                renderItem={({ item }) => (
-                <View style={{ padding: 10 }}>
-                    <CheckBox 
-                    label={item.title} 
-                    checked={checkedKitchen}
-                    onChange={()=>setCheckedKitchen(!checkedKitchen)}
-                    />
-                </View>
-                )}
-            />
-
-            
-            </View>
-
-            
+          <FlatList
+            style={styles.kitchenFLatList}
+            ItemSeparatorComponent={() => (
+              <View
+                style={{ height: 0.4, backgroundColor: 'black', width: '100%', opacity: 0.4 }}
+              />
+            )}
+            keyExtractor={item => item.id}
+            data={kjokken}
+            renderItem={({ item }) => (
+              <View style={{ padding: 10 }}>
+                <CheckBox
+                  label={item.title}
+                  checked={filterState.kitchens.includes(item.title)}
+                  onChange={() => filterDispatch({ type: 'toggle_kitchen', payload: item.title })}
+                />
+              </View>
+            )}
+          />
         </View>
+      </View>
     </Modal>
-
-  )}
+  );
+}
 
 const styles = StyleSheet.create({
-
   kitchenBox: {
     backgroundColor: 'white',
     width: 270,
