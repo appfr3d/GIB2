@@ -19,7 +19,7 @@ const initialFilterState = {
   },
   rating: {
     name: 'God rating',
-    activa: false,
+    active: false,
     priority: 1,
   },
 };
