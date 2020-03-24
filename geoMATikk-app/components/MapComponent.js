@@ -4,6 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 import { useRestaurants } from '../hooks';
 
 import RestaurantList from './RestaurantList';
+import RestaurantInfo from './RestaurantInfo';
 
 // Mock data
 // const restaurants = [
@@ -23,11 +24,14 @@ import RestaurantList from './RestaurantList';
 // ];
 
 function MapComponent() {
-  const [restaurants] = useRestaurants();
-  const [restInfoVisible, setRestInfoVisible] = useState(false);
-  const [selectedRestaurantID, setSelectedRestaurantID] = useState(null);
+  const [restaurants] = useRestaurants();                                 // Restaurant data
+  const [restListVisible, setRestListVisible] = useState(false);          // om listen i bunnen er synlig eller ikke
+  const [restInfoVisible, setRestInfoVisible] = useState(false);          // om informasjon om én restaurant er synlig
+  const [selectedRestaurantID, setSelectedRestaurantID] = useState(null); // id-en til den valgte restauranten
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null);     // restaurant objektet som er valgt
+
   useEffect(() => {
-    if (restInfoVisible) {
+    if (restListVisible) {
       const restaurant = restaurants.find(x => x.id === selectedRestaurantID);
       if (restaurant !== undefined) {
         mapRef.animateToRegion({
@@ -40,11 +44,17 @@ function MapComponent() {
     }
   });
 
+  useEffect(() => {
+    if (selectedRestaurantID !== null) {
+      setSelectedRestaurant(restaurants.find(x => x.id === selectedRestaurantID))
+    }
+  }, [selectedRestaurantID]);
+
   const selectRestaurant = restaurant => {
-    // if (!restInfoVisible) {
+    // if (!restListVisible) {
     // console.log(restaurant);
     setSelectedRestaurantID(restaurant.id);
-    setRestInfoVisible(true);
+    setRestListVisible(true);
     mapRef.animateToRegion({
       latitude: restaurant.location.latitude,
       longitude: restaurant.location.longitude,
@@ -55,8 +65,8 @@ function MapComponent() {
   };
 
   const hideRestInfo = () => {
-    if (restInfoVisible) {
-      setRestInfoVisible(false);
+    if (restListVisible) {
+      setRestListVisible(false);
       const restaurant = restaurants.find(x => x.id === selectedRestaurantID);
       if (restaurant !== undefined) {
         mapRef.animateToRegion({
@@ -100,10 +110,19 @@ function MapComponent() {
       </MapView>
       <RestaurantList
         restaurants={restaurants}
-        visible={restInfoVisible}
+        visible={restListVisible}
+        setVisible={setRestListVisible}
         selectedID={selectedRestaurantID}
         setSelectedID={setSelectedRestaurantID}
+        showMoreInfo={setRestInfoVisible}
       />
+      { restInfoVisible &&
+        <RestaurantInfo 
+          restaurant={selectedRestaurant}
+          setInfoVisible={setRestInfoVisible}
+          setListVisible={setRestListVisible}
+        />
+      }
     </>
   );
 }
@@ -116,7 +135,7 @@ function MapComponent() {
             hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
             style={styles.closelogin}
             onPress={() => {
-              setRestInfoVisible(false);
+              setRestListVisible(false);
             }}
           >
             <Ionicons name="md-close" size={20} />

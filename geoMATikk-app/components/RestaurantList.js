@@ -7,10 +7,11 @@ import {
   SafeAreaView,
   Dimensions,
   Image,
+  TouchableOpacity,
   // Animated,
   // TextInput,
   // Slider,
-  // Button,
+  // 
 } from 'react-native';
 import Constants from 'expo-constants';
 // import { PanGestureHandler, State } from 'react-native-gesture-handler';
@@ -24,7 +25,7 @@ import Rating from './Rating';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
-function RestaurantItem({ restaurant }) {
+function RestaurantItem({ restaurant, setVisible, showMoreInfo }) {
   /*
   function handleAnimationStateChange({ nativeEvent }) {
     if (nativeEvent.state === State.ACTIVE) {
@@ -64,6 +65,14 @@ function RestaurantItem({ restaurant }) {
         <Text>{restaurant.name}</Text>
         <Rating maxRating={5} value={restaurant.rating} size={20} />
         <Text>{restaurant.phone}</Text>
+        <View style={{ alignItems: 'flex-end' }}>
+          <TouchableOpacity onPress={() => {
+            setVisible(false);
+            showMoreInfo(true);
+          }}>
+            <Text>Mer info</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -87,7 +96,7 @@ function RestaurantItem({ restaurant }) {
 },
 */
 
-function RestaurantList({ restaurants, visible, selectedID, setSelectedID }) {
+function RestaurantList({ restaurants, visible, setVisible, selectedID, setSelectedID, showMoreInfo }) {
   let listRef = useRef(null);
 
   const viewabilityConfig = useRef({
@@ -119,7 +128,13 @@ function RestaurantList({ restaurants, visible, selectedID, setSelectedID }) {
         <FlatList
           ref={listRef}
           data={restaurants}
-          renderItem={({ item }) => <RestaurantItem restaurant={item} />}
+          renderItem={({ item }) => 
+            <RestaurantItem 
+              restaurant={item} 
+              setVisible={setVisible} 
+              showMoreInfo={showMoreInfo}
+            />
+          }
           getItemLayout={(data, index) => ({
             length: screenWidth,
             offset: screenWidth * index,

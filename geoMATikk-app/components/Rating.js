@@ -24,9 +24,9 @@ function Rating({ maxRating, value, size }) {
   let ratings = []
   for (let i = 0; i < maxRating; i++) {
     if (i < Math.round(value)) {
-      ratings.push(<Image style={{ width: size, height: size }} source={starFull} resizeMode='contain' />);
+      ratings.push(<Image key={i.toString()} style={{ width: size, height: size }} source={starFull} resizeMode='contain' />);
     } else {
-      ratings.push(<Image style={{ width: size, height: size }} source={starEmpty} resizeMode='contain' />);
+      ratings.push(<Image key={i.toString()} style={{ width: size, height: size }} source={starEmpty} resizeMode='contain' />);
     }
   }
 
