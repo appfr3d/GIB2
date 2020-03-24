@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import CheckBox from 'react-native-modest-checkbox';
 import SnapSlider from 'react-native-snap-slider';
-import { FilterStateContext, FilterDispatchContext } from '../context/FilterContext';
+import { FilterStateContext, FilterDispatchContext } from '../../context/FilterContext';
 
 const sliderOptions = [
   { value: 0, label: 'Uviktig' },
@@ -11,10 +11,10 @@ const sliderOptions = [
   { value: 2, label: 'Viktig' },
 ];
 
-export default function FilterItem({ item }) {
+export default function FilterItem({ item, children }) {
   const filterState = useContext(FilterStateContext);
   const filterDispatch = useContext(FilterDispatchContext);
-  const { name, active, prefferedValue, priority } = filterState[item];
+  const { name, active, priority } = filterState[item];
 
   return (
     <>
@@ -24,17 +24,7 @@ export default function FilterItem({ item }) {
           checked={active}
           onChange={() => filterDispatch({ type: 'toggle_item', payload: { item } })}
         />
-        {active && prefferedValue && (
-          <View style={styles.priceRateBox}>
-            <View style={styles.priceRate}>
-              <Button title="Lav" color="black" />
-            </View>
-
-            <View style={styles.priceRate}>
-              <Button title="Høy" color="black" />
-            </View>
-          </View>
-        )}
+        {active && children}
       </View>
       {active && (
         <>
@@ -65,20 +55,6 @@ const styles = StyleSheet.create({
   dropDown: {
     flex: 1,
     padding: 50,
-  },
-  priceRate: {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'lightblue',
-    borderWidth: 1.5,
-    width: 70,
-    margin: 5,
-  },
-  priceRateBox: {
-    display: 'flex',
-    flexDirection: 'row',
-    padding: 10,
-    paddingTop: 5,
   },
   snapSlider: {
     marginBottom: 30,
