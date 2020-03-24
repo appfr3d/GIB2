@@ -21,11 +21,7 @@ const initialFilterState = {
     active: false,
     priority: 1,
   },
-  kitchen: {
-    name: 'Type kjøkken',
-    active: false,
-    kitchens: [],
-  },
+  kitchens: [],
 };
 
 function filterReducer(state, action) {
@@ -40,10 +36,19 @@ function filterReducer(state, action) {
       };
     case 'set_priority':
       return { ...state, [payload.item]: { ...state[payload.item], priority: payload.value } };
-    case 'add_kitchen':
+    case 'toggle_kitchen':
+      if (state.kitchens.includes(payload)) {
+        const index = state.kitchens.indexOf(payload);
+        const newArray = state.kitchens;
+        newArray.splice(index, 1);
+        return {
+          ...state,
+          kitchens: newArray,
+        };
+      }
       return {
         ...state,
-        kitchen: { ...state.kitchen, kitchens: [...state.kitchen.kitchens, payload] },
+        kitchens: [...state.kitchens, payload],
       };
     default:
       console.warning(action.type);

@@ -76,8 +76,8 @@ export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
               <View style={{ padding: 10 }}>
                 <CheckBox
                   label={item.title}
-                  checked={filterState.kitchen.kitchens.includes(item.title)}
-                  onChange={() => filterDispatch({ type: 'add_kitchen', payload: item.title })}
+                  checked={filterState.kitchens.includes(item.title)}
+                  onChange={() => filterDispatch({ type: 'toggle_kitchen', payload: item.title })}
                 />
               </View>
             )}
