@@ -10,10 +10,10 @@ import {
   Modal,
   FlatList,
 } from 'react-native';
-import TypeKitchen from './TypeKitchen';
 import Constants from 'expo-constants';
 import CheckBox from 'react-native-modest-checkbox';
 import { Ionicons } from '@expo/vector-icons';
+import TypeKitchen from './TypeKitchen';
 import FilterItem from './FilterItem';
 import { FilterDispatchContext } from '../context/FilterContext';
 
@@ -22,7 +22,6 @@ function TopMenu(props) {
   const [filterModalVisible, setFilterModalVisible] = useState(false);
   const [kitchenVisible, setKitchenVisible] = useState(false);
   const filterDispatch = useContext(FilterDispatchContext);
-
 
   return (
     <View style={styles.topMenu}>
@@ -47,15 +46,41 @@ function TopMenu(props) {
         </View>
         {!filterModalVisible ? null : (
           <View style={styles.filterbox}>
-            
             <FilterItem item="price" />
-            <View style={{ height: 0.3, backgroundColor: 'black', width: '100%', opacity: .4, marginBottom: 15}} />
+            <View
+              style={{
+                height: 0.3,
+                backgroundColor: 'black',
+                width: '100%',
+                opacity: 0.4,
+                marginBottom: 15,
+              }}
+            />
 
             <FilterItem item="nearby" />
-            <View style={{ height: 0.3, backgroundColor: 'black', width: '100%' , opacity: .4, marginBottom: 15}} />
+            <View
+              style={{
+                height: 0.3,
+                backgroundColor: 'black',
+                width: '100%',
+                opacity: 0.4,
+                marginBottom: 15,
+              }}
+            />
 
             <FilterItem item="rating" />
-            <View style={{ height: 0.3, backgroundColor: 'black', width: '100%' , opacity: .4, marginBottom: 15}} />
+            <View
+              style={{
+                height: 0.3,
+                backgroundColor: 'black',
+                width: '100%',
+                opacity: 0.4,
+                marginBottom: 15,
+              }}
+            />
+            {/* <FilterItem item="kitchen">
+              <TypeKitchen />
+            </FilterItem> */}
 
             <View style={styles.typeKitchen}>
               <TouchableOpacity
@@ -65,10 +90,9 @@ function TopMenu(props) {
                 <Text style={{ fontSize: 19 }}>Velg kjøkken </Text>
                 <Ionicons name="md-arrow-round-forward" size={20} />
               </TouchableOpacity>
-
             </View>
 
-            <TypeKitchen kitchenVisible={kitchenVisible} setKitchenVisible={setKitchenVisible}/>
+            <TypeKitchen kitchenVisible={kitchenVisible} setKitchenVisible={setKitchenVisible} />
 
             <View style={styles.searchButton}>
               <Button title="Søk" color="black" />
@@ -91,7 +115,6 @@ function TopMenu(props) {
 }
 
 const styles = StyleSheet.create({
-
   topMenu: {
     position: 'absolute',
     top: Constants.statusBarHeight + 10,
@@ -119,7 +142,7 @@ const styles = StyleSheet.create({
   filterbutton: {
     paddingRight: 10,
   },
-  
+
   filterbox: {
     padding: 5,
     paddingTop: 15,
@@ -128,14 +151,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     borderRadius: 10,
     backgroundColor: 'white',
-  
   },
 
   typeKitchen: {
     padding: 10,
     display: 'flex',
     width: 200,
-
   },
 
   searchButton: {

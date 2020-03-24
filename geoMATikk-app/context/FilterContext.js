@@ -18,8 +18,13 @@ const initialFilterState = {
   },
   rating: {
     name: 'God rating',
-    activa: false,
+    active: false,
     priority: 1,
+  },
+  kitchen: {
+    name: 'Type kjøkken',
+    active: false,
+    kitchens: [],
   },
 };
 
@@ -35,7 +40,11 @@ function filterReducer(state, action) {
       };
     case 'set_priority':
       return { ...state, [payload.item]: { ...state[payload.item], priority: payload.value } };
-
+    case 'add_kitchen':
+      return {
+        ...state,
+        kitchen: { ...state.kitchen, kitchens: [...state.kitchen.kitchens, payload] },
+      };
     default:
       console.warning(action.type);
       return state;
