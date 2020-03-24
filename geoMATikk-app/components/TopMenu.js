@@ -78,10 +78,6 @@ function TopMenu(props) {
                 marginBottom: 15,
               }}
             />
-            {/* <FilterItem item="kitchen">
-              <TypeKitchen />
-            </FilterItem> */}
-
             <View style={styles.typeKitchen}>
               <TouchableOpacity
                 style={{ display: 'flex', flexDirection: 'row' }}

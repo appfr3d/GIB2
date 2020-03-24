@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, StyleSheet, Modal, FlatList, TouchableOpacity, TabBarIOS, Text } from 'react-native';
+import { View, StyleSheet, Modal, FlatList, TouchableOpacity, Text } from 'react-native';
 import CheckBox from 'react-native-modest-checkbox';
 import { Ionicons } from '@expo/vector-icons';
 import { FilterDispatchContext, FilterStateContext } from '../context/FilterContext';
@@ -7,7 +7,7 @@ import { FilterDispatchContext, FilterStateContext } from '../context/FilterCont
 export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
   const filterDispatch = useContext(FilterDispatchContext);
   const filterState = useContext(FilterStateContext);
-  const [kjokken, setKjokken] = useState([
+  const [kjokken] = useState([
     {
       id: '1',
       title: 'Italiensk',
@@ -50,7 +50,6 @@ export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
     },
   ]);
 
-  const [checkedKitchen, setCheckedKitchen] = useState(false);
   console.log(filterState);
   return (
     <Modal visible={kitchenVisible} animationType="fade" transparent>
