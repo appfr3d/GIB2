@@ -43,14 +43,14 @@ export default function FilterItem({ item }) {
             <View style={styles.priceRateBox}>
               <View style={[styles.priceRate, buttonStateStyle('lav')]}>
                 <Button 
-                title="Lav" 
+                title="$" 
                 color="black" 
                 onPress={()=>setPriceState('lav')} />
               </View>
 
               <View style={[styles.priceRate, buttonStateStyle('høy')]}>
                 <Button 
-                title="Høy" 
+                title="$$$$" 
                 color="black" 
                 style={buttonStateStyle('høy')}
                 onPress={()=>setPriceState('høy')}/>
