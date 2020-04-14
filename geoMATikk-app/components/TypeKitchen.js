@@ -52,38 +52,38 @@ export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
 
   console.log(filterState);
   return (
-    <Modal visible={kitchenVisible} animationType="fade" transparent>
-      <View style={{ backgroundColor: 'rgba(0,0,0,0.4)', flex: 1 }}>
-        <View style={styles.kitchenBox}>
-          <TouchableOpacity
-            style={{ display: 'flex', flexDirection: 'row', padding: 10 }}
-            onPress={() => setKitchenVisible(!kitchenVisible)}
-          >
-            <Ionicons name="md-arrow-back" size={20} style={{ marginRight: 10 }} />
-            <Text style={{ fontSize: 19 }}> Tilbake </Text>
-          </TouchableOpacity>
+    <Modal visible={kitchenVisible} animationType="fade" transparent>     
+        <View style={{ flex: 1}}>
+          <View style={styles.kitchenBox}>
+            <TouchableOpacity
+              style={{ display: 'flex', flexDirection: 'row', padding: 10 }}
+              onPress={() => setKitchenVisible(!kitchenVisible)}
+            >
+              <Ionicons name="md-arrow-back" size={20} style={{ marginRight: 10 }} />
+              <Text style={{ fontSize: 19 }}> Tilbake </Text>
+            </TouchableOpacity>
 
-          <FlatList
-            style={styles.kitchenFLatList}
-            ItemSeparatorComponent={() => (
-              <View
-                style={{ height: 0.4, backgroundColor: 'black', width: '100%', opacity: 0.4 }}
-              />
-            )}
-            keyExtractor={item => item.id}
-            data={kjokken}
-            renderItem={({ item }) => (
-              <View style={{ padding: 10 }}>
-                <CheckBox
-                  label={item.title}
-                  checked={filterState.kitchens.includes(item.title)}
-                  onChange={() => filterDispatch({ type: 'toggle_kitchen', payload: item.title })}
+            <FlatList
+              style={styles.kitchenFLatList}
+              ItemSeparatorComponent={() => (
+                <View
+                  style={{ height: 0.4, backgroundColor: 'black', width: '100%', opacity: 0.4 }}
                 />
-              </View>
-            )}
-          />
+              )}
+              keyExtractor={item => item.id}
+              data={kjokken}
+              renderItem={({ item }) => (
+                <View style={{ padding: 10 }}>
+                  <CheckBox
+                    label={item.title}
+                    checked={filterState.kitchens.includes(item.title)}
+                    onChange={() => filterDispatch({ type: 'toggle_kitchen', payload: item.title })}
+                  />
+                </View>
+              )}
+            />
+          </View>
         </View>
-      </View>
     </Modal>
   );
 }
@@ -91,11 +91,17 @@ export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
 const styles = StyleSheet.create({
   kitchenBox: {
     backgroundColor: 'white',
-    width: 270,
-    display: 'flex',
-    marginLeft: 10,
-    marginTop: 55,
+    margin: 20,
+    //width: '90%',
+    marginTop: '32%',
     borderRadius: 10,
-    padding: 25,
+    padding: 20,
+    flex: 1,
+
   },
+
+  kitchenFLatList: {
+    backgroundColor: 'white', 
+    flex: 1, 
+  }
 });

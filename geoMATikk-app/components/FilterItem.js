@@ -30,52 +30,58 @@ export default function FilterItem({ item }) {
 
   return (
     <>
-      <View style={styles.filterOption}>
-        <View style={styles.priceRateButtons}>
-          <CheckBox
-            label={name}
-            checked={active}
-            onChange={() => filterDispatch({ type: 'toggle_item', payload: { item } })}
-          />
-        
-        
-          {active && prefferedValue && (
-            <View style={styles.priceRateBox}>
-              <View style={[styles.priceRate, buttonStateStyle('lav')]}>
-                <Button 
-                title="$" 
-                color="black" 
-                onPress={()=>setPriceState('lav')} />
-              </View>
+      <View>
+        <View style={styles.filterOption}>
+          <View style={styles.priceRateButtons}>
+            <CheckBox
+              label={name}
+              checked={active}
+              onChange={() => filterDispatch({ type: 'toggle_item', payload: { item } })}
+            />
+          
+          
+            {active && prefferedValue && (
+              <View style={styles.priceRateBox}>
+                <View style={[styles.priceRate, buttonStateStyle('lav')]}>
+                  <Button 
+                  title="$" 
+                  color="black" 
+                  onPress={()=>setPriceState('lav')} />
+                </View>
 
-              <View style={[styles.priceRate, buttonStateStyle('høy')]}>
-                <Button 
-                title="$$$$" 
-                color="black" 
-                style={buttonStateStyle('høy')}
-                onPress={()=>setPriceState('høy')}/>
+                <View style={[styles.priceRate, buttonStateStyle('høy')]}>
+                  <Button 
+                  title="$$$$" 
+                  color="black" 
+                  style={buttonStateStyle('høy')}
+                  onPress={()=>setPriceState('høy')}/>
+                </View>
               </View>
-            </View>
-          )}
+            )}
+          </View>
+        
+
+
         </View>
-      
 
+    
+        {active && (
+          <>
+            <SnapSlider
+              containerStyle={styles.snapSlider}
+              labelPosisiton="top"
+              items={sliderOptions}
+              defaultItem={priority}
+              onSlidingComplete={value =>
+                filterDispatch({ type: `set_priority`, payload: { item, value } })
+              }
+              width="200"
+            />
 
+        
+          </>
+        )}
       </View>
-      {active && (
-        <>
-          <SnapSlider
-            containerStyle={styles.snapSlider}
-            labelPosisiton="top"
-            items={sliderOptions}
-            defaultItem={priority}
-            onSlidingComplete={value =>
-              filterDispatch({ type: `set_priority`, payload: { item, value } })
-            }
-            width="200"
-          />
-        </>
-      )}
     </>
   );
 }
@@ -87,7 +93,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-
 
   },
   dropDown: {
