@@ -1,17 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useContext } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  TextInput,
-  StyleSheet,
-  Text,
-  Button,
-} from 'react-native';
+import { View, TouchableOpacity, TextInput, StyleSheet, Text, Button } from 'react-native';
 import Constants from 'expo-constants';
 import { Ionicons } from '@expo/vector-icons';
-import TypeKitchen from './TypeKitchen';
-import FilterItem from './FilterItem';
+// import TypeKitchen from './TypeKitchen';
+// import FilterItem from './FilterItem';
 import { FilterDispatchContext } from '../context/FilterContext';
 
 function TopMenu(props) {
@@ -24,7 +17,6 @@ function TopMenu(props) {
     <View style={styles.topMenu}>
       <View style={styles.searchContainer}>
         <View style={styles.searchView}>
-          
           <TextInput
             placeholder="Søk på restaurant"
             style={styles.searchInput}
@@ -35,7 +27,6 @@ function TopMenu(props) {
           </TouchableOpacity>
           <Text />
         </View>
-        
       </View>
       <View>
         <TouchableOpacity
@@ -75,8 +66,6 @@ const styles = StyleSheet.create({
     width: '70%',
     marginLeft: 7,
   },
-
-
 });
 
 export default TopMenu;
