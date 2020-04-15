@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Button, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import FilterItem from './FilterItem';
+import { FilterItem } from './FilterComponents';
 import TypeKitchen from './TypeKitchen';
 
 export default function FindRestaurant({ findRestaurantVisible, setFindRestaurantVisible }) {

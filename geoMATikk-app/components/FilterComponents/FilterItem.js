@@ -16,17 +16,15 @@ export default function FilterItem({ item, children }) {
   const filterDispatch = useContext(FilterDispatchContext);
   const { name, active, prefferedValue, priority } = filterState[item];
   const [priceState, setPriceState] = useState('lav');
-  
-  
-  const buttonStateStyle = (state) => {
+
+  const buttonStateStyle = state => {
     if (state === priceState) {
       return {
         backgroundColor: 'rgba(48,105,189,1)',
-      }
+      };
     }
-  }
-
-
+    return null;
+  };
 
   return (
     <>
@@ -38,33 +36,26 @@ export default function FilterItem({ item, children }) {
               checked={active}
               onChange={() => filterDispatch({ type: 'toggle_item', payload: { item } })}
             />
-          
-          
+
             {active && prefferedValue && (
               <View style={styles.priceRateBox}>
                 <View style={[styles.priceRate, buttonStateStyle('lav')]}>
-                  <Button 
-                  title="$" 
-                  color="black" 
-                  onPress={()=>setPriceState('lav')} />
+                  <Button title="$" color="black" onPress={() => setPriceState('lav')} />
                 </View>
 
                 <View style={[styles.priceRate, buttonStateStyle('høy')]}>
-                  <Button 
-                  title="$$$$" 
-                  color="black" 
-                  style={buttonStateStyle('høy')}
-                  onPress={()=>setPriceState('høy')}/>
+                  <Button
+                    title="$$$$"
+                    color="black"
+                    style={buttonStateStyle('høy')}
+                    onPress={() => setPriceState('høy')}
+                  />
                 </View>
               </View>
             )}
           </View>
-        
-
-
         </View>
 
-    
         {active && (
           <>
             <SnapSlider
@@ -77,8 +68,6 @@ export default function FilterItem({ item, children }) {
               }
               width="200"
             />
-
-        
           </>
         )}
       </View>
@@ -93,13 +82,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-
   },
   dropDown: {
     flex: 1,
     padding: 50,
   },
-<<<<<<< HEAD:geoMATikk-app/components/FilterItem.js
   priceRate: {
     display: 'flex',
     flexDirection: 'column',
@@ -113,13 +100,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 10,
   },
-=======
->>>>>>> master:geoMATikk-app/components/FilterComponents/FilterItem.js
   snapSlider: {
     marginBottom: 30,
     width: 200,
   },
-
-
-  
 });

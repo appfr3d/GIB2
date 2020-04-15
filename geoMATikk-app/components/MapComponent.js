@@ -7,24 +7,24 @@ import RestaurantList from './RestaurantList';
 import RestaurantInfo from './RestaurantInfo';
 
 // Mock data
-const restaurants = [
-  {
-    description: 'Burger <3',
-    id: 9,
-    image_url: '',
-    location: {
-      latitude: 63.430646,
-      longitude: 10.397,
-    },
-    name: 'MacDonald',
-    phone: '12345678',
-    price_class: 2,
-    rating: 4,
-  },
-];
+// const restaurants = [
+//   {
+//     description: 'Burger <3',
+//     id: 9,
+//     image_url: '',
+//     location: {
+//       latitude: 63.430646,
+//       longitude: 10.397,
+//     },
+//     name: 'MacDonald',
+//     phone: '12345678',
+//     price_class: 2,
+//     rating: 4,
+//   },
+// ];
 
 function MapComponent() {
-  // const [restaurants] = useRestaurants();                                 // Restaurant data
+  const [restaurants] = useRestaurants(); // Restaurant data
   const [restListVisible, setRestListVisible] = useState(false); // om listen i bunnen er synlig eller ikke
   const [restInfoVisible, setRestInfoVisible] = useState(false); // om informasjon om én restaurant er synlig
   const [selectedRestaurantID, setSelectedRestaurantID] = useState(null); // id-en til den valgte restauranten
