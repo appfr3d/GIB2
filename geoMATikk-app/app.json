@@ -3,7 +3,6 @@
     "name": "geoMATikk",
     "slug": "geoMATikk",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
@@ -30,9 +29,9 @@
     "android": {
       "package": "com.gib.geomatikk",
       "config": {
-          "googleMaps": {
-            "apiKey": "AIzaSyB_waoXnAeBRlBly6grQNiE2hdlYvNv_gY"
-          }
+        "googleMaps": {
+          "apiKey": "AIzaSyB_waoXnAeBRlBly6grQNiE2hdlYvNv_gY"
+        }
       }
     }
   }
