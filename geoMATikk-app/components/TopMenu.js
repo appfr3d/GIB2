@@ -20,7 +20,7 @@ function TopMenu(props) {
           <TextInput
             placeholder="Søk på restaurant"
             style={styles.searchInput}
-            onChangeText={value => filterDispatch({ type: 'set_search_string', payload: value })}
+            onChangeText={value =>  patch({ type: 'set_search_string', payload: value })}
           />
           <TouchableOpacity>
             <Ionicons name="md-search" size={32} />

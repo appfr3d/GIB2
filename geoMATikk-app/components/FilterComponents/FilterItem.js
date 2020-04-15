@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import CheckBox from 'react-native-modest-checkbox';
 import SnapSlider from 'react-native-snap-slider';
-import { FilterStateContext, FilterDispatchContext } from '../context/FilterContext';
+import { FilterStateContext, FilterDispatchContext } from '../../context/FilterContext';
 
 const sliderOptions = [
   { value: 0, label: 'Uviktig' },
@@ -11,7 +11,7 @@ const sliderOptions = [
   { value: 2, label: 'Viktig' },
 ];
 
-export default function FilterItem({ item }) {
+export default function FilterItem({ item, children }) {
   const filterState = useContext(FilterStateContext);
   const filterDispatch = useContext(FilterDispatchContext);
   const { name, active, prefferedValue, priority } = filterState[item];
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 50,
   },
+<<<<<<< HEAD:geoMATikk-app/components/FilterItem.js
   priceRate: {
     display: 'flex',
     flexDirection: 'column',
@@ -112,6 +113,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 10,
   },
+=======
+>>>>>>> master:geoMATikk-app/components/FilterComponents/FilterItem.js
   snapSlider: {
     marginBottom: 30,
     width: 200,
