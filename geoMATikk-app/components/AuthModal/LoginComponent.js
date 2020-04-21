@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native';
 import { useAuth } from '../../hooks/useAuth';
+import PasswordInput from './PasswordInput';
 
 export default function LoginComponent(props) {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const auth = useAuth();
+
+  const handleLogin = () => {
+    if (username) {
+      auth.signin(username.toLowerCase(), password);
+    }
+  };
 
   return (
     <>
@@ -26,18 +33,9 @@ export default function LoginComponent(props) {
           style={styles.regUser}
           onChangeText={text => setUsername(text)}
         />
-        <TextInput
-          placeholder="Passord"
-          placeholderTextColor="rgba(0,0,0,0.5)"
-          marginBottom="10%"
-          secureTextEntry
-          style={styles.regUser}
-          onChangeText={text => setPassword(text)}
-        />
-        <TouchableOpacity
-          style={styles.submitButton}
-          onPress={() => auth.signin(username.toLowerCase(), password)}
-        >
+        <PasswordInput onChangeText={text => setPassword(text)} />
+        <Text style={styles.errorText}>{auth.error}</Text>
+        <TouchableOpacity style={styles.submitButton} onPress={handleLogin} disabled={!username}>
           <Text style={{ fontSize: 20 }}>Logg inn</Text>
         </TouchableOpacity>
       </View>
@@ -76,6 +74,11 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     alignSelf: 'center',
-    padding: 30,
+    padding: 15,
+    backgroundColor: 'lightgreen',
+    borderRadius: 20,
+  },
+  errorText: {
+    color: 'red',
   },
 });

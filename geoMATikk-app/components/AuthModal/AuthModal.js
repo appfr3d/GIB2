@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -11,9 +11,16 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import LoginComponent from './LoginComponent';
 import RegisterComponent from './RegisterComponent';
+import LogoutComponent from './LogoutComponent';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function AuthModal(props) {
-  const [mode, setMode] = useState('login');
+  const auth = useAuth();
+  const [mode, setMode] = useState(auth.user ? 'logout' : 'login');
+
+  useEffect(() => {
+    setMode(auth.user ? 'logout' : 'login');
+  }, [auth.user]);
 
   return (
     <Modal
@@ -32,6 +39,9 @@ export default function AuthModal(props) {
               {
                 login: <LoginComponent setMode={setMode} />,
                 register: <RegisterComponent setMode={setMode} />,
+                logout: (
+                  <LogoutComponent name={auth.user && auth.user.username} onLogout={auth.signout} />
+                ),
               }[mode]
             }
             <TouchableOpacity

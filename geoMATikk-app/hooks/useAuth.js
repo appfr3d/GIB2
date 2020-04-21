@@ -1,47 +1,61 @@
 import React, { useState, useContext, createContext } from 'react';
-// import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import axios from 'axios';
 import config from '../config';
 
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
-  const [user, setUser] = useState(null);
+  // user = { username, token }
+  const [user, setUser] = useState();
+  const [error, setError] = useState();
 
-  // Wrap any Firebase methods we want to use making sure ...
-  // ... to save the user to state.
+  async function cacheAuth(userCache) {
+    return AsyncStorage.setItem(config.authStorageKey, JSON.stringify(userCache));
+  }
+
   const signin = async (username, password) => {
-    const auth = { username, password };
-    console.log('logging in ', username);
-    console.log(password);
-    console.log(auth);
-    const response = await axios(`${config.domain}/token`, {
-      // method: 'GET',
-      auth: { username, password },
-      // headers: { Authorization: 'Basic dGVzdHU6dGVzdHA=' },
-      proxy: { host: 'localhost', port: 5000 },
-      timeout: 10000,
-    });
-    console.log(response.data);
+    setError(null);
+    console.log('logging in ', username, password);
+    try {
+      const response = await axios(`${config.domain}/token`, {
+        method: 'GET',
+        auth: { username, password },
+      });
+      console.log(response.data);
+      setUser(response.data);
+      cacheAuth(response.data);
+    } catch (err) {
+      if (err.response.status === 401) {
+        setError('Invalid username or password');
+      }
+    }
   };
 
-  // const signup = (email, password) => {
-  //   return firebase
-  //     .auth()
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then(response => {
-  //       setUser(response.user);
-  //       return response.user;
-  //     });
-  // };
+  const signup = async (username, password) => {
+    setError(null);
+    try {
+      const response = await axios(`${config.domain}/users`, {
+        method: 'POST',
+        // headers: { ContentType: 'application/x-www-form-urlencoded' },
+        data: {
+          username,
+          password,
+        },
+      });
+      setUser(response.data);
+      cacheAuth(response.data);
+    } catch (err) {
+      if (err.response.status === 400) {
+        setError('User already exists');
+      }
+      console.log(Object.keys(err.response));
+    }
+  };
 
-  // const signout = () => {
-  //   return firebase
-  //     .auth()
-  //     .signOut()
-  //     .then(() => {
-  //       setUser(false);
-  //     });
-  // };
+  const signout = async () => {
+    setUser(null);
+    AsyncStorage.removeItem(config.authStorageKey);
+  };
 
   // const sendPasswordResetEmail = email => {
   //   return firebase
@@ -82,10 +96,11 @@ function useProvideAuth() {
   return {
     user,
     signin,
-    // signup,
-    // signout,
+    signup,
+    signout,
     // sendPasswordResetEmail,
     // confirmPasswordReset,
+    error,
   };
 }
 
