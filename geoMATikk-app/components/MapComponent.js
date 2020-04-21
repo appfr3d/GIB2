@@ -6,23 +6,6 @@ import { useRestaurants } from '../hooks';
 import RestaurantList from './RestaurantList';
 import RestaurantInfo from './RestaurantInfo';
 
-// Mock data
-// const restaurants = [
-//   {
-//     description: 'Burger <3',
-//     id: 9,
-//     image_url: '',
-//     location: {
-//       latitude: 63.430646,
-//       longitude: 10.397,
-//     },
-//     name: 'MacDonald',
-//     phone: '12345678',
-//     price_class: 2,
-//     rating: 4,
-//   },
-// ];
-
 function MapComponent() {
   const [restaurants] = useRestaurants(); // Restaurant data
   const [restListVisible, setRestListVisible] = useState(false); // om listen i bunnen er synlig eller ikke

@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function LoginComponent(props) {
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const auth = useAuth();
+
   return (
     <>
       <Text style={styles.header}>Logg inn</Text>
@@ -19,6 +24,7 @@ export default function LoginComponent(props) {
           placeholderTextColor="rgba(0,0,0,0.5)"
           marginBottom="5%"
           style={styles.regUser}
+          onChangeText={text => setUsername(text)}
         />
         <TextInput
           placeholder="Passord"
@@ -26,8 +32,12 @@ export default function LoginComponent(props) {
           marginBottom="10%"
           secureTextEntry
           style={styles.regUser}
+          onChangeText={text => setPassword(text)}
         />
-        <TouchableOpacity style={styles.submitButton} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={() => auth.signin(username.toLowerCase(), password)}
+        >
           <Text style={{ fontSize: 20 }}>Logg inn</Text>
         </TouchableOpacity>
       </View>
