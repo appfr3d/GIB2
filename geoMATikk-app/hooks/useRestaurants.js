@@ -25,7 +25,7 @@ export default function useRestaurants() {
 
   // UseEffect cannot be async in itself, so need to define an async function.
   async function fetchRestaurants() {
-    const url = `${config.domain}/restaurant/filter`;
+    const url = `${config.apiDomain}/restaurant/filter`;
     console.log(filterState);
     try {
       console.log('Trying');

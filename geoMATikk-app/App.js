@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { TopMenu, AuthModal, MapComponent } from './components';
 import { FilterProvider } from './context/FilterContext';
 import FindRestaurant from './components/FindRestaurant';
-import { ProvideAuth } from './hooks/useAuth';
+import { ProvideAuth, useAuth } from './hooks/useAuth';
 
 export default function App() {
   const [authModalVisible, setAuthModalVisible] = useState(false);

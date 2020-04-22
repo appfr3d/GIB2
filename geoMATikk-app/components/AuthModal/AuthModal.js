@@ -19,7 +19,11 @@ export default function AuthModal(props) {
   const [mode, setMode] = useState(auth.user ? 'logout' : 'login');
 
   useEffect(() => {
-    setMode(auth.user ? 'logout' : 'login');
+    if (auth.user) {
+      props.setAuthModalVisible(false);
+    } else {
+      setMode('login');
+    }
   }, [auth.user]);
 
   return (

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native';
 import PasswordInput from './PasswordInput';
 import { useAuth } from '../../hooks/useAuth';
+import Button from './Button';
 
 export default function RegisterComponent(props) {
   const [username, setUsername] = useState();
@@ -49,13 +50,12 @@ export default function RegisterComponent(props) {
       <PasswordInput onChangeText={text => setPassword(text)} />
       <PasswordInput onChangeText={text => setPasswordCheck(text)} check />
       <Text style={styles.errorText}>{error || auth.error}</Text>
-      <TouchableOpacity
-        style={styles.submitButton}
+      <Button
+        text="Registrer bruker"
         onPress={handleSignup}
         disabled={!username || !password}
-      >
-        <Text style={{ fontSize: 20 }}>Registrer bruker</Text>
-      </TouchableOpacity>
+        loding={auth.loading}
+      />
     </>
   );
 }

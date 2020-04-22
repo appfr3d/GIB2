@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native';
 import { useAuth } from '../../hooks/useAuth';
 import PasswordInput from './PasswordInput';
+import Button from './Button';
 
 export default function LoginComponent(props) {
   const [username, setUsername] = useState();
@@ -35,9 +36,7 @@ export default function LoginComponent(props) {
         />
         <PasswordInput onChangeText={text => setPassword(text)} />
         <Text style={styles.errorText}>{auth.error}</Text>
-        <TouchableOpacity style={styles.submitButton} onPress={handleLogin} disabled={!username}>
-          <Text style={{ fontSize: 20 }}>Logg inn</Text>
-        </TouchableOpacity>
+        <Button text="Logg inn" onPress={handleLogin} disabled={!username} loding={auth.loading} />
       </View>
     </>
   );

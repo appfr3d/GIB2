@@ -1,16 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState, useContext } from 'react';
-import { View, TouchableOpacity, TextInput, StyleSheet, Text, Button } from 'react-native';
+import React, { useContext } from 'react';
+import { View, TouchableOpacity, TextInput, StyleSheet, Text } from 'react-native';
 import Constants from 'expo-constants';
 import { Ionicons } from '@expo/vector-icons';
 // import TypeKitchen from './TypeKitchen';
 // import FilterItem from './FilterItem';
 import { FilterDispatchContext } from '../context/FilterContext';
+import LoginStatus from './AuthModal/LoginStatus';
 
 function TopMenu(props) {
   const { authModalVisible, setAuthModalVisible } = props;
-  const [filterModalVisible, setFilterModalVisible] = useState(false);
-  const [kitchenVisible, setKitchenVisible] = useState(false);
   const filterDispatch = useContext(FilterDispatchContext);
 
   return (
@@ -20,7 +19,7 @@ function TopMenu(props) {
           <TextInput
             placeholder="Søk på restaurant"
             style={styles.searchInput}
-            onChangeText={value =>  patch({ type: 'set_search_string', payload: value })}
+            onChangeText={value => filterDispatch({ type: 'set_search_string', payload: value })}
           />
           <TouchableOpacity>
             <Ionicons name="md-search" size={32} />
@@ -36,6 +35,7 @@ function TopMenu(props) {
           }}
         >
           <Ionicons name="md-person" size={40} />
+          <LoginStatus />
         </TouchableOpacity>
       </View>
     </View>
