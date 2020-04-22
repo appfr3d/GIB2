@@ -14,7 +14,11 @@ function useProvideAuth() {
     getCachedAuth();
   }, []);
 
-  const signin = async (username, password = null) => {
+  async function cacheAuth(userCache) {
+    return AsyncStorage.setItem(config.authStorageKey, JSON.stringify(userCache));
+  }
+
+  const signin = async (username, password) => {
     setError(null);
     setLoading(true);
     console.log('logging in ', username, password);
@@ -25,7 +29,7 @@ function useProvideAuth() {
       });
       console.log(response.data);
       setUser(response.data);
-      AsyncStorage.setItem(config.authStorageKey, JSON.stringify(response.data));
+      cacheAuth(response.data);
       setLoading(false);
     } catch (err) {
       if (err.response.status === 401) {
@@ -69,12 +73,21 @@ function useProvideAuth() {
   const getCachedAuth = async () => {
     const value = await AsyncStorage.getItem(config.authStorageKey);
     const cachedAuth = JSON.parse(value);
-    console.log('getCachedAuthAsync', cachedAuth);
     if (cachedAuth) {
-      signin(cachedAuth.token);
-    } else {
-      setLoading(false);
+      // Refreshes token
+      try {
+        const response = await axios(`${config.apiDomain}/token`, {
+          method: 'GET',
+          auth: { username: cachedAuth.token },
+        });
+        setUser(response.data);
+        cacheAuth(response.data);
+      } catch (err) {
+        console.log(err.response.data);
+        AsyncStorage.removeItem(config.authStorageKey);
+      }
     }
+    setLoading(false);
   };
 
   const signout = async () => {
