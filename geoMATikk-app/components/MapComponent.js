@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView from "react-native-map-clustering";
+import /*MapView, */{ Marker } from 'react-native-maps';
 import { useRestaurants } from '../hooks';
 
 import RestaurantList from './RestaurantList';
 import RestaurantInfo from './RestaurantInfo';
+
+import { primary, light, dark } from '../assets/colors';
 
 function MapComponent() {
   const [restaurants] = useRestaurants(); // Restaurant data
@@ -26,6 +29,10 @@ function MapComponent() {
       }
     }
   });
+
+  useEffect(() => {
+    console.log('halla');
+  }, []);
 
   useEffect(() => {
     if (selectedRestaurantID !== null) {
@@ -51,7 +58,7 @@ function MapComponent() {
     if (restListVisible) {
       setRestListVisible(false);
       const restaurant = restaurants.find(x => x.id === selectedRestaurantID);
-      if (restaurant !== undefined) {
+      if (restaurant !== undefined && restaurant !== null) {
         mapRef.animateToRegion({
           latitude: restaurant.location.latitude,
           longitude: restaurant.location.longitude,
@@ -67,10 +74,11 @@ function MapComponent() {
   return (
     <>
       <MapView
-        ref={ref => {
+        mapRef={ref => {
           mapRef = ref;
         }}
         style={styles.mapStyle}
+        clusterColor={primary}
         showsPointsOfInterest={false}
         initialRegion={{
           latitude: 63.430646,

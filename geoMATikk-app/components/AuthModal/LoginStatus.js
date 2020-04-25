@@ -3,13 +3,15 @@ import { StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../hooks/useAuth';
 
+import { primary, light, dark } from '../../assets/colors';
+
 const LoginStatus = () => {
   const auth = useAuth();
   let name;
   let color;
   if (auth.user) {
     name = 'md-checkmark-circle';
-    color = 'lightgreen';
+    color = light;
   } else {
     name = 'md-close-circle';
     color = 'red';

@@ -15,6 +15,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Constants from 'expo-constants';
 
 import Rating from './Rating';
+import { primary, light, dark } from '../assets/colors';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
@@ -31,18 +32,22 @@ function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
     >
       <SafeAreaView style={styles.container}>
         <View style={styles.contentContainer}>
-          
           <Image
-            style={{ width: screenWidth - 40, height: 150, alignSelf: 'center' }}
+            style={{ width: screenWidth - 60, height: 150, alignSelf: 'center', borderRadius: 10 }}
             source={{ uri: `https://www.trondheim.no/${restaurant.image_url}` }}
             // resizeMode="contain"
           />
-          <Text>{restaurant.name}</Text>
-          <Rating maxRating={5} value={restaurant.rating} size={20} />
-          <Text>{restaurant.description}</Text>
-          <View style={{ alignItems: 'flex-end' }}>
+          <Text style={styles.name} >{restaurant.name}</Text>
+          <View style={styles.ratingContainer}>
+            <Text style={styles.ratingText}>Brukernes rangering av denne restauranten</Text>    
+            <Rating maxRating={5} value={restaurant.rating} size={20} />
+          </View>
+          <Text style={styles.description} >{restaurant.description}</Text>
+          <View style={styles.rateContainer}>
             <TouchableOpacity onPress={() => {}}>
-              <Text>Rate restaurant</Text>
+              <View style={styles.rateButtonView}>
+                <Text style={styles.rateButtonText}>Rate restaurant</Text>
+              </View>
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -53,7 +58,7 @@ function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
               setListVisible(true);
             }}
           >
-            <Ionicons name="md-close" size={30} color='white' />
+            <Ionicons name="md-close" size={30} color='lightgray' />
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -70,47 +75,46 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     top: Constants.statusBarHeight + 10,
     marginHorizontal: 10,
+    borderRadius: 20
   },
   contentContainer: {
-    padding: 10,
-  },
-  loginbox: {
-    padding: 30,
-    margin: 0,
-    marginLeft: 20,
-    marginRight: 8,
-    display: 'flex',
-    flexDirection: 'column',
-    marginTop: 110,
-    borderRadius: 10,
-    backgroundColor: 'white',
+    padding: 20,
   },
   closeInfo: {
     position: 'absolute',
-    top: 20,
-    right: 20,
+    top: 30,
+    right: 30,
   },
-  header: {
+  name: {
+    color: dark,
     fontSize: 32,
     fontWeight: 'bold',
+    paddingTop: 20,
+    paddingBottom: 10
   },
-  link: {
-    color: 'blue',
+  ratingContainer: {
+    paddingBottom: 10
+  },  
+  ratingText: {
+    color: light,
+    paddingBottom: 5
+  }, 
+  description: {
+    color: dark,
+    fontSize: 20,
   },
-  closelogin: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '8%',
-    justifyContent: 'space-around',
+  rateContainer: {
+    alignSelf: 'flex-end',
+    paddingTop: 10
   },
-  regUser: {
-    color: 'black',
-    marginTop: '10%',
+  rateButtonView: {
+    backgroundColor: dark,
+    borderRadius: 5
   },
-  submitButton: {
-    alignSelf: 'center',
-    padding: 30,
-  },
+  rateButtonText: {
+    color: 'white',
+    padding: 10,
+  }
 });
 
 export default RestaurantInfo;
