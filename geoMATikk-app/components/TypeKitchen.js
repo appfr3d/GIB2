@@ -50,7 +50,6 @@ export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
     },
   ]);
 
-  console.log(filterState);
   return (
     <Modal visible={kitchenVisible} animationType="fade" transparent>     
         <View style={{ flex: 1}}>

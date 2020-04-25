@@ -17,9 +17,14 @@ import Constants from 'expo-constants';
 import Rating from './Rating';
 import { primary, light, dark } from '../assets/colors';
 
+import { useAuth } from '../hooks/useAuth';
+
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
+
+  const auth = useAuth();
+
   return (
     <Modal
       style={styles.modalStyle}
@@ -43,13 +48,17 @@ function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
             <Rating maxRating={5} value={restaurant.rating} size={20} />
           </View>
           <Text style={styles.description} >{restaurant.description}</Text>
-          <View style={styles.rateContainer}>
-            <TouchableOpacity onPress={() => {}}>
-              <View style={styles.rateButtonView}>
-                <Text style={styles.rateButtonText}>Rate restaurant</Text>
+          { auth.user && (
+              <View style={styles.rateContainer}>
+                <TouchableOpacity onPress={() => {}}>
+                  <View style={styles.rateButtonView}>
+                    <Text style={styles.rateButtonText}>Ranger restaurant</Text>
+                  </View>
+                </TouchableOpacity>
               </View>
-            </TouchableOpacity>
-          </View>
+            )
+          }
+
           <TouchableOpacity
             hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
             style={styles.closeInfo}

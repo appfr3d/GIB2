@@ -17,6 +17,7 @@ import Constants from 'expo-constants';
 // import { PanGestureHandler, State } from 'react-native-gesture-handler';
 
 import Rating from './Rating';
+import { primary, light, dark } from '../assets/colors';
 
 // const { Swipeable } = GestureHandler;
 // import { Dropdown } from 'react-native-material-dropdown';
@@ -48,21 +49,20 @@ function RestaurantItem({ restaurant, setVisible, showMoreInfo }) {
     <View
       style={[
         {
-          // position: 'absolute',
           width: screenWidth - 40,
-          // height: 100,
           backgroundColor: 'white',
           marginHorizontal: 20,
-          padding: 10,
+          padding: 20,
+          borderRadius: 10
         },
       ]}
     >
       <Image
-        style={[{ width: screenWidth - 60, height: 150 }]}
+        style={[{ width: screenWidth - 80, height: 150, borderRadius: 5 }]}
         source={{ uri: `https://www.trondheim.no/${restaurant.image_url}` }}
       />
       <View style={{ paddingTop: 10 }}>
-        <Text>{restaurant.name}</Text>
+        <Text style={styles.name}>{restaurant.name}</Text>
         <Rating maxRating={5} value={restaurant.rating} size={20} />
         <Text>{restaurant.phone}</Text>
         <View style={{ alignItems: 'flex-end' }}>
@@ -72,7 +72,9 @@ function RestaurantItem({ restaurant, setVisible, showMoreInfo }) {
               showMoreInfo(true);
             }}
           >
-            <Text>Mer info</Text>
+            <View style={styles.merInfoView}>
+              <Text style={styles.merInfoText}>Mer info</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -114,7 +116,6 @@ function RestaurantList({
   });
 
   const handleViewableItemsChanged = useRef(info => {
-    console.log(info);
     if (info.viewableItems.length > 0) {
       setSelectedID(info.viewableItems[0].item.id);
     }
@@ -177,6 +178,18 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
     // justifyContent: 'flex-end',
   },
+  name: {
+    fontSize: 24,
+    color: dark
+  },
+  merInfoView: {
+    backgroundColor: dark,
+    borderRadius: 5
+  },
+  merInfoText: {
+    color: 'white',
+    padding: 10
+  }
 });
 
 export default RestaurantList;

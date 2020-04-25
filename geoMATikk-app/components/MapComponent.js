@@ -30,9 +30,7 @@ function MapComponent() {
     }
   });
 
-  useEffect(() => {
-    console.log('halla');
-  }, []);
+
 
   useEffect(() => {
     if (selectedRestaurantID !== null) {
