@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-nativ
 import { useAuth } from '../../hooks/useAuth';
 import PasswordInput from './PasswordInput';
 import Button from './Button';
+import { primary, dark, medium, light } from '../../assets/colors';
 
 export default function LoginComponent(props) {
   const [username, setUsername] = useState();
@@ -36,7 +37,7 @@ export default function LoginComponent(props) {
         />
         <PasswordInput onChangeText={text => setPassword(text)} />
         <Text style={styles.errorText}>{auth.error}</Text>
-        <Button text="Logg inn" onPress={handleLogin} disabled={!username} loding={auth.loading} />
+        <Button text="Logg inn" onPress={handleLogin} disabled={!username} loding={auth.loading}/>
       </View>
     </>
   );
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   link: {
-    color: 'blue',
+    color: medium,
   },
   closelogin: {
     display: 'flex',
@@ -74,8 +75,7 @@ const styles = StyleSheet.create({
   submitButton: {
     alignSelf: 'center',
     padding: 15,
-    backgroundColor: 'lightgreen',
-    borderRadius: 20,
+    backgroundColor: primary,
   },
   errorText: {
     color: 'red',
