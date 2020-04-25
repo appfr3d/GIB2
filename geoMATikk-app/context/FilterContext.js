@@ -9,18 +9,18 @@ const initialFilterState = {
     name: 'Pris',
     active: false,
     prefferedValue: 'low',
-    priority: 1,
+    weight: 2,
   },
   nearby: {
     name: 'I nærheten',
     active: false,
-    priority: 1,
+    weight: 2,
     position: null,
   },
   rating: {
     name: 'God rating',
     active: false,
-    priority: 1,
+    weight: 2,
   },
   kitchens: [],
 };

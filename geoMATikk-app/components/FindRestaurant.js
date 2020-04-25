@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Button, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { FilterItem } from './FilterComponents';
+import { FilterItem, FilterLocation } from './FilterComponents';
 import TypeKitchen from './TypeKitchen';
 
 export default function FindRestaurant({ findRestaurantVisible, setFindRestaurantVisible }) {
@@ -70,7 +70,9 @@ export default function FindRestaurant({ findRestaurantVisible, setFindRestauran
 
           <View>
             <View style={styles.criteriaBox}>
-              <FilterItem item="nearby" />
+              <FilterItem item="nearby">
+                <FilterLocation />
+              </FilterItem>
               <TouchableOpacity
                 onPress={createNearbyAlert}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
@@ -137,6 +139,15 @@ export default function FindRestaurant({ findRestaurantVisible, setFindRestauran
           <View style={{ height: 60 }} />
         </ScrollView>
       )}
+      <TouchableOpacity
+        hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
+        style={styles.closeModal}
+        onPress={() => {
+          setFindRestaurantVisible(false);
+        }}
+      >
+        <Ionicons name="md-close" size={20} />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -162,15 +173,11 @@ const styles = StyleSheet.create({
     width: 200,
     marginTop: 15,
   },
-  kitchenBox: {
-    backgroundColor: 'white',
-    width: 280,
-    marginLeft: 10,
-    marginTop: 55,
-    borderRadius: 10,
-    padding: 10,
+  closeModal: {
+    position: 'absolute',
+    top: 30,
+    right: 30,
   },
-
   criteriaBox: {
     flexDirection: 'row',
   },

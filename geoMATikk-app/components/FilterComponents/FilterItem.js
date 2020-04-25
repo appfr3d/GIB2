@@ -7,14 +7,16 @@ import { FilterStateContext, FilterDispatchContext } from '../../context/FilterC
 
 const sliderOptions = [
   { value: 0, label: 'Uviktig' },
-  { value: 1, label: 'Passe viktig' },
-  { value: 2, label: 'Viktig' },
+  { value: 1, label: '' },
+  { value: 2, label: 'Passe viktig' },
+  { value: 3, label: '' },
+  { value: 4, label: 'Viktig' },
 ];
 
 export default function FilterItem({ item, children }) {
   const filterState = useContext(FilterStateContext);
   const filterDispatch = useContext(FilterDispatchContext);
-  const { name, active, prefferedValue, priority } = filterState[item];
+  const { name, active, prefferedValue, weight } = filterState[item];
   const [priceState, setPriceState] = useState('lav');
 
   const buttonStateStyle = state => {
@@ -55,14 +57,14 @@ export default function FilterItem({ item, children }) {
             )}
           </View>
         </View>
-
+        {active && children}
         {active && (
           <>
             <SnapSlider
               containerStyle={styles.snapSlider}
               labelPosisiton="top"
               items={sliderOptions}
-              defaultItem={priority}
+              defaultItem={weight}
               onSlidingComplete={value =>
                 filterDispatch({ type: `set_priority`, payload: { item, value } })
               }

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Button } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
@@ -21,13 +21,18 @@ function FilterLocation() {
     }
   }
 
-  return (
-    <Button
-      title="Your location"
-      onPress={getLocationAsync}
-      color={filterOnYourLocation ? 'green' : 'black'}
-    />
-  );
+  useEffect(() => {
+    getLocationAsync();
+  }, []);
+
+  return null;
+  // return (
+  //   <Button
+  //     title="Your location"
+  //     onPress={getLocationAsync}
+  //     color={filterOnYourLocation ? 'green' : 'black'}
+  //   />
+  // );
 }
 
 export default FilterLocation;
