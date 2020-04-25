@@ -4,6 +4,7 @@ import { View, StyleSheet, Button } from 'react-native';
 import CheckBox from 'react-native-modest-checkbox';
 import SnapSlider from 'react-native-snap-slider';
 import { FilterStateContext, FilterDispatchContext } from '../../context/FilterContext';
+import { light, primary } from '../../assets/colors';
 
 const sliderOptions = [
   { value: 0, label: 'Uviktig' },
@@ -22,7 +23,7 @@ export default function FilterItem({ item, children }) {
   const buttonStateStyle = state => {
     if (state === priceState) {
       return {
-        backgroundColor: 'rgba(48,105,189,1)',
+        backgroundColor: primary,
       };
     }
     return null;
@@ -42,13 +43,13 @@ export default function FilterItem({ item, children }) {
             {active && prefferedValue && (
               <View style={styles.priceRateBox}>
                 <View style={[styles.priceRate, buttonStateStyle('lav')]}>
-                  <Button title="$" color="black" onPress={() => setPriceState('lav')} />
+                  <Button title="$" color="white" onPress={() => setPriceState('lav')} />
                 </View>
 
                 <View style={[styles.priceRate, buttonStateStyle('høy')]}>
                   <Button
                     title="$$$$"
-                    color="black"
+                    color="white"
                     style={buttonStateStyle('høy')}
                     onPress={() => setPriceState('høy')}
                   />
@@ -65,6 +66,7 @@ export default function FilterItem({ item, children }) {
               labelPosisiton="top"
               items={sliderOptions}
               defaultItem={weight}
+              minimumTrackTintColor={light}
               onSlidingComplete={value =>
                 filterDispatch({ type: `set_priority`, payload: { item, value } })
               }
@@ -92,10 +94,11 @@ const styles = StyleSheet.create({
   priceRate: {
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: 'lightblue',
+    backgroundColor: light,
     width: 75,
     marginRight: 25,
     marginLeft: 0,
+    borderRadius: 6,
   },
   priceRateBox: {
     display: 'flex',

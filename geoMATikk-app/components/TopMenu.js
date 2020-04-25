@@ -8,6 +8,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { FilterDispatchContext } from '../context/FilterContext';
 import LoginStatus from './AuthModal/LoginStatus';
 
+import { primary, light, dark } from '../assets/colors';
+
 function TopMenu(props) {
   const { authModalVisible, setAuthModalVisible } = props;
   const filterDispatch = useContext(FilterDispatchContext);
@@ -22,7 +24,7 @@ function TopMenu(props) {
             onChangeText={value => filterDispatch({ type: 'set_search_string', payload: value })}
           />
           <TouchableOpacity>
-            <Ionicons name="md-search" size={32} />
+            <Ionicons name="md-search" size={32} color={light} />
           </TouchableOpacity>
           <Text />
         </View>
@@ -34,7 +36,7 @@ function TopMenu(props) {
             setAuthModalVisible(!authModalVisible);
           }}
         >
-          <Ionicons name="md-person" size={40} />
+          <Ionicons name="md-person" size={40} color={dark}/>
           <LoginStatus />
         </TouchableOpacity>
       </View>

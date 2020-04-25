@@ -6,7 +6,6 @@ import {
   Image,
   Text,
 } from 'react-native';
-import Constants from 'expo-constants';
 // import { PanGestureHandler, State } from 'react-native-gesture-handler';
 
 // const { Swipeable } = GestureHandler;
@@ -17,14 +16,15 @@ import Constants from 'expo-constants';
 // const screenWidth = Math.round(Dimensions.get('window').width);
 
 function Rating({ maxRating, value, size }) {
-  const starFull = require('../assets/rating/star-full.png')
-  const starHalf = require('../assets/rating/star-half.png')
-  const starEmpty = require('../assets/rating/star-empty.png')
-  
+  const starFull = require('../assets/rating/star-full.png');
+  const starHalf = require('../assets/rating/star-half.png');
+  const starEmpty = require('../assets/rating/star-empty.png');
   let ratings = []
   for (let i = 0; i < maxRating; i++) {
-    if (i < Math.round(value)) {
+    if (i + 1 <= Math.floor(value)) {
       ratings.push(<Image key={i.toString()} style={{ width: size, height: size }} source={starFull} resizeMode='contain' />);
+    } else if (i + 1 <= Math.ceil(value) && Math.round(value) > Math.floor(value)) {
+      ratings.push(<Image key={i.toString()} style={{ width: size, height: size }} source={starHalf} resizeMode='contain' />);
     } else {
       ratings.push(<Image key={i.toString()} style={{ width: size, height: size }} source={starEmpty} resizeMode='contain' />);
     }

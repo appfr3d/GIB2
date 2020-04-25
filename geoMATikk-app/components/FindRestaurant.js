@@ -4,6 +4,7 @@ import { StyleSheet, View, TouchableOpacity, Text, Button, ScrollView, Alert } f
 import { Ionicons } from '@expo/vector-icons';
 import { FilterItem, FilterLocation } from './FilterComponents';
 import TypeKitchen from './TypeKitchen';
+import { primary } from '../assets/colors';
 
 export default function FindRestaurant({ findRestaurantVisible, setFindRestaurantVisible }) {
   const [kitchenVisible, setKitchenVisible] = useState(false);
@@ -127,14 +128,14 @@ export default function FindRestaurant({ findRestaurantVisible, setFindRestauran
               onPress={() => setKitchenVisible(!kitchenVisible)}
             >
               <Text style={{ fontSize: 19 }}>Velg kjøkken </Text>
-              <Ionicons name="md-arrow-round-forward" size={20} />
+              <Ionicons name="md-arrow-round-forward" size={20} color={primary} />
             </TouchableOpacity>
           </View>
 
           <TypeKitchen kitchenVisible={kitchenVisible} setKitchenVisible={setKitchenVisible} />
 
           <View style={styles.searchButton}>
-            <Button title="Søk" color="black" />
+            <Button title="Søk" color="white" />
           </View>
           <View style={{ height: 60 }} />
         </ScrollView>
@@ -165,13 +166,16 @@ const styles = StyleSheet.create({
   typeKitchen: {
     padding: 10,
     width: 200,
+    alignSelf: 'flex-start',
   },
 
   searchButton: {
     padding: 5,
-    backgroundColor: 'lightblue',
+    backgroundColor: primary,
     width: 200,
     marginTop: 15,
+    alignSelf: 'center',
+    borderRadius: 10,
   },
   closeModal: {
     position: 'absolute',

@@ -6,6 +6,8 @@ import { FilterProvider } from './context/FilterContext';
 import FindRestaurant from './components/FindRestaurant';
 import { ProvideAuth, useAuth } from './hooks/useAuth';
 
+import { primary, light, dark } from './assets/colors';
+
 export default function App() {
   const [authModalVisible, setAuthModalVisible] = useState(false);
   const [findRestaurantVisible, setFindRestaurantVisible] = useState(false);
@@ -31,7 +33,7 @@ export default function App() {
               setFindRestaurantVisible(!findRestaurantVisible);
             }}
           >
-            <Text style={{ fontSize: 25, textAlign: 'center' }}>Finn restaurant</Text>
+            <Text style={{ fontSize: 25, textAlign: 'center', color: 'white' }}>Finn restaurant</Text>
           </TouchableOpacity>
         </FilterProvider>
       </ProvideAuth>
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
   findRestButton: {
     padding: 15,
     display: 'flex',
-    backgroundColor: 'lightgreen',
+    backgroundColor: primary,
     width: '100%',
     height: '10%',
   },
