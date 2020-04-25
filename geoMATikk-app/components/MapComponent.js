@@ -71,6 +71,7 @@ function MapComponent() {
           mapRef = ref;
         }}
         style={styles.mapStyle}
+        showsPointsOfInterest={false}
         initialRegion={{
           latitude: 63.430646,
           longitude: 10.397,

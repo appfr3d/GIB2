@@ -11,6 +11,7 @@ import {
   TextInput,
   Dimensions,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import Constants from 'expo-constants';
 
 import Rating from './Rating';
@@ -28,30 +29,34 @@ function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
       //     Alert.alert('Modal has been closed.');
       //   }}
     >
-      <TouchableWithoutFeedback
-        onPress={() => {
-          setInfoVisible(false);
-          setListVisible(true);
-        }}
-      >
-        <SafeAreaView style={styles.container}>
-          <View style={styles.contentContainer}>
-            <Image
-              style={{ width: screenWidth - 40, height: 150, alignSelf: 'center' }}
-              source={{ uri: `https://www.trondheim.no/${restaurant.image_url}` }}
-              // resizeMode="contain"
-            />
-            <Text>{restaurant.name}</Text>
-            <Rating maxRating={5} value={restaurant.rating} size={20} />
-            <Text>{restaurant.description}</Text>
-            <View style={{ alignItems: 'flex-end' }}>
-              <TouchableOpacity onPress={() => {}}>
-                <Text>Rate restaurant</Text>
-              </TouchableOpacity>
-            </View>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.contentContainer}>
+          
+          <Image
+            style={{ width: screenWidth - 40, height: 150, alignSelf: 'center' }}
+            source={{ uri: `https://www.trondheim.no/${restaurant.image_url}` }}
+            // resizeMode="contain"
+          />
+          <Text>{restaurant.name}</Text>
+          <Rating maxRating={5} value={restaurant.rating} size={20} />
+          <Text>{restaurant.description}</Text>
+          <View style={{ alignItems: 'flex-end' }}>
+            <TouchableOpacity onPress={() => {}}>
+              <Text>Rate restaurant</Text>
+            </TouchableOpacity>
           </View>
-        </SafeAreaView>
-      </TouchableWithoutFeedback>
+          <TouchableOpacity
+            hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
+            style={styles.closeInfo}
+            onPress={() => {
+              setInfoVisible(false);
+              setListVisible(true);
+            }}
+          >
+            <Ionicons name="md-close" size={30} color='white' />
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
     </Modal>
   );
 }
@@ -79,6 +84,11 @@ const styles = StyleSheet.create({
     marginTop: 110,
     borderRadius: 10,
     backgroundColor: 'white',
+  },
+  closeInfo: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
   },
   header: {
     fontSize: 32,

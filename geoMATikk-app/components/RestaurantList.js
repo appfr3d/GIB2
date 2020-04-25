@@ -135,6 +135,7 @@ function RestaurantList({
     <SafeAreaView style={styles.listContainer}>
       {visible && (
         <FlatList
+          style={{ paddingBottom: 60 }}
           ref={listRef}
           data={restaurants}
           renderItem={({ item }) => (
