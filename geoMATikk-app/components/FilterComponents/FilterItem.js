@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import CheckBox from 'react-native-modest-checkbox';
 import SnapSlider from 'react-native-snap-slider';
-import { FilterStateContext, FilterDispatchContext } from '../context/FilterContext';
+import { FilterStateContext, FilterDispatchContext } from '../../context/FilterContext';
 
 const sliderOptions = [
   { value: 0, label: 'Uviktig' },
@@ -11,22 +11,20 @@ const sliderOptions = [
   { value: 2, label: 'Viktig' },
 ];
 
-export default function FilterItem({ item }) {
+export default function FilterItem({ item, children }) {
   const filterState = useContext(FilterStateContext);
   const filterDispatch = useContext(FilterDispatchContext);
   const { name, active, prefferedValue, priority } = filterState[item];
   const [priceState, setPriceState] = useState('lav');
-  
-  
-  const buttonStateStyle = (state) => {
+
+  const buttonStateStyle = state => {
     if (state === priceState) {
       return {
         backgroundColor: 'rgba(48,105,189,1)',
-      }
+      };
     }
-  }
-
-
+    return null;
+  };
 
   return (
     <>
@@ -38,33 +36,26 @@ export default function FilterItem({ item }) {
               checked={active}
               onChange={() => filterDispatch({ type: 'toggle_item', payload: { item } })}
             />
-          
-          
+
             {active && prefferedValue && (
               <View style={styles.priceRateBox}>
                 <View style={[styles.priceRate, buttonStateStyle('lav')]}>
-                  <Button 
-                  title="$" 
-                  color="black" 
-                  onPress={()=>setPriceState('lav')} />
+                  <Button title="$" color="black" onPress={() => setPriceState('lav')} />
                 </View>
 
                 <View style={[styles.priceRate, buttonStateStyle('høy')]}>
-                  <Button 
-                  title="$$$$" 
-                  color="black" 
-                  style={buttonStateStyle('høy')}
-                  onPress={()=>setPriceState('høy')}/>
+                  <Button
+                    title="$$$$"
+                    color="black"
+                    style={buttonStateStyle('høy')}
+                    onPress={() => setPriceState('høy')}
+                  />
                 </View>
               </View>
             )}
           </View>
-        
-
-
         </View>
 
-    
         {active && (
           <>
             <SnapSlider
@@ -77,8 +68,6 @@ export default function FilterItem({ item }) {
               }
               width="200"
             />
-
-        
           </>
         )}
       </View>
@@ -93,7 +82,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-
   },
   dropDown: {
     flex: 1,
@@ -116,7 +104,4 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     width: 200,
   },
-
-
-  
 });

@@ -15,6 +15,7 @@ const initialFilterState = {
     name: 'I nærheten',
     active: false,
     priority: 1,
+    position: null,
   },
   rating: {
     name: 'God rating',
@@ -50,6 +51,9 @@ function filterReducer(state, action) {
         ...state,
         kitchens: [...state.kitchens, payload],
       };
+    case 'set_position':
+      return { ...state, nearby: { ...state.nearby, position: payload } };
+
     default:
       console.warning(action.type);
       return state;
