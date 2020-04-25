@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-nativ
 import PasswordInput from './PasswordInput';
 import { useAuth } from '../../hooks/useAuth';
 import Button from './Button';
+import {primary, light, dark, medium} from '../../assets/colors'
 
 export default function RegisterComponent(props) {
   const [username, setUsername] = useState();
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   link: {
-    color: 'blue',
+    color: light,
   },
   closelogin: {
     display: 'flex',
@@ -92,8 +93,8 @@ const styles = StyleSheet.create({
   submitButton: {
     alignSelf: 'center',
     padding: 15,
-    backgroundColor: 'lightgreen',
-    borderRadius: 20,
+    backgroundColor: primary,
+    borderRadius: 10,
   },
   errorText: {
     color: 'red',

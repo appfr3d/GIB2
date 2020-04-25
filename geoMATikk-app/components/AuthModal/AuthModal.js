@@ -13,6 +13,7 @@ import LoginComponent from './LoginComponent';
 import RegisterComponent from './RegisterComponent';
 import LogoutComponent from './LogoutComponent';
 import { useAuth } from '../../hooks/useAuth';
+import { primary, light, dark } from '../../assets/colors';
 
 export default function AuthModal(props) {
   const auth = useAuth();
@@ -51,6 +52,7 @@ export default function AuthModal(props) {
             <TouchableOpacity
               hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
               style={styles.closelogin}
+              backgroundColor = {primary}
               onPress={() => {
                 props.setAuthModalVisible(false);
               }}

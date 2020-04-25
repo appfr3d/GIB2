@@ -7,7 +7,7 @@ import { useRestaurants } from '../hooks';
 import RestaurantList from './RestaurantList';
 import RestaurantInfo from './RestaurantInfo';
 
-import { primary, light, dark } from '../assets/colors';
+import { primary, light, dark,medium } from '../assets/colors';
 
 function MapComponent() {
   const [restaurants] = useRestaurants(); // Restaurant data
@@ -76,7 +76,7 @@ function MapComponent() {
           mapRef = ref;
         }}
         style={styles.mapStyle}
-        clusterColor={primary}
+        clusterColor={medium}
         showsPointsOfInterest={false}
         initialRegion={{
           latitude: 63.430646,
@@ -91,6 +91,7 @@ function MapComponent() {
             <Marker
               key={restaurant.id}
               coordinate={restaurant.location}
+              pinColor= {primary}
               // title={restaurant.name}
               // description={restaurant.description}
               onPress={() => selectRestaurant(restaurant)}
