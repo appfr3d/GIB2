@@ -50,7 +50,6 @@ export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
     },
   ]);
 
-  console.log(filterState);
   return (
     <Modal visible={kitchenVisible} animationType="fade" transparent>
       <View style={{ flex: 1 }}>
@@ -92,7 +91,6 @@ const styles = StyleSheet.create({
   kitchenBox: {
     backgroundColor: 'white',
     margin: 20,
-    // width: '90%',
     marginTop: '32%',
     borderRadius: 10,
     padding: 20,

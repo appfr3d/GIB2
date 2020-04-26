@@ -70,7 +70,7 @@ function MapComponent() {
   };
 
   let mapRef = null;
-  console.log(restaurants);
+  // console.log(restaurants);
   return (
     <>
       <MapView

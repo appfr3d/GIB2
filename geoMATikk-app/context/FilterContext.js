@@ -69,6 +69,11 @@ function filterReducer(state, action) {
         ...state,
         mode: payload,
       };
+    case 'set_prefferedPrice':
+      return {
+        ...state,
+        filter: { ...filter, price: { ...filter.price, prefferedValue: payload } },
+      };
 
     default:
       console.warning(action.type);

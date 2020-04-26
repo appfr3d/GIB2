@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Button, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { FilterItem, FilterLocation } from './FilterComponents';
-import { useFilterDispatch } from '../context/FilterContext';
+import { useFilterState, useFilterDispatch } from '../context/FilterContext';
 import TypeKitchen from './TypeKitchen';
 import { primary } from '../assets/colors';
 
 export default function FindRestaurant({ findRestaurantVisible, setFindRestaurantVisible }) {
   const [kitchenVisible, setKitchenVisible] = useState(false);
   const filterDispatch = useFilterDispatch();
+  const filterState = useFilterState();
 
   const createPriceAlert = () =>
     Alert.alert(
@@ -31,6 +32,18 @@ export default function FindRestaurant({ findRestaurantVisible, setFindRestauran
     Alert.alert('God rating', 'Er god rating en viktig prioritet for deg?', [{ text: 'OK' }], {
       cancelable: false,
     });
+
+  const selectedKitchens = () => {
+    const { kitchens } = filterState.filter;
+    if (kitchens.length === 0) {
+      return false;
+    }
+    let str = 'Valgt: ';
+    kitchens.forEach(item => {
+      str += `${item} - `;
+    });
+    return str.substring(0, str.length - 3);
+  };
 
   return (
     <View style={{ height: '75%' }}>
@@ -133,6 +146,7 @@ export default function FindRestaurant({ findRestaurantVisible, setFindRestauran
                 <Text style={{ fontSize: 19 }}>Velg kjøkken </Text>
                 <Ionicons name="md-arrow-round-forward" size={20} color={primary} />
               </TouchableOpacity>
+              <Text style={styles.selectedKitchens}>{selectedKitchens()}</Text>
             </View>
 
             <TypeKitchen kitchenVisible={kitchenVisible} setKitchenVisible={setKitchenVisible} />
@@ -140,7 +154,7 @@ export default function FindRestaurant({ findRestaurantVisible, setFindRestauran
             <View style={styles.searchButton}>
               <Button
                 title="Søk"
-                color="white"
+                color={primary}
                 onPress={() => filterDispatch({ type: 'set_mode', payload: 'filter' })}
               />
             </View>
@@ -172,11 +186,15 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   typeKitchen: {
-    padding: 10,
+    paddingBottom: 20,
+    paddingTop: -40,
     width: 200,
     alignSelf: 'flex-start',
   },
-
+  selectedKitchens: {
+    color: 'grey',
+    fontSize: 10,
+  },
   searchButton: {
     padding: 5,
     backgroundColor: primary,

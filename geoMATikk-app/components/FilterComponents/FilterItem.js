@@ -18,16 +18,6 @@ export default function FilterItem({ item, children }) {
   const filterState = useFilterState();
   const filterDispatch = useFilterDispatch();
   const { name, active, prefferedValue, weight } = filterState.filter[item];
-  const [priceState, setPriceState] = useState('lav');
-
-  const buttonStateStyle = state => {
-    if (state === priceState) {
-      return {
-        backgroundColor: primary,
-      };
-    }
-    return null;
-  };
 
   return (
     <>
@@ -42,16 +32,19 @@ export default function FilterItem({ item, children }) {
 
             {active && prefferedValue && (
               <View style={styles.priceRateBox}>
-                <View style={[styles.priceRate, buttonStateStyle('lav')]}>
-                  <Button title="$" color="white" onPress={() => setPriceState('lav')} />
+                <View style={styles.priceRate}>
+                  <Button
+                    title="Billig"
+                    color={prefferedValue === 'low' ? primary : light}
+                    onPress={() => filterDispatch({ type: 'set_prefferedPrice', payload: 'low' })}
+                  />
                 </View>
 
-                <View style={[styles.priceRate, buttonStateStyle('høy')]}>
+                <View style={[styles.priceRate]}>
                   <Button
-                    title="$$$$"
-                    color="white"
-                    style={buttonStateStyle('høy')}
-                    onPress={() => setPriceState('høy')}
+                    title="Eksklusivt"
+                    color={prefferedValue === 'high' ? primary : light}
+                    onPress={() => filterDispatch({ type: 'set_prefferedPrice', payload: 'high' })}
                   />
                 </View>
               </View>
@@ -95,7 +88,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: light,
-    width: 75,
+    width: 100,
     marginRight: 25,
     marginLeft: 0,
     borderRadius: 6,
