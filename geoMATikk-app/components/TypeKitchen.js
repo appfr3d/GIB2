@@ -7,47 +7,49 @@ import { useFilterDispatch, useFilterState } from '../context/FilterContext';
 export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
   const filterDispatch = useFilterDispatch();
   const filterState = useFilterState();
+  /*
+  Allround : 43
+  Kafe : 18
+  Amerikansk : 16
+  Asiatisk : 15
+  Italiensk : 11
+  Norsk : 4
+  Bar : 4
+  Thai : 2
+  Latinsk : 2
+  Mexikansk : 2
+  Spansk : 1
+  Indisk : 1
+  Kinesisk : 1
+  Britisk : 0
+  Amerikans : 0
+  Irsk : 0
+  Italiansk : 0
+  Afrikansk : 0
+  Japansk : 0
+  Fransk : 0
+  */
   const [kjokken] = useState([
-    {
-      id: '1',
-      title: 'Italiensk',
-    },
-    {
-      id: '2',
-      title: 'Asiatisk',
-    },
-    {
-      id: '3',
-      title: 'Meksikansk',
-    },
-    {
-      id: '4',
-      title: 'Amerikansk',
-    },
-    {
-      id: '5',
-      title: 'Nordisk',
-    },
-
-    {
-      id: '6',
-      title: 'Spansk',
-    },
-
-    {
-      id: '7',
-      title: 'Fransk',
-    },
-
-    {
-      id: '8',
-      title: 'Vietnamesisk',
-    },
-
-    {
-      id: '9',
-      title: 'Midtøsten',
-    },
+    { id : '0', title: 'Amerikansk' },
+    { id : '1', title: 'Asiatisk' },
+    { id : '2', title: 'Amerikans' },
+    { id : '3', title: 'Allround' },
+    { id : '4', title: 'Italiensk' },
+    { id : '5', title: 'Latinsk' },
+    { id : '6', title: 'Spansk' },
+    { id : '7', title: 'Mexikansk' },
+    { id : '8', title: 'Britisk' },
+    { id : '9', title: 'Bar' },
+    { id : '10', title: 'Kafe' },
+    { id : '11', title: 'Irsk' },
+    { id : '12', title: 'Norsk' },
+    { id : '13', title: 'Italiansk' },
+    { id : '14', title: 'Thai' },
+    { id : '15', title: 'Kinesisk' },
+    { id : '16', title: 'Indisk' },
+    { id : '17', title: 'Afrikansk' },
+    { id : '18', title: 'Japansk' },
+    { id : '19', title: 'Fransk' },
   ]);
 
   return (

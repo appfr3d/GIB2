@@ -77,6 +77,7 @@ function MapComponent() {
         }}
         style={styles.mapStyle}
         clusterColor={medium}
+        showsUserLocation
         showsPointsOfInterest={false}
         initialRegion={{
           latitude: 63.430646,
@@ -86,7 +87,7 @@ function MapComponent() {
         }}
         onPress={() => hideRestInfo()}
       >
-        {restaurants &&
+        {restaurants && restaurants.length && 
           restaurants.map(restaurant => (
             <Marker
               key={restaurant.id}

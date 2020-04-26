@@ -76,11 +76,12 @@ function RestaurantList({
 
   useEffect(() => {
     // måtte ha null-sjekk for at den ikke skal krasje på iOS
-    if (listRef !== null && restaurants) {
+    if (listRef !== null && restaurants && listRef.current !== null) {
       const i = restaurants.map(x => x.id).indexOf(selectedID);
       if (i > -1) {
         console.log(`index: ${i}`);
         listRef.current.scrollToIndex({ index: i });
+        // listRef.scrollToIndex({ index: i });
       }
     }
   }, [selectedID]);

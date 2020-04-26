@@ -47,7 +47,7 @@ export default function useRestaurants() {
   }
 
   useEffect(() => {
-    console.log('HEYHEY', filterState);
+    // console.log('HEYHEY', filterState);
     fetchRestaurants();
   }, [filterState]);
 
