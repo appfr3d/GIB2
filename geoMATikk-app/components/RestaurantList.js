@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   View,
   FlatList,
@@ -8,42 +8,13 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
-  // Animated,
-  // TextInput,
-  // Slider,
-  //
 } from 'react-native';
 import Constants from 'expo-constants';
-// import { PanGestureHandler, State } from 'react-native-gesture-handler';
-
 import Rating from './Rating';
-
-// const { Swipeable } = GestureHandler;
-// import { Dropdown } from 'react-native-material-dropdown';
-// import { Ionicons } from '@expo/vector-icons';
-// import CheckBox from 'react-native-modest-checkbox';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 function RestaurantItem({ restaurant, setVisible, showMoreInfo }) {
-  /*
-  function handleAnimationStateChange({ nativeEvent }) {
-    if (nativeEvent.state === State.ACTIVE) {
-      console.log('PAN!!!');
-    }
-  }
-
-  let _panY = new Animated.Value(0);
-  const _onPanGestureEvent = Animated.event([{nativeEvent: {translationY: _panY}}]);
-
-  const animatedStyle = {
-    height: Animated.add(100, _panY),
-  };
-  <PanGestureHandler onHandlerStateChange={_onPanGestureEvent}>
-
-    </PanGestureHandler>
-  */
-
   return (
     <View
       style={[
@@ -79,24 +50,6 @@ function RestaurantItem({ restaurant, setVisible, showMoreInfo }) {
     </View>
   );
 }
-
-/* {
-  transform: [
-    {
-      scaleX: _panY.interpolate({
-        inputRange: [-1000, 1000],
-        outputRange: [0, 2], // 0 : 150, 0.5 : 75, 1 : 0
-      }),
-    },
-    {
-      scaleY: _panY.interpolate({
-        inputRange: [-1000, 1000],
-        outputRange: [0, 2], // 0 : 150, 0.5 : 75, 1 : 0
-      }),
-    },
-  ],
-},
-*/
 
 function RestaurantList({
   restaurants,
@@ -160,22 +113,10 @@ function RestaurantList({
   );
 }
 
-/*
-<TouchableWithoutFeedback onPress={() => setVisability(false)}>
-            <View />
-          </TouchableWithoutFeedback>
-
-*/
-
 const styles = StyleSheet.create({
   listContainer: {
-    // ...StyleSheet.fill,
-    // top: 0,
-    // bottom: 0,
     position: 'absolute',
     marginTop: Constants.statusBarHeight,
-    // backgroundColor: 'red',
-    // justifyContent: 'flex-end',
   },
 });
 

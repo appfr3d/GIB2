@@ -1,11 +1,11 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 // import { Button } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
-import { FilterDispatchContext } from '../../context/FilterContext';
+import { useFilterDispatch } from '../../context/FilterContext';
 
 function FilterLocation() {
-  const filterDispatch = useContext(FilterDispatchContext);
+  const filterDispatch = useFilterDispatch();
   // const [filterOnYourLocation, setFilterOnYourLocation] = useState(false);
   async function getLocationAsync() {
     // setFilterOnYourLocation(true);

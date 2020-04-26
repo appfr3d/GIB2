@@ -1,58 +1,74 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 
-export const FilterStateContext = React.createContext();
-export const FilterDispatchContext = React.createContext();
-
-const initialFilterState = {
+const defaultFilterState = {
+  mode: 'all',
   search: '',
-  price: {
-    name: 'Pris',
-    active: false,
-    prefferedValue: 'low',
-    weight: 2,
+  filter: {
+    price: {
+      name: 'Pris',
+      active: false,
+      prefferedValue: 'low',
+      weight: 2,
+    },
+    nearby: {
+      name: 'I nærheten',
+      active: false,
+      weight: 2,
+      position: null,
+    },
+    rating: {
+      name: 'God rating',
+      active: false,
+      weight: 2,
+    },
+    kitchens: [],
   },
-  nearby: {
-    name: 'I nærheten',
-    active: false,
-    weight: 2,
-    position: null,
-  },
-  rating: {
-    name: 'God rating',
-    active: false,
-    weight: 2,
-  },
-  kitchens: [],
 };
 
 function filterReducer(state, action) {
   const { payload } = action;
+  const { filter } = state;
   switch (action.type) {
     case 'set_search_string':
-      return { ...state, search: action.payload };
+      return { ...state, mode: 'search', search: action.payload };
     case 'toggle_item':
       return {
         ...state,
-        [payload.item]: { ...state[payload.item], active: !state[payload.item].active },
+        filter: {
+          ...filter,
+          [payload.item]: { ...filter[payload.item], active: !filter[payload.item].active },
+        },
       };
-    case 'set_priority':
-      return { ...state, [payload.item]: { ...state[payload.item], priority: payload.value } };
+    case 'set_weight':
+      return {
+        ...state,
+        filter: { ...filter, [payload.item]: { ...filter[payload.item], weight: payload.value } },
+      };
     case 'toggle_kitchen':
-      if (state.kitchens.includes(payload)) {
-        const index = state.kitchens.indexOf(payload);
-        const newArray = state.kitchens;
+      if (filter.kitchens.includes(payload)) {
+        // Remove kitchen
+        const index = filter.kitchens.indexOf(payload);
+        const newArray = filter.kitchens;
         newArray.splice(index, 1);
         return {
           ...state,
-          kitchens: newArray,
+          filter: { ...filter, kitchens: newArray },
         };
       }
       return {
         ...state,
-        kitchens: [...state.kitchens, payload],
+        filter: { ...filter, kitchens: [...filter.kitchens, payload] },
       };
     case 'set_position':
-      return { ...state, nearby: { ...state.nearby, position: payload } };
+      return {
+        ...state,
+        filter: { ...filter, nearby: { ...filter.nearby, position: payload } },
+      };
+    case 'set_mode':
+      return {
+        ...state,
+        mode: payload,
+      };
 
     default:
       console.warning(action.type);
@@ -60,8 +76,11 @@ function filterReducer(state, action) {
   }
 }
 
+const FilterStateContext = React.createContext();
+const FilterDispatchContext = React.createContext();
+
 export function FilterProvider({ children }) {
-  const [filterState, filterDispatch] = useReducer(filterReducer, initialFilterState);
+  const [filterState, filterDispatch] = useReducer(filterReducer, defaultFilterState);
   return (
     <FilterStateContext.Provider value={filterState}>
       <FilterDispatchContext.Provider value={filterDispatch}>
@@ -70,3 +89,11 @@ export function FilterProvider({ children }) {
     </FilterStateContext.Provider>
   );
 }
+
+export const useFilterDispatch = () => {
+  return useContext(FilterDispatchContext);
+};
+
+export const useFilterState = () => {
+  return useContext(FilterStateContext);
+};

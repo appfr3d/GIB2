@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FilterStateContext } from '../context/FilterContext';
+import { useFilterState } from '../context/FilterContext';
 import config from '../config';
 
 const mockRestaurants = [
@@ -21,15 +21,24 @@ const mockRestaurants = [
 
 export default function useRestaurants() {
   const [restaurants, setRestaurants] = useState();
-  const filterState = useContext(FilterStateContext);
+  const filterState = useFilterState();
 
   // UseEffect cannot be async in itself, so need to define an async function.
   async function fetchRestaurants() {
-    const url = `${config.apiDomain}/restaurant/filter`;
-    console.log(filterState);
+    const endpoint = { all: '', filter: '/filter', search: '/search' }[filterState.mode];
+    const params = {
+      all: null,
+      filter: { ...filterState.filter, kitchens: filterState.filter.kitchens.toString() },
+      search: filterState.search,
+    }[filterState.mode];
+    const url = `${config.apiDomain}/restaurant${endpoint}`;
+    console.log(params);
     try {
       console.log('Trying');
-      const response = await axios.get(url, { params: filterState, timeout: 5000 });
+      const response = await axios.get(url, {
+        params,
+        timeout: 5000,
+      });
       setRestaurants(response.data);
     } catch (error) {
       console.log('Error:', error);
