@@ -34,7 +34,10 @@ function RestaurantItem({ restaurant, setVisible, showMoreInfo }) {
       />
       <View style={{ paddingTop: 10 }}>
         <Text>{restaurant.name}</Text>
-        <Rating maxRating={5} value={restaurant.rating} size={20} />
+        <View style={{flexDirection:'row'}}>
+          <Rating maxRating={5} type='star' value={restaurant.rating} size={20} />
+          <Rating maxRating={5} type='cash' value={restaurant.price_class} size={20}/>
+        </View>
         <Text>{restaurant.phone}</Text>
         <View style={{ alignItems: 'flex-end' }}>
           <TouchableOpacity

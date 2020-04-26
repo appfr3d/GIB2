@@ -29,7 +29,12 @@ function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
           <Text style={styles.name}>{restaurant.name}</Text>
           <View style={styles.ratingContainer}>
             <Text style={styles.ratingText}>Brukernes rangering av denne restauranten</Text>
-            <Rating maxRating={5} value={restaurant.rating} size={20} />
+            <View style={{flexDirection:'row'}}>
+              <Rating maxRating={5} type='star' value={restaurant.rating} size={20} />
+              <Rating maxRating={5} type='cash' value={restaurant.price_class} size={20}/>
+            </View>
+            
+
           </View>
           <Text style={styles.description}>{restaurant.description}</Text>
           <View style={styles.rateContainer}>
@@ -95,6 +100,7 @@ const styles = StyleSheet.create({
   rateContainer: {
     alignSelf: 'flex-end',
     paddingTop: 10,
+    
   },
   rateButtonView: {
     backgroundColor: dark,
