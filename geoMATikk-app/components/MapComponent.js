@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import MapView from "react-native-map-clustering";
-import /*MapView, */{ Marker } from 'react-native-maps';
+import MapView from 'react-native-map-clustering';
+import { /* MapView, */ Marker } from 'react-native-maps';
 import { useRestaurants } from '../hooks';
 
 import RestaurantList from './RestaurantList';
 import RestaurantInfo from './RestaurantInfo';
 
-import { primary, light, dark, medium } from '../assets/colors';
+import { primary, medium } from '../assets/colors';
 
 function MapComponent() {
   const [restaurants] = useRestaurants(); // Restaurant data
@@ -68,7 +68,7 @@ function MapComponent() {
   };
 
   let mapRef = null;
-
+  console.log(restaurants);
   return (
     <>
       <MapView
@@ -91,7 +91,7 @@ function MapComponent() {
             <Marker
               key={restaurant.id}
               coordinate={restaurant.location}
-              pinColor= {primary}
+              pinColor={primary}
               // title={restaurant.name}
               // description={restaurant.description}
               onPress={() => selectRestaurant(restaurant)}

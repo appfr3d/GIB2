@@ -1,7 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import {primary, light} from '../../assets/colors'
-import { colors } from 'react-native-elements';
+import { primary } from '../../assets/colors';
 
 function Button({ text, loading, disabled, onPress }) {
   return (
@@ -9,7 +8,7 @@ function Button({ text, loading, disabled, onPress }) {
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <Text style={{ fontSize: 20, textAlign: 'center', color: 'white'}}>{text}</Text>
+        <Text style={{ fontSize: 20, textAlign: 'center', color: 'white' }}>{text}</Text>
       )}
     </TouchableOpacity>
   );

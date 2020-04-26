@@ -1,21 +1,23 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import CheckBox from 'react-native-modest-checkbox';
 import SnapSlider from 'react-native-snap-slider';
-import { FilterStateContext, FilterDispatchContext } from '../../context/FilterContext';
-import { dark, light, primary } from '../../assets/colors';
+import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
+import { light, primary } from '../../assets/colors';
 
 const sliderOptions = [
   { value: 0, label: 'Uviktig' },
-  { value: 1, label: 'Passe viktig' },
-  { value: 2, label: 'Viktig' },
+  { value: 1, label: '' },
+  { value: 2, label: 'Passe viktig' },
+  { value: 3, label: '' },
+  { value: 4, label: 'Viktig' },
 ];
 
 export default function FilterItem({ item, children }) {
-  const filterState = useContext(FilterStateContext);
-  const filterDispatch = useContext(FilterDispatchContext);
-  const { name, active, prefferedValue, priority } = filterState[item];
+  const filterState = useFilterState();
+  const filterDispatch = useFilterDispatch();
+  const { name, active, prefferedValue, weight } = filterState.filter[item];
   const [priceState, setPriceState] = useState('lav');
 
   const buttonStateStyle = state => {
@@ -56,17 +58,17 @@ export default function FilterItem({ item, children }) {
             )}
           </View>
         </View>
-
+        {active && children}
         {active && (
           <>
             <SnapSlider
               containerStyle={styles.snapSlider}
               labelPosisiton="top"
               items={sliderOptions}
+              defaultItem={weight}
               minimumTrackTintColor={light}
-              defaultItem={priority}
               onSlidingComplete={value =>
-                filterDispatch({ type: `set_priority`, payload: { item, value } })
+                filterDispatch({ type: `set_weight`, payload: { item, value } })
               }
               width="200"
             />

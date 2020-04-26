@@ -1,18 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, TouchableOpacity, TextInput, StyleSheet, Text } from 'react-native';
 import Constants from 'expo-constants';
 import { Ionicons } from '@expo/vector-icons';
-// import TypeKitchen from './TypeKitchen';
-// import FilterItem from './FilterItem';
-import { FilterDispatchContext } from '../context/FilterContext';
+import { useFilterDispatch } from '../context/FilterContext';
 import LoginStatus from './AuthModal/LoginStatus';
-
-import { primary, light, dark } from '../assets/colors';
 
 function TopMenu(props) {
   const { authModalVisible, setAuthModalVisible } = props;
-  const filterDispatch = useContext(FilterDispatchContext);
+  const filterDispatch = useFilterDispatch();
 
   return (
     <View style={styles.topMenu}>
@@ -24,7 +20,7 @@ function TopMenu(props) {
             onChangeText={value => filterDispatch({ type: 'set_search_string', payload: value })}
           />
           <TouchableOpacity>
-            <Ionicons name="md-search" size={32} color={light} />
+            <Ionicons name="md-search" size={32} />
           </TouchableOpacity>
           <Text />
         </View>
@@ -36,7 +32,7 @@ function TopMenu(props) {
             setAuthModalVisible(!authModalVisible);
           }}
         >
-          <Ionicons name="md-person" size={40} color={dark}/>
+          <Ionicons name="md-person" size={40} />
           <LoginStatus />
         </TouchableOpacity>
       </View>

@@ -3,19 +3,17 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   Text,
   Image,
   Modal,
   StyleSheet,
-  TextInput,
   Dimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Constants from 'expo-constants';
 
 import Rating from './Rating';
-import { primary, light, dark } from '../assets/colors';
+import { light, dark } from '../assets/colors';
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -26,25 +24,16 @@ function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
   const auth = useAuth();
 
   return (
-    <Modal
-      style={styles.modalStyle}
-      animationType="fade"
-      transparent
-      // visible={props.authModalVisible}
-      //   onRequestClose={() => {
-      //     Alert.alert('Modal has been closed.');
-      //   }}
-    >
+    <Modal style={styles.modalStyle} animationType="fade" transparent>
       <SafeAreaView style={styles.container}>
         <View style={styles.contentContainer}>
           <Image
             style={{ width: screenWidth - 60, height: 150, alignSelf: 'center', borderRadius: 10 }}
             source={{ uri: `https://www.trondheim.no/${restaurant.image_url}` }}
-            // resizeMode="contain"
           />
-          <Text style={styles.name} >{restaurant.name}</Text>
+          <Text style={styles.name}>{restaurant.name}</Text>
           <View style={styles.ratingContainer}>
-            <Text style={styles.ratingText}>Brukernes rangering av denne restauranten</Text>    
+            <Text style={styles.ratingText}>Brukernes rangering av denne restauranten</Text>
             <Rating maxRating={5} value={restaurant.rating} size={20} />
           </View>
           <Text style={styles.description} >{restaurant.description}</Text>
@@ -86,7 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     top: Constants.statusBarHeight + 10,
     marginHorizontal: 10,
-    borderRadius: 20
+    borderRadius: 20,
   },
   contentContainer: {
     padding: 20,
@@ -101,31 +90,31 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     paddingTop: 20,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   ratingContainer: {
-    paddingBottom: 10
-  },  
+    paddingBottom: 10,
+  },
   ratingText: {
     color: light,
-    paddingBottom: 5
-  }, 
+    paddingBottom: 5,
+  },
   description: {
     color: dark,
     fontSize: 20,
   },
   rateContainer: {
     alignSelf: 'flex-end',
-    paddingTop: 10
+    paddingTop: 10,
   },
   rateButtonView: {
     backgroundColor: dark,
-    borderRadius: 5
+    borderRadius: 5,
   },
   rateButtonText: {
     color: 'white',
     padding: 10,
-  }
+  },
 });
 
 export default RestaurantInfo;
