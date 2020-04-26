@@ -33,7 +33,7 @@ export default function RegisterComponent(props) {
 
   return (
     <>
-      <Text style={styles.header}>Registrer Bruker</Text>
+      <Text style={styles.header}>Registrer bruker</Text>
       <TouchableOpacity
         style={{ paddingVertical: 10 }}
         onPress={() => {
