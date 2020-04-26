@@ -30,8 +30,6 @@ function MapComponent() {
     }
   });
 
-
-
   useEffect(() => {
     if (selectedRestaurantID !== null) {
       setSelectedRestaurant(restaurants.find(x => x.id === selectedRestaurantID));
@@ -87,7 +85,8 @@ function MapComponent() {
         }}
         onPress={() => hideRestInfo()}
       >
-        {restaurants && restaurants.length && 
+        {restaurants &&
+          restaurants.length &&
           restaurants.map(restaurant => (
             <Marker
               key={restaurant.id}

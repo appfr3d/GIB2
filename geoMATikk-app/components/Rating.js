@@ -9,9 +9,9 @@ function Rating({ maxRating, type, value, size }) {
   const starHalf = require('../assets/rating/star-half.png');
   const starEmpty = require('../assets/rating/star-empty.png');
   const ratings = [];
-  
-  if(type=='star'){
-    for (let i = 0; i < maxRating; i++) {
+
+  if (type === 'star') {
+    for (let i = 0; i < maxRating; i += 1) {
       if (i + 1 <= Math.floor(value)) {
         ratings.push(
           <Image
@@ -42,12 +42,10 @@ function Rating({ maxRating, type, value, size }) {
       }
     }
   } else {
-    for (let i = 0; i < maxRating; i++) {
+    for (let i = 0; i < maxRating; i += 1) {
       if (i + 1 <= Math.floor(value)) {
-        ratings.push(
-          <Text style={{fontWeight: 'bold'}}>$</Text> 
-        );
-       }
+        ratings.push(<Text style={{ fontWeight: 'bold' }}>$</Text>);
+      }
     }
   }
 
@@ -57,8 +55,6 @@ function Rating({ maxRating, type, value, size }) {
     </View>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   ratingContainer: {

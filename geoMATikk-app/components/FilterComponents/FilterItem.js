@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import CheckBox from 'react-native-modest-checkbox';
 import SnapSlider from 'react-native-snap-slider';

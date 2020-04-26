@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Constants from 'expo-constants';
 import Rating from './Rating';
-import { primary, light, dark } from '../assets/colors';
+import { dark } from '../assets/colors';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
@@ -24,7 +24,7 @@ function RestaurantItem({ restaurant, setVisible, showMoreInfo }) {
           backgroundColor: 'white',
           marginHorizontal: 20,
           padding: 20,
-          borderRadius: 10
+          borderRadius: 10,
         },
       ]}
     >
@@ -34,9 +34,9 @@ function RestaurantItem({ restaurant, setVisible, showMoreInfo }) {
       />
       <View style={{ paddingTop: 10 }}>
         <Text style={styles.name}>{restaurant.name}</Text>
-        <View style={{flexDirection:'row'}}>
-          <Rating maxRating={5} type='star' value={restaurant.rating} size={20} />
-          <Rating maxRating={5} type='cash' value={restaurant.price_class} size={20}/>
+        <View style={{ flexDirection: 'row' }}>
+          <Rating maxRating={5} type="star" value={restaurant.rating} size={20} />
+          <Rating maxRating={5} type="cash" value={restaurant.price_class} size={20} />
         </View>
         <Text>{restaurant.phone}</Text>
         <View style={{ alignItems: 'flex-end' }}>
@@ -125,16 +125,16 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 24,
-    color: dark
+    color: dark,
   },
   merInfoView: {
     backgroundColor: dark,
-    borderRadius: 5
+    borderRadius: 5,
   },
   merInfoText: {
     color: 'white',
-    padding: 10
-  }
+    padding: 10,
+  },
 });
 
 export default RestaurantList;
