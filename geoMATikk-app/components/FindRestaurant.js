@@ -3,13 +3,15 @@ import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Button, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { FilterItem, FilterLocation } from './FilterComponents';
-import { useFilterState, useFilterDispatch } from '../context/FilterContext';
+import { useFilterState } from '../context/FilterContext';
+import useRestaurants from '../hooks/useRestaurants';
 import TypeKitchen from './TypeKitchen';
 import { primary } from '../assets/colors';
 
 export default function FindRestaurant({ findRestaurantVisible, setFindRestaurantVisible }) {
   const [kitchenVisible, setKitchenVisible] = useState(false);
-  const filterDispatch = useFilterDispatch();
+  const [, fetchRestaurants] = useRestaurants();
+  // const filterDispatch = useFilterDispatch();
   const filterState = useFilterState();
 
   const createPriceAlert = () =>
@@ -155,7 +157,10 @@ export default function FindRestaurant({ findRestaurantVisible, setFindRestauran
               <Button
                 title="Søk"
                 color={primary}
-                onPress={() => filterDispatch({ type: 'set_mode', payload: 'filter' })}
+                onPress={() => {
+                  fetchRestaurants();
+                  setFindRestaurantVisible(false);
+                }}
               />
             </View>
             <View style={{ height: 60 }} />

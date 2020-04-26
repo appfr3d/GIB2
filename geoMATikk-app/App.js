@@ -1,43 +1,60 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { TopMenu, AuthModal, MapComponent } from './components';
 import { FilterProvider } from './context/FilterContext';
 import FindRestaurant from './components/FindRestaurant';
-import { ProvideAuth, useAuth } from './hooks/useAuth';
+import { ProvideAuth } from './hooks/useAuth';
 
-import { primary, light, dark } from './assets/colors';
+import { primary } from './assets/colors';
 
 export default function App() {
   const [authModalVisible, setAuthModalVisible] = useState(false);
   const [findRestaurantVisible, setFindRestaurantVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <ProvideAuth>
-        <FilterProvider>
-          <MapComponent />
-          <TopMenu authModalVisible={authModalVisible} setAuthModalVisible={setAuthModalVisible} />
-          <AuthModal
-            authModalVisible={authModalVisible}
-            setAuthModalVisible={setAuthModalVisible}
-          />
-          <FindRestaurant
-            findRestaurantVisible={findRestaurantVisible}
-            setFindRestaurantVisible={setFindRestaurantVisible}
-          />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.container}>
+        <ProvideAuth>
+          <FilterProvider>
+            <MapComponent />
+            {/* <View style={{ ...StyleSheet.absoluteFill }}> */}
+            <TopMenu
+              authModalVisible={authModalVisible}
+              setAuthModalVisible={setAuthModalVisible}
+            />
+            {/* </View> */}
 
-          <TouchableOpacity
-            style={styles.findRestButton}
-            onPress={() => {
-              setFindRestaurantVisible(!findRestaurantVisible);
-            }}
-          >
-            <Text style={{ fontSize: 25, textAlign: 'center', color: 'white' }}>Finn restaurant</Text>
-          </TouchableOpacity>
-        </FilterProvider>
-      </ProvideAuth>
-    </View>
+            <AuthModal
+              authModalVisible={authModalVisible}
+              setAuthModalVisible={setAuthModalVisible}
+            />
+            <FindRestaurant
+              findRestaurantVisible={findRestaurantVisible}
+              setFindRestaurantVisible={setFindRestaurantVisible}
+            />
+
+            <TouchableOpacity
+              style={styles.findRestButton}
+              onPress={() => {
+                setFindRestaurantVisible(!findRestaurantVisible);
+              }}
+            >
+              <Text style={{ fontSize: 25, textAlign: 'center', color: 'white' }}>
+                Finn restaurant
+              </Text>
+            </TouchableOpacity>
+          </FilterProvider>
+        </ProvideAuth>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 

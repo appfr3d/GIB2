@@ -1,7 +1,6 @@
 import React, { useReducer, useContext } from 'react';
 
 const defaultFilterState = {
-  mode: 'all',
   search: '',
   filter: {
     price: {
