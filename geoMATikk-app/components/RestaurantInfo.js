@@ -67,7 +67,9 @@ function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
               setListVisible(true);
             }}
           >
-            <Ionicons name="md-close" size={30} color='lightgray' />
+            <View style={{ backgroundColor: dark, padding: 5, borderRadius: 5, height: 40, width: 40, alignItems: 'center' }}>
+              <Ionicons name="md-close" size={30} color='white' />
+            </View>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -91,8 +93,8 @@ const styles = StyleSheet.create({
   },
   closeInfo: {
     position: 'absolute',
-    top: 30,
-    right: 30,
+    top: 25,
+    right: 25,
   },
   name: {
     color: dark,

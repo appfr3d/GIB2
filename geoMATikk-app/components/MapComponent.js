@@ -7,7 +7,7 @@ import { useRestaurants } from '../hooks';
 import RestaurantList from './RestaurantList';
 import RestaurantInfo from './RestaurantInfo';
 
-import { primary, light, dark,medium } from '../assets/colors';
+import { primary, light, dark, medium } from '../assets/colors';
 
 function MapComponent() {
   const [restaurants] = useRestaurants(); // Restaurant data
