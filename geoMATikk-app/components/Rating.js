@@ -1,4 +1,6 @@
+// READ MED
 // Viser enten stjerne eller kostnad rating
+
 import React from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 

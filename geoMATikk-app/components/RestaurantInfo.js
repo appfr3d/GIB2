@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
+  ScrollView,
   SafeAreaView,
   TouchableOpacity,
   Text,
@@ -13,48 +14,97 @@ import { Ionicons } from '@expo/vector-icons';
 import Constants from 'expo-constants';
 
 import Rating from './Rating';
+import RestaurantRating from './RestaurantRating';
 import { light, dark } from '../assets/colors';
+
+import { useAuth } from '../hooks/useAuth';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
+
+  const scrollRef = useRef(null);
+  
+  const [isRating, setIsRating] = useState(false);
+
+  // useEffect(() => {
+  //   if (scrollRef !== null && isRating) {
+  //     scrollRef.scrollToEnd({animated: true});
+  //   }
+  // }, [isRating]);
+  
+
+  const auth = useAuth();
+
   return (
     <Modal style={styles.modalStyle} animationType="fade" transparent>
       <SafeAreaView style={styles.container}>
-        <View style={styles.contentContainer}>
-          <Image
-            style={{ width: screenWidth - 60, height: 150, alignSelf: 'center', borderRadius: 10 }}
-            source={{ uri: `https://www.trondheim.no/${restaurant.image_url}` }}
-          />
-          <Text style={styles.name}>{restaurant.name}</Text>
-          <View style={styles.ratingContainer}>
-            <Text style={styles.ratingText}>Brukernes rangering av denne restauranten</Text>
-            <View style={{flexDirection:'row'}}>
-              <Rating maxRating={5} type='star' value={restaurant.rating} size={20} />
-              <Rating maxRating={5} type='cash' value={restaurant.price_class} size={20}/>
+        <ScrollView ref={scrollRef}>
+          <View style={styles.contentContainer}>
+            <Image
+              style={{ width: screenWidth - 60, height: 150, alignSelf: 'center', borderRadius: 10 }}
+              source={{ uri: `https://www.trondheim.no/${restaurant.image_url}` }}
+            />
+            <Text style={styles.name}>{restaurant.name}</Text>
+            <View style={styles.ratingContainer}>
+              <Text style={styles.ratingText}>Brukernes rangering av denne restauranten</Text>
+              <View style={{flexDirection:'row'}}>
+                <Rating maxRating={5} type='star' value={restaurant.rating} size={20} />
+                <Rating maxRating={5} type='cash' value={restaurant.price_class} size={20}/>
+              </View>
             </View>
+            { !isRating && <Text style={styles.description} >{restaurant.description}</Text> }
             
+            { auth.user && !isRating && (
+                <View style={styles.rateContainer}>
+                  <TouchableOpacity onPress={() => setIsRating(true)}>
+                    <View style={styles.rateButtonView}>
+                      <Text style={styles.rateButtonText}>Ranger restaurant</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              )
+            }
 
-          </View>
-          <Text style={styles.description}>{restaurant.description}</Text>
-          <View style={styles.rateContainer}>
-            <TouchableOpacity onPress={() => {}}>
-              <View style={styles.rateButtonView}>
-                <Text style={styles.rateButtonText}>Rate restaurant</Text>
+            { isRating && (
+                <View style={{ justifyContent: 'center' }}>
+                  <Text style={{ color: dark, fontSize: 30 }}>Ranger restauranten</Text>
+                  <Text style={{ color: light, fontSize: 20 }}>I hvilken prisklasse vil du plassere restauranten</Text>
+                  <RestaurantRating type='cash' />
+                  <Text style={{ color: light, fontSize: 20 }}>Din opplevelse av restauranten</Text>
+                  <RestaurantRating type='star' />
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10 }}>
+                    <TouchableOpacity onPress={() => setIsRating(false)}>
+                      <View style={styles.rateButtonView}>
+                        <Text style={styles.rateButtonText}>Avbryt</Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => setIsRating(false)}>
+                      <View style={styles.rateButtonView}>
+                        <Text style={styles.rateButtonText}>Bekreft</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )
+            }
+
+
+
+            <TouchableOpacity
+              hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
+              style={styles.closeInfo}
+              onPress={() => {
+                setInfoVisible(false);
+                setListVisible(true);
+              }}
+            >
+              <View style={{ backgroundColor: dark, padding: 5, borderRadius: 5, height: 40, width: 40, alignItems: 'center' }}>
+                <Ionicons name="md-close" size={30} color='white' />
               </View>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
-            style={styles.closeInfo}
-            onPress={() => {
-              setInfoVisible(false);
-              setListVisible(true);
-            }}
-          >
-            <Ionicons name="md-close" size={30} color="lightgray" />
-          </TouchableOpacity>
-        </View>
+        </ScrollView>
       </SafeAreaView>
     </Modal>
   );
@@ -76,8 +126,8 @@ const styles = StyleSheet.create({
   },
   closeInfo: {
     position: 'absolute',
-    top: 30,
-    right: 30,
+    top: 25,
+    right: 25,
   },
   name: {
     color: dark,
