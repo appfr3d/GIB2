@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet } from 'react-native';
 import MapView from 'react-native-map-clustering';
 import { /* MapView, */ Marker } from 'react-native-maps';
@@ -18,19 +18,21 @@ function MapComponent({ restaurants }) {
 
   useEffect(() => {
     console.log('rerender');
-    if (restListVisible) {
-      // const restaurant = restaurants.find(x => x.id === selectedRestaurantID);
-      if (selectedRestaurant) {
-        console.log(selectedRestaurant);
-        mapRef.animateToRegion({
-          latitude: selectedRestaurant.location.latitude,
-          longitude: selectedRestaurant.location.longitude,
-          latitudeDelta: 0.002,
-          longitudeDelta: 0.002,
-        });
-      }
+    if (selectedRestaurant) {
+      console.log('Selected restauant: ' + selectedRestaurant.name);
+      mapRef.animateToRegion({
+        latitude: selectedRestaurant.location.latitude - 0.0003, // for å vise pinnen over boksen
+        longitude: selectedRestaurant.location.longitude,
+        latitudeDelta: 0.002,
+        longitudeDelta: 0.002,
+      });
+      setRestListVisible(true);
     }
   }, [selectedRestaurant]);
+
+  useEffect(() => {
+    console.log('restListVisible is:' + restListVisible);
+  }, [restListVisible]);
 
   useEffect(() => {
     console.log('useEffect:', restaurants && restaurants[0].id);
@@ -45,8 +47,9 @@ function MapComponent({ restaurants }) {
   const selectRestaurant = restaurant => {
     // if (!restListVisible) {
     // console.log(restaurant);
+    console.log('show restaurant: ' + restaurant.name);
     setSelectedRestaurant(restaurant);
-    setRestListVisible(true);
+    
     // mapRef.animateToRegion({
     //   latitude: restaurant.location.latitude,
     //   longitude: restaurant.location.longitude,
@@ -56,9 +59,13 @@ function MapComponent({ restaurants }) {
     // }
   };
 
-  const hideRestInfo = () => {
+  const hideRestInfo = (event) => {
     // if (restListVisible) {
-    setRestListVisible(false);
+    if (event.nativeEvent.action !== 'marker-press') {
+      console.log('hide');
+      setRestListVisible(false);
+    }
+    
     // const restaurant = restaurants.find(x => x.id === selectedRestaurantID);
     // if (restaurant !== undefined && restaurant !== null) {
     //   mapRef.animateToRegion({
@@ -71,14 +78,14 @@ function MapComponent({ restaurants }) {
     // }
   };
 
-  let mapRef = null;
+  let mapRef = useRef(null);
+
+
   console.log('rerendering', restaurants && restaurants.length);
   return (
     <>
       <MapView
-        mapRef={ref => {
-          mapRef = ref;
-        }}
+        mapRef={ref => mapRef = ref}
         style={styles.mapStyle}
         clusterColor={medium}
         showsUserLocation
@@ -89,7 +96,7 @@ function MapComponent({ restaurants }) {
           latitudeDelta: 0.0372,
           longitudeDelta: 0.0271,
         }}
-        onPress={() => hideRestInfo()}
+        onPress={hideRestInfo}
       >
         {restaurants &&
           restaurants.length &&
@@ -105,14 +112,15 @@ function MapComponent({ restaurants }) {
             />
           ))}
       </MapView>
-      <RestaurantList
-        restaurants={restaurants}
-        visible={restListVisible}
-        setVisible={setRestListVisible}
-        selectedRestaurant={selectedRestaurant}
-        setSelectedRestaurant={setSelectedRestaurant}
-        showMoreInfo={setRestInfoVisible}
-      />
+      { restListVisible && (
+        <RestaurantList
+          restaurants={restaurants}
+          setVisible={setRestListVisible}
+          selectedRestaurant={selectedRestaurant}
+          setSelectedRestaurant={setSelectedRestaurant}
+          showMoreInfo={setRestInfoVisible}
+        />
+      )}
       {restInfoVisible && (
         <RestaurantInfo
           restaurant={selectedRestaurant}

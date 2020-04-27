@@ -67,14 +67,14 @@ const empty = (num, type) => {
   return null;
 };
 
-function RestaurantRating({ type = 'star' }) {
+function RestaurantRating({ type = 'star', setRatingValue }) {
   // type: 'star', 'cash'
   const [value, setValue] = useState(0);
   const [ratings, setRatings] = useState([]);
 
   useEffect(() => {
+    // Set the ui
     const newRatings = [];
-
     for (let i = 0; i < 5; i += 1) {
       if (i + 1 <= Math.floor(value)) {
         newRatings.push({ type: 'full', indx: i });
@@ -82,10 +82,12 @@ function RestaurantRating({ type = 'star' }) {
         newRatings.push({ type: 'empty', indx: i });
       }
     }
-
-    console.log(newRatings.length);
-
     setRatings(newRatings);
+
+    // Pass the value up
+    if (value !== 0) {
+      setRatingValue(value);
+    }
   }, [value]);
 
   const renderRating = (rating, indx) => {

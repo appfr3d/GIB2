@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   ScrollView,
@@ -18,6 +18,7 @@ import RestaurantRating from './RestaurantRating';
 import { light, dark } from '../assets/colors';
 
 import { useAuth } from '../hooks/useAuth';
+import { useRate } from '../hooks';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
@@ -25,6 +26,7 @@ function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
   const scrollRef = useRef(null);
 
   const [isRating, setIsRating] = useState(false);
+  const [rateState, ratingFunctions] = useRate();
 
   // useEffect(() => {
   //   if (scrollRef !== null && isRating) {
@@ -33,6 +35,22 @@ function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
   // }, [isRating]);
 
   const auth = useAuth();
+
+  const rateRestaurant = () => {
+    ratingFunctions.rateRestaurant(auth.user.token);
+  };
+
+  useEffect(() => {
+    if (rateState.done) {
+      setIsRating(false);
+    }
+  }, [rateState]);
+
+  useEffect(() => {
+    if (isRating) {
+      ratingFunctions.setRestaurantID(restaurant.id)
+    }
+  }, [isRating])
 
   return (
     <Modal style={styles.modalStyle} animationType="fade" transparent>
@@ -58,7 +76,7 @@ function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
             </View>
             {!isRating && <Text style={styles.description}>{restaurant.description}</Text>}
 
-            {auth.user && !isRating && (
+            {auth.user && !isRating && !rateState.done && (
               <View style={styles.rateContainer}>
                 <TouchableOpacity onPress={() => setIsRating(true)}>
                   <View style={styles.rateButtonView}>
@@ -68,24 +86,36 @@ function RestaurantInfo({ restaurant, setInfoVisible, setListVisible }) {
               </View>
             )}
 
+            { rateState.done && (
+              <Text style={{ paddingTop: 10, color: light, fontSize: 18 }}>
+                Takk, din rangering er registrert!
+              </Text>
+            ) /* TODO: Style denne */}
+
+            
+
             {isRating && (
               <View style={{ justifyContent: 'center' }}>
                 <Text style={{ color: dark, fontSize: 30 }}>Ranger restauranten</Text>
                 <Text style={{ color: light, fontSize: 20 }}>
                   I hvilken prisklasse vil du plassere restauranten
                 </Text>
-                <RestaurantRating type="cash" />
+                <RestaurantRating type="cash" setRatingValue={ratingFunctions.setPrice} />
                 <Text style={{ color: light, fontSize: 20 }}>Din opplevelse av restauranten</Text>
-                <RestaurantRating type="star" />
+                <RestaurantRating type="star" setRatingValue={ratingFunctions.setRating} />
+
+                { rateState.error !== '' && <Text style={{ color: 'red' }} >{rateState.error}</Text> }
+
                 <View
                   style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10 }}
+                  // TODO: set en activity indicator her når den loader
                 >
                   <TouchableOpacity onPress={() => setIsRating(false)}>
                     <View style={styles.rateButtonView}>
                       <Text style={styles.rateButtonText}>Avbryt</Text>
                     </View>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => setIsRating(false)}>
+                  <TouchableOpacity onPress={rateRestaurant}>
                     <View style={styles.rateButtonView}>
                       <Text style={styles.rateButtonText}>Bekreft</Text>
                     </View>

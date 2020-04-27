@@ -25,16 +25,18 @@ export default function useRestaurants() {
 
   // UseEffect cannot be async in itself, so need to define an async function.
   async function fetchRestaurants() {
-    console.log('FETCHING');
+    // console.log('FETCHING');
     const endpoint = filterState.search ? '/search' : '/filter';
     const params = filterState.search
       ? { search: filterState.search }
       : { ...filterState.filter, kitchens: filterState.filter.kitchens.toString() };
     const url = `${config.apiDomain}/restaurant${endpoint}`;
     try {
-      console.log(params);
-      console.log(endpoint);
-      console.log('Trying');
+      // console.log(params);
+      // console.log(endpoint);
+      // console.log('Trying');
+      // console.log('trying to get restaurants: ')
+      // console.log(params)
       const response = await axios.get(url, {
         params,
         timeout: 5000,
@@ -42,8 +44,8 @@ export default function useRestaurants() {
       if (response.data.error) {
         console.log(response.data.error);
       } else {
-        console.log(response.data.map(o => o.name));
-        console.log('sets restaurants');
+        // console.log(response.data.map(o => o.name));
+        // console.log('sets restaurants');
         const { data } = response;
         setRestaurants(data);
       }
