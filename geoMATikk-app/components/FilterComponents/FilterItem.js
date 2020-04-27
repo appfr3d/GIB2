@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import CheckBox from 'react-native-modest-checkbox';
 import SnapSlider from 'react-native-snap-slider';
 import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
@@ -32,21 +32,25 @@ export default function FilterItem({ item, children }) {
 
             {active && prefferedValue && (
               <View style={styles.priceRateBox}>
-                <View style={styles.priceRate}>
-                  <Button
-                    title="Billig"
-                    color={prefferedValue === 'low' ? primary : light}
-                    onPress={() => filterDispatch({ type: 'set_prefferedPrice', payload: 'low' })}
-                  />
-                </View>
+                <TouchableOpacity
+                  style={[
+                    styles.priceRate,
+                    { backgroundColor: prefferedValue === 'low' ? primary : light },
+                  ]}
+                  onPress={() => filterDispatch({ type: 'set_prefferedPrice', payload: 'low' })}
+                >
+                  <Text style={styles.buttonText}>BILLIG</Text>
+                </TouchableOpacity>
 
-                <View style={[styles.priceRate]}>
-                  <Button
-                    title="Eksklusivt"
-                    color={prefferedValue === 'high' ? primary : light}
-                    onPress={() => filterDispatch({ type: 'set_prefferedPrice', payload: 'high' })}
-                  />
-                </View>
+                <TouchableOpacity
+                  style={[
+                    styles.priceRate,
+                    { backgroundColor: prefferedValue === 'high' ? primary : light },
+                  ]}
+                  onPress={() => filterDispatch({ type: 'set_prefferedPrice', payload: 'high' })}
+                >
+                  <Text style={styles.buttonText}>EKSKLUSIVT</Text>
+                </TouchableOpacity>
               </View>
             )}
           </View>
@@ -89,9 +93,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: light,
     width: 100,
+    height: 40,
     marginRight: 25,
     marginLeft: 0,
     borderRadius: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   priceRateBox: {
     display: 'flex',
@@ -101,5 +108,9 @@ const styles = StyleSheet.create({
   snapSlider: {
     marginBottom: 30,
     width: 200,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 14,
   },
 });

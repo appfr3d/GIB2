@@ -3,11 +3,11 @@
 
 import React from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
+import starFull from '../assets/rating/star-full.png';
+import starHalf from '../assets/rating/star-half.png';
+import starEmpty from '../assets/rating/star-empty.png';
 
 function Rating({ maxRating, type, value, size }) {
-  const starFull = require('../assets/rating/star-full.png');
-  const starHalf = require('../assets/rating/star-half.png');
-  const starEmpty = require('../assets/rating/star-empty.png');
   const ratings = [];
 
   if (type === 'star') {

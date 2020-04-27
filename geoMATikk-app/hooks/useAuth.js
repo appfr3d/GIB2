@@ -21,13 +21,11 @@ function useProvideAuth() {
   const signin = async (username, password) => {
     setError(null);
     setLoading(true);
-    console.log('logging in ', username, password);
     try {
       const response = await axios(`${config.apiDomain}/token`, {
         method: 'GET',
         auth: { username, password },
       });
-      console.log(response.data);
       setUser(response.data);
       cacheAuth(response.data);
       setLoading(false);
