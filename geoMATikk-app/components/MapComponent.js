@@ -13,60 +13,66 @@ function MapComponent() {
   const [restaurants] = useRestaurants(); // Restaurant data
   const [restListVisible, setRestListVisible] = useState(false); // om listen i bunnen er synlig eller ikke
   const [restInfoVisible, setRestInfoVisible] = useState(false); // om informasjon om én restaurant er synlig
-  const [selectedRestaurantID, setSelectedRestaurantID] = useState(null); // id-en til den valgte restauranten
+  // const [selectedRestaurantID, setSelectedRestaurantID] = useState(null); // id-en til den valgte restauranten
   const [selectedRestaurant, setSelectedRestaurant] = useState(null); // restaurant objektet som er valgt
 
   useEffect(() => {
+    console.log('rerender');
     if (restListVisible) {
-      const restaurant = restaurants.find(x => x.id === selectedRestaurantID);
-      if (restaurant !== undefined) {
+      // const restaurant = restaurants.find(x => x.id === selectedRestaurantID);
+      if (selectedRestaurant) {
+        console.log(selectedRestaurant);
         mapRef.animateToRegion({
-          latitude: restaurant.location.latitude,
-          longitude: restaurant.location.longitude,
+          latitude: selectedRestaurant.location.latitude,
+          longitude: selectedRestaurant.location.longitude,
           latitudeDelta: 0.002,
           longitudeDelta: 0.002,
         });
       }
     }
-  });
+  }, [selectedRestaurant]);
 
   useEffect(() => {
-    if (selectedRestaurantID !== null) {
-      setSelectedRestaurant(restaurants.find(x => x.id === selectedRestaurantID));
-    }
-  }, [selectedRestaurantID]);
+    console.log('useEffect:', restaurants && restaurants[0].id);
+  }, [restaurants]);
+
+  // useEffect(() => {
+  //   if (selectedRestaurantID !== null) {
+  //     setSelectedRestaurant(restaurants.find(x => x.id === selectedRestaurantID));
+  //   }
+  // }, [selectedRestaurantID]);
 
   const selectRestaurant = restaurant => {
     // if (!restListVisible) {
     // console.log(restaurant);
-    setSelectedRestaurantID(restaurant.id);
+    setSelectedRestaurant(restaurant);
     setRestListVisible(true);
-    mapRef.animateToRegion({
-      latitude: restaurant.location.latitude,
-      longitude: restaurant.location.longitude,
-      latitudeDelta: 0.001,
-      longitudeDelta: 0.001,
-    });
+    // mapRef.animateToRegion({
+    //   latitude: restaurant.location.latitude,
+    //   longitude: restaurant.location.longitude,
+    //   latitudeDelta: 0.001,
+    //   longitudeDelta: 0.001,
+    // });
     // }
   };
 
   const hideRestInfo = () => {
-    if (restListVisible) {
-      setRestListVisible(false);
-      const restaurant = restaurants.find(x => x.id === selectedRestaurantID);
-      if (restaurant !== undefined && restaurant !== null) {
-        mapRef.animateToRegion({
-          latitude: restaurant.location.latitude,
-          longitude: restaurant.location.longitude,
-          latitudeDelta: 0.006,
-          longitudeDelta: 0.006,
-        });
-      }
-    }
+    // if (restListVisible) {
+    setRestListVisible(false);
+    // const restaurant = restaurants.find(x => x.id === selectedRestaurantID);
+    // if (restaurant !== undefined && restaurant !== null) {
+    //   mapRef.animateToRegion({
+    //     latitude: restaurant.location.latitude,
+    //     longitude: restaurant.location.longitude,
+    //     latitudeDelta: 0.006,
+    //     longitudeDelta: 0.006,
+    //   });
+    // }
+    // }
   };
 
   let mapRef = null;
-  // console.log(restaurants);
+  console.log('rerendering', restaurants && restaurants.length);
   return (
     <>
       <MapView
@@ -103,8 +109,8 @@ function MapComponent() {
         restaurants={restaurants}
         visible={restListVisible}
         setVisible={setRestListVisible}
-        selectedID={selectedRestaurantID}
-        setSelectedID={setSelectedRestaurantID}
+        selectedRestaurant={selectedRestaurant}
+        setSelectedRestaurant={setSelectedRestaurant}
         showMoreInfo={setRestInfoVisible}
       />
       {restInfoVisible && (

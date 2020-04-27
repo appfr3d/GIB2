@@ -44,7 +44,11 @@ function Rating({ maxRating, type, value, size }) {
   } else {
     for (let i = 0; i < maxRating; i += 1) {
       if (i + 1 <= Math.floor(value)) {
-        ratings.push(<Text style={{ fontWeight: 'bold' }}>$</Text>);
+        ratings.push(
+          <Text key={i.toString()} style={{ fontWeight: 'bold' }}>
+            $
+          </Text>
+        );
       }
     }
   }

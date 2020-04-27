@@ -42,8 +42,10 @@ export default function useRestaurants() {
       if (response.data.error) {
         console.log(response.data.error);
       } else {
-        console.log(response.data.length);
-        setRestaurants(response.data);
+        console.log(response.data.map(o => o.name));
+        console.log('sets restaurants');
+        const { data } = response;
+        setRestaurants(data);
       }
     } catch (error) {
       console.log('Error:', error);

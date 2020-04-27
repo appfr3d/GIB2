@@ -60,8 +60,8 @@ function RestaurantList({
   restaurants,
   visible,
   setVisible,
-  selectedID,
-  setSelectedID,
+  selectedRestaurant,
+  setSelectedRestaurant,
   showMoreInfo,
 }) {
   const listRef = useRef(null);
@@ -73,21 +73,22 @@ function RestaurantList({
 
   const handleViewableItemsChanged = useRef(info => {
     if (info.viewableItems.length > 0) {
-      setSelectedID(info.viewableItems[0].item.id);
+      setSelectedRestaurant(info.viewableItems[0].item);
     }
   });
 
   useEffect(() => {
     // måtte ha null-sjekk for at den ikke skal krasje på iOS
     if (listRef !== null && restaurants && listRef.current !== null) {
-      const i = restaurants.map(x => x.id).indexOf(selectedID);
+      const i = restaurants.map(x => x.id).indexOf(selectedRestaurant.id);
+      // const i = restaurants.indexOf(selectedRestaurant);
       if (i > -1) {
         console.log(`index: ${i}`);
         listRef.current.scrollToIndex({ index: i });
         // listRef.scrollToIndex({ index: i });
       }
     }
-  }, [selectedID]);
+  }, [selectedRestaurant]);
 
   return (
     <SafeAreaView style={styles.listContainer}>
@@ -109,7 +110,7 @@ function RestaurantList({
           pagingEnabled
           snapToInterval={screenWidth}
           showsHorizontalScrollIndicator={false}
-          initialScrollIndex={restaurants.map(x => x.id).indexOf(selectedID)}
+          initialScrollIndex={restaurants.map(x => x.id).indexOf(selectedRestaurant.id)}
           viewabilityConfig={viewabilityConfig.current}
           onViewableItemsChanged={handleViewableItemsChanged.current}
         />
