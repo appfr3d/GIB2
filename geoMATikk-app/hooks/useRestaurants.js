@@ -54,9 +54,11 @@ export default function useRestaurants() {
   }
 
   useEffect(() => {
-    // console.log('HEYHEY', filterState);
+    // console.log(filterState);
+    // if (filterState) {
     fetchRestaurants();
-  }, [filterState.search]);
+    // }
+  }, []);
 
   return [restaurants, fetchRestaurants];
 }

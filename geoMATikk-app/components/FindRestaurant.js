@@ -4,13 +4,17 @@ import { StyleSheet, View, TouchableOpacity, Text, Button, ScrollView, Alert } f
 import { Ionicons } from '@expo/vector-icons';
 import { FilterItem, FilterLocation } from './FilterComponents';
 import { useFilterState } from '../context/FilterContext';
-import useRestaurants from '../hooks/useRestaurants';
+// import useRestaurants from '../hooks/useRestaurants';
 import TypeKitchen from './TypeKitchen';
 import { primary } from '../assets/colors';
 
-export default function FindRestaurant({ findRestaurantVisible, setFindRestaurantVisible }) {
+export default function FindRestaurant({
+  findRestaurantVisible,
+  setFindRestaurantVisible,
+  fetchRestaurants,
+}) {
   const [kitchenVisible, setKitchenVisible] = useState(false);
-  const [, fetchRestaurants] = useRestaurants();
+  // const [, setRestaurants] = useRestaurants();
   // const filterDispatch = useFilterDispatch();
   const filterState = useFilterState();
 

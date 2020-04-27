@@ -9,8 +9,8 @@ import RestaurantInfo from './RestaurantInfo';
 
 import { primary, medium } from '../assets/colors';
 
-function MapComponent() {
-  const [restaurants] = useRestaurants(); // Restaurant data
+function MapComponent({ restaurants }) {
+  // const [restaurants] = useRestaurants(); // Restaurant data
   const [restListVisible, setRestListVisible] = useState(false); // om listen i bunnen er synlig eller ikke
   const [restInfoVisible, setRestInfoVisible] = useState(false); // om informasjon om én restaurant er synlig
   // const [selectedRestaurantID, setSelectedRestaurantID] = useState(null); // id-en til den valgte restauranten
