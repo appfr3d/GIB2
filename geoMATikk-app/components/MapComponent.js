@@ -115,8 +115,8 @@ function MapComponent({ restaurants }) {
         }}
         onPress={hideRestInfo}
       >
-        {restaurants &&
-          restaurants.length &&
+        { Array.isArray(restaurants) &&
+          restaurants.length > 0 &&
           restaurants.map(restaurant => (
             <Marker
               key={restaurant.id}
