@@ -14,7 +14,6 @@ function TopMenu(props) {
 
   useEffect(() => {
     if (filterState.search === '') {
-      console.log('INPUT:', input.current);
       input.current.clear();
     }
   }, [filterState.search]);
