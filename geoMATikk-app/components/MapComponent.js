@@ -37,7 +37,7 @@ function MapComponent({ restaurants }) {
   useEffect(() => {
     console.log('rerender');
     if (selectedRestaurant) {
-      console.log('Selected restauant: ' + selectedRestaurant.name);
+      console.log(`Selected restauant: ${selectedRestaurant.name}`);
       mapRef.animateToRegion({
         latitude: selectedRestaurant.location.latitude - 0.0003, // for å vise pinnen over boksen
         longitude: selectedRestaurant.location.longitude,
@@ -49,11 +49,11 @@ function MapComponent({ restaurants }) {
   }, [selectedRestaurant]);
 
   useEffect(() => {
-    console.log('restListVisible is:' + restListVisible);
+    console.log(`restListVisible is:${restListVisible}`);
   }, [restListVisible]);
 
   useEffect(() => {
-    console.log('useEffect:', restaurants && restaurants[0].id);
+    // console.log('useEffect:', restaurants && restaurants[0].id);
   }, [restaurants]);
 
   // useEffect(() => {
@@ -65,9 +65,9 @@ function MapComponent({ restaurants }) {
   const selectRestaurant = restaurant => {
     // if (!restListVisible) {
     // console.log(restaurant);
-    console.log('show restaurant: ' + restaurant.name);
+    console.log(`show restaurant: ${restaurant.name}`);
     setSelectedRestaurant(restaurant);
-    
+
     // mapRef.animateToRegion({
     //   latitude: restaurant.location.latitude,
     //   longitude: restaurant.location.longitude,
@@ -77,13 +77,13 @@ function MapComponent({ restaurants }) {
     // }
   };
 
-  const hideRestInfo = (event) => {
+  const hideRestInfo = event => {
     // if (restListVisible) {
     if (event.nativeEvent.action !== 'marker-press') {
       console.log('hide');
       setRestListVisible(false);
     }
-    
+
     // const restaurant = restaurants.find(x => x.id === selectedRestaurantID);
     // if (restaurant !== undefined && restaurant !== null) {
     //   mapRef.animateToRegion({
@@ -98,12 +98,11 @@ function MapComponent({ restaurants }) {
 
   let mapRef = useRef(null);
 
-
   console.log('rerendering', restaurants && restaurants.length);
   return (
     <>
       <MapView
-        mapRef={ref => mapRef = ref}
+        mapRef={ref => (mapRef = ref)}
         style={styles.mapStyle}
         clusterColor={medium}
         showsUserLocation
@@ -130,7 +129,7 @@ function MapComponent({ restaurants }) {
             />
           ))}
       </MapView>
-      { restListVisible && (
+      {restListVisible && (
         <RestaurantList
           restaurants={restaurants}
           setVisible={setRestListVisible}
