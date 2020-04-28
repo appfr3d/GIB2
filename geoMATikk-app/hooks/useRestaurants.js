@@ -60,7 +60,7 @@ export default function useRestaurants() {
     // if (filterState) {
     fetchRestaurants();
     // }
-  }, []);
+  }, [filterState.search]);
 
   return [restaurants, fetchRestaurants];
 }

@@ -1,5 +1,5 @@
 const config = {
-  apiDomain: 'http://293dd9fa.ngrok.io',
+  apiDomain: 'https://886533db.ngrok.io',
   authStorageKey: '@geoMATikk:auth', // Used to save auth object in async storage
 };
 
