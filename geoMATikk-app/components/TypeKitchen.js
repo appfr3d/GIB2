@@ -32,7 +32,7 @@ export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
   const [kjokken] = useState([
     { id: '0', title: 'Amerikansk' },
     { id: '1', title: 'Asiatisk' },
-    { id: '2', title: 'Amerikans' },
+    { id: '2', title: 'Fransk' },
     { id: '3', title: 'Allround' },
     { id: '4', title: 'Italiensk' },
     { id: '5', title: 'Latinsk' },
@@ -49,7 +49,7 @@ export default function TypeKitchen({ kitchenVisible, setKitchenVisible }) {
     { id: '16', title: 'Indisk' },
     { id: '17', title: 'Afrikansk' },
     { id: '18', title: 'Japansk' },
-    { id: '19', title: 'Fransk' },
+
   ]);
 
   return (

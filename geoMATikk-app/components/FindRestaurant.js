@@ -7,6 +7,7 @@ import { useFilterState } from '../context/FilterContext';
 // import useRestaurants from '../hooks/useRestaurants';
 import TypeKitchen from './TypeKitchen';
 import { primary } from '../assets/colors';
+import { withTheme } from 'react-native-elements';
 
 export default function FindRestaurant({
   findRestaurantVisible,
@@ -157,18 +158,23 @@ export default function FindRestaurant({
 
             <TypeKitchen kitchenVisible={kitchenVisible} setKitchenVisible={setKitchenVisible} />
 
-            <View style={styles.searchButton}>
-              <Button
-                title="Søk"
+            
+            <View style={{ height: 40 }} />
+          </ScrollView>
+
+          <View style={styles.geomatBox}>
+              <TouchableOpacity
+                style={styles.searchButton}
                 color={primary}
                 onPress={() => {
                   fetchRestaurants();
                   setFindRestaurantVisible(false);
                 }}
-              />
-            </View>
-            <View style={{ height: 60 }} />
-          </ScrollView>
+              >
+                <Text style={styles.searchButtonStyle}>GEOMAT MEG</Text>
+              </TouchableOpacity>
+          </View>
+
           <TouchableOpacity
             hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
             style={styles.closeModal}
@@ -208,6 +214,7 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: primary,
     width: 200,
+    height: 40,
     marginTop: 15,
     alignSelf: 'center',
     borderRadius: 10,
@@ -220,4 +227,20 @@ const styles = StyleSheet.create({
   criteriaBox: {
     flexDirection: 'row',
   },
+  searchButtonStyle: {
+    color: 'white',
+    fontSize: 18,
+    textAlign: 'center',
+    paddingTop: 3,
+  }, 
+  geomatBox: {
+    backgroundColor: 'white', 
+    margin: 10, 
+    marginTop: -25,
+    paddingBottom: 13,
+    borderBottomEndRadius: 10,
+    borderBottomStartRadius: 10,
+    marginLeft: 0,
+    marginRight: 0,
+  }
 });
