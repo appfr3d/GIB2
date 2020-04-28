@@ -3,21 +3,21 @@ import axios from 'axios';
 import { useFilterState } from '../context/FilterContext';
 import config from '../config';
 
-const mockRestaurants = [
-  {
-    description: 'Burger <3',
-    id: 9,
-    image_url: '',
-    location: {
-      latitude: 63.430646,
-      longitude: 10.397,
-    },
-    name: 'MacDonald',
-    phone: '12345678',
-    price_class: 2,
-    rating: 4,
-  },
-];
+// const mockRestaurants = [
+//   {
+//     description: 'Burger <3',
+//     id: 9,
+//     image_url: '',
+//     location: {
+//       latitude: 63.430646,
+//       longitude: 10.397,
+//     },
+//     name: 'MacDonald',
+//     phone: '12345678',
+//     price_class: 2,
+//     rating: 4,
+//   },
+// ];
 
 export default function useRestaurants() {
   const [restaurants, setRestaurants] = useState();
@@ -32,11 +32,6 @@ export default function useRestaurants() {
       : { ...filterState.filter, kitchens: filterState.filter.kitchens.toString() };
     const url = `${config.apiDomain}/restaurant${endpoint}`;
     try {
-      // console.log(params);
-      // console.log(endpoint);
-      // console.log('Trying');
-      // console.log('trying to get restaurants: ')
-      // console.log(params)
       const response = await axios.get(url, {
         params,
         timeout: 5000,
@@ -44,22 +39,17 @@ export default function useRestaurants() {
       if (response.data.error) {
         console.log(response.data.error);
       } else {
-        // console.log(response.data.map(o => o.name));
-        // console.log('sets restaurants');
         const { data } = response;
         setRestaurants(data);
       }
     } catch (error) {
       console.log('Error:', error);
-      setRestaurants(mockRestaurants);
+      // setRestaurants(mockRestaurants);
     }
   }
 
   useEffect(() => {
-    // console.log(filterState);
-    // if (filterState) {
     fetchRestaurants();
-    // }
   }, [filterState.search]);
 
   return [restaurants, fetchRestaurants];
