@@ -7,6 +7,11 @@ import { useRestaurants } from '../hooks';
 import RestaurantList from './RestaurantList';
 import RestaurantInfo from './RestaurantInfo';
 
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
+import { useFilterDispatch } from '..//context/FilterContext';
+
+
 import { primary, medium } from '../assets/colors';
 
 function MapComponent({ restaurants }) {
@@ -15,6 +20,19 @@ function MapComponent({ restaurants }) {
   const [restInfoVisible, setRestInfoVisible] = useState(false); // om informasjon om én restaurant er synlig
   // const [selectedRestaurantID, setSelectedRestaurantID] = useState(null); // id-en til den valgte restauranten
   const [selectedRestaurant, setSelectedRestaurant] = useState(null); // restaurant objektet som er valgt
+
+  const filterDispatch = useFilterDispatch();
+  async function getLocationAsync() {
+    const { status, permissions } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status === 'granted') {
+      const location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
+      console.log(location);
+      filterDispatch({ type: 'set_position', payload: location });
+    } 
+  }
+  useEffect(() => {
+    getLocationAsync();
+  }, []);
 
   useEffect(() => {
     console.log('rerender');
