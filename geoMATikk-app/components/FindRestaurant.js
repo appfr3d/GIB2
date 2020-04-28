@@ -1,24 +1,24 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
-import { 
-  StyleSheet, 
-  View, 
-  TouchableOpacity, 
-  TouchableWithoutFeedback, 
-  Text, 
-  Button, 
-  ScrollView, 
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Text,
+  Button,
+  ScrollView,
   Alert,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { FilterItem, FilterLocation } from './FilterComponents';
-import { useFilterState } from '../context/FilterContext';
 import Constants from 'expo-constants';
+import { withTheme } from 'react-native-elements';
+import { FilterItem, FilterLocation } from './FilterComponents';
+import { useFilterState, useFilterDispatch } from '../context/FilterContext';
 // import useRestaurants from '../hooks/useRestaurants';
 import TypeKitchen from './TypeKitchen';
 import { primary } from '../assets/colors';
-import { withTheme } from 'react-native-elements';
 
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -29,7 +29,7 @@ export default function FindRestaurant({
 }) {
   const [kitchenVisible, setKitchenVisible] = useState(false);
   // const [, setRestaurants] = useRestaurants();
-  // const filterDispatch = useFilterDispatch();
+  const filterDispatch = useFilterDispatch();
   const filterState = useFilterState();
 
   const createPriceAlert = () =>
@@ -69,7 +69,7 @@ export default function FindRestaurant({
     <View style={{ flex: 1 }}>
       {!findRestaurantVisible ? null : (
         <View style={styles.filterbox}>
-          <ScrollView >
+          <ScrollView>
             <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>
               Finn restauranten for deg!
             </Text>
@@ -136,7 +136,7 @@ export default function FindRestaurant({
                 />
               </View>
             </TouchableWithoutFeedback>
-            
+
             <TouchableWithoutFeedback onPress={() => {}}>
               <View>
                 <View style={styles.criteriaBox}>
@@ -165,7 +165,6 @@ export default function FindRestaurant({
               </View>
             </TouchableWithoutFeedback>
 
-
             <View style={styles.typeKitchen}>
               <TouchableOpacity
                 style={{ display: 'flex', flexDirection: 'row' }}
@@ -179,21 +178,21 @@ export default function FindRestaurant({
 
             <TypeKitchen kitchenVisible={kitchenVisible} setKitchenVisible={setKitchenVisible} />
 
-            
             <View style={{ height: 40 }} />
           </ScrollView>
 
           <View style={styles.geomatBox}>
-              <TouchableOpacity
-                style={styles.searchButton}
-                color={primary}
-                onPress={() => {
-                  fetchRestaurants();
-                  setFindRestaurantVisible(false);
-                }}
-              >
-                <Text style={styles.searchButtonStyle}>GEOMAT MEG</Text>
-              </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.searchButton}
+              color={primary}
+              onPress={() => {
+                filterDispatch({ type: 'set_search_string', payload: '' });
+                fetchRestaurants();
+                setFindRestaurantVisible(false);
+              }}
+            >
+              <Text style={styles.searchButtonStyle}>GEOMAT MEG</Text>
+            </TouchableOpacity>
           </View>
 
           <TouchableOpacity
@@ -225,14 +224,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginHorizontal: 20,
     marginTop: Constants.statusBarHeight + 80,
-    height: screenHeight*0.7,
+    height: screenHeight * 0.7,
     // marginTop: '32%',
     borderRadius: 10,
     paddingHorizontal: 40,
-    paddingTop: 40
+    paddingTop: 40,
     // flex: 1,
     // borderWidth: 1
-
   },
   typeKitchen: {
     // paddingBottom: 20,
@@ -266,15 +264,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     paddingTop: 3,
-  }, 
+  },
   geomatBox: {
-    backgroundColor: 'white', 
-    margin: 10, 
+    backgroundColor: 'white',
+    margin: 10,
     marginTop: -25,
     paddingBottom: 13,
     borderBottomEndRadius: 10,
     borderBottomStartRadius: 10,
     marginLeft: 0,
     marginRight: 0,
-  }
+  },
 });
