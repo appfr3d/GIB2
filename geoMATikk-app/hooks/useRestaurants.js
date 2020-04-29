@@ -36,11 +36,11 @@ export default function useRestaurants() {
         params,
         timeout: 5000,
       });
-      if (response.data.error) {
-        console.log(response.data.error);
-      } else {
+      if (response.status === 200) {
         const { data } = response;
         setRestaurants(data);
+      } else {
+        console.log(response.data.error);
       }
     } catch (error) {
       console.log('Error:', error);

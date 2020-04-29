@@ -1,14 +1,22 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { View, TouchableOpacity, TextInput, StyleSheet, Text } from 'react-native';
 import Constants from 'expo-constants';
 import { Ionicons } from '@expo/vector-icons';
-import { useFilterDispatch } from '../context/FilterContext';
+import { useFilterDispatch, useFilterState } from '../context/FilterContext';
 import LoginStatus from './AuthModal/LoginStatus';
 
 function TopMenu(props) {
   const { authModalVisible, setAuthModalVisible } = props;
   const filterDispatch = useFilterDispatch();
+  const filterState = useFilterState();
+  const input = useRef();
+
+  useEffect(() => {
+    if (filterState.search === '') {
+      input.current.clear();
+    }
+  }, [filterState.search]);
 
   return (
     <View style={styles.topMenu}>
@@ -18,11 +26,12 @@ function TopMenu(props) {
             placeholder="Søk på restaurant"
             style={styles.searchInput}
             onChangeText={value => filterDispatch({ type: 'set_search_string', payload: value })}
+            ref={input}
           />
           <TouchableOpacity>
             <Ionicons name="md-search" size={32} />
           </TouchableOpacity>
-          <Text />
+          {/* <Text /> */}
         </View>
       </View>
       <View>
