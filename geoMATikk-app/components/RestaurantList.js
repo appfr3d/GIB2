@@ -74,7 +74,7 @@ function RestaurantList({
 
   const viewabilityConfig = useRef({
     viewAreaCoveragePercentThreshold: 85,
-    minimumViewTime: 150,
+    minimumViewTime: 100,
   });
 
   const handleViewableItemsChanged = useRef(info => {

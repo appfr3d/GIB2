@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native';
 import { useAuth } from '../../hooks/useAuth';
 import PasswordInput from './PasswordInput';
@@ -9,6 +9,12 @@ export default function LoginComponent(props) {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const auth = useAuth();
+
+  useEffect(() => {
+    if (auth.user) {
+      props.setMode('logout');
+    }
+  }, [auth.user]);
 
   const handleLogin = () => {
     if (username) {

@@ -66,6 +66,7 @@ function MapComponent({ restaurants }) {
     // if (!restListVisible) {
     // console.log(restaurant);
     console.log(`show restaurant: ${restaurant.name}`);
+    setRestListVisible(true);
     setSelectedRestaurant(restaurant);
 
     // mapRef.animateToRegion({
